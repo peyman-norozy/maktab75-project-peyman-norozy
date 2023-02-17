@@ -1,8 +1,18 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchCartData } from "./store/cart-actions";
+import Layout from "./components/layout/Layout";
+
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
+
   return (
-    <>
-      <div className="text-red-600">پیمان نوروزی</div>
-    </>
+    <Layout>
+      <div>peyman</div>
+    </Layout>
   );
 }
 
