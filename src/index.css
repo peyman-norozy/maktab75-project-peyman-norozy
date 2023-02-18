@@ -10,3 +10,12 @@
 * {
   font-family: iranSans;
 }
+
+body {
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+  background-color: #f7f8fa;
+}

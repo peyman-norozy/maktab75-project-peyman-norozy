@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import ManagementMainPage from "./pages/ManagementMainPage";
 import CartMainPage from "./pages/CartMainPage";
+import Home from "./pages/Home";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,9 @@ function App() {
   return (
     <Layout>
       <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
         <Route path="/management">
           <ManagementMainPage />
         </Route>
