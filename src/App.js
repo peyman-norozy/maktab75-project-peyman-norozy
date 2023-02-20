@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCartData());
-  }, [dispatch, fetchCartData]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchNavstate("navChanging"));

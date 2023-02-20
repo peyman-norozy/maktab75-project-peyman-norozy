@@ -3,15 +3,21 @@ import { Link } from "react-router-dom";
 
 import Logo from "../logo/Logo";
 import MainPageLink from "../mainPageLink/MainPageLink";
-import { uiActions } from "../../store/ui-slice";
 import { sendNavstate } from "../../store/cart-actions";
+import { fetchNavstate } from "../../store/cart-actions";
 
 const MainNavigation = () => {
   const addOrRemoveAuth = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
+  async function sendAndFetch() {
+    await dispatch(sendNavstate(false));
+    await dispatch(fetchNavstate("navChanging"));
+  }
+
+  console.log(addOrRemoveAuth);
   const navigationRemoveHandler = () => {
-    dispatch(sendNavstate(false));
+    sendAndFetch();
   };
 
   return (

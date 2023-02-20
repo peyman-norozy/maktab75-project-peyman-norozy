@@ -5,6 +5,7 @@ const uiSlice = createSlice({
   initialState: { showNavBar: true },
   reducers: {
     addOrRemoveNavBar(state, action) {
+      console.log(action);
       state.showNavBar = action.payload;
     },
   },

@@ -1,10 +1,25 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { sendNavstate } from "../../store/cart-actions";
+import { fetchNavstate } from "./../../store/cart-actions";
 
 const MainPageLink = () => {
+  const dispatch = useDispatch();
+
+  async function sendAndFetch() {
+    await dispatch(sendNavstate(true));
+    await dispatch(fetchNavstate("navChanging"));
+  }
+
+  const navigationAddHandler = () => {
+    sendAndFetch();
+  };
+
   return (
     <Fragment>
       <Link
+        onClick={navigationAddHandler}
         to="/"
         className="flex items-start gap-2 mt-2 mb-2 border-b-2 border-zinc-600"
       >
