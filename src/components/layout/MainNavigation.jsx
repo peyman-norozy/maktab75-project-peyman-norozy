@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Logo from "../logo/Logo";
 import MainPageLink from "../mainPageLink/MainPageLink";
 import { uiActions } from "../../store/ui-slice";
+import { sendNavstate } from "../../store/cart-actions";
 
 const MainNavigation = () => {
   const addOrRemoveAuth = useSelector((state) => state.ui);
@@ -11,7 +12,8 @@ const MainNavigation = () => {
 
   const navigationRemoveHandler = () => {
     // console.log(addOrRemoveAuth.showNavBar);
-    dispatch(uiActions.addOrRemoveNavBar(false));
+    // dispatch(uiActions.addOrRemoveNavBar(false));
+    dispatch(sendNavstate(false));
   };
 
   return (

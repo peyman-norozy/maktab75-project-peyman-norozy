@@ -62,11 +62,39 @@ export const sendCartData = (cart) => {
   };
 };
 
-export const sendNavstate = (cart) => {
+export const fetchNavstate = () => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await axios.get("http://localhost:3002/nav");
+
+      if (response.statusText !== "OK") {
+        throw new Error("Could not fetch cart data!");
+      }
+
+      const data = await response.data;
+
+      return data;
+    };
+
+    try {
+      const cartData = await fetchData();
+      console.log(cartData);
+      // dispatch(
+      //   productActions.addItemToCart({
+      //     items: cartData,
+      //   })
+      // );
+    } catch (error) {
+      console.log("you have a error!");
+    }
+  };
+};
+
+export const sendNavstate = (mood) => {
   return async (dispatch) => {
     const sendRequest = async () => {
-      const response = await axios.post("http://localhost:3002/navAuth", {
-        showNavBar: false,
+      const response = await axios.post("http://localhost:3002/nav", {
+        showNavBar: mood,
       });
 
       if (response.statusText !== "OK") {
