@@ -1,10 +1,8 @@
-import { Route } from "react-router-dom";
 import MainPageLink from "../components/mainPageLink/MainPageLink";
-import Home from "./Home";
 
 const ManagementMainPage = () => {
   return (
-    <form className="mx-auto mt-[5rem] w-[50%] h-[100%]">
+    <form className="flex justify-center items-center h-[100%]">
       <div className="bg-blue-200 p-4 flex flex-col gap-4 rounded-md">
         <h1 className="text-[1.2rem] font-bold text-white">
           ورود به پنل مدیریت فروشگاه پیلوت

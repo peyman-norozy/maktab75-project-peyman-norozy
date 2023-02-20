@@ -5,7 +5,7 @@ const Layout = (props) => {
   return (
     <Fragment>
       <MainNavigation />
-      <main>{props.children}</main>
+      <main className="h-full">{props.children}</main>
     </Fragment>
   );
 };
