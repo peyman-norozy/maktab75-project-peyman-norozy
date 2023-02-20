@@ -1,3 +1,7 @@
+import { Route } from "react-router-dom";
+import MainPageLink from "../components/mainPageLink/MainPageLink";
+import Home from "./Home";
+
 const ManagementMainPage = () => {
   return (
     <form className="mx-auto mt-[5rem] w-[50%] h-[100%]">
@@ -28,6 +32,7 @@ const ManagementMainPage = () => {
         <button className="bg-[#3ccf4e] text-white w-28 m-auto py-4 rounded-md">
           ورود
         </button>
+        <MainPageLink />
       </div>
     </form>
   );
