@@ -8,8 +8,12 @@ const MainPageLink = () => {
   const dispatch = useDispatch();
 
   async function sendAndFetch() {
-    await dispatch(sendNavstate(true));
-    await dispatch(fetchNavstate("navChanging"));
+    try {
+      await dispatch(sendNavstate(true));
+      await dispatch(fetchNavstate("navChanging"));
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   const navigationAddHandler = () => {

@@ -11,8 +11,12 @@ const MainNavigation = () => {
   const dispatch = useDispatch();
 
   async function sendAndFetch() {
-    await dispatch(sendNavstate(false));
-    await dispatch(fetchNavstate("navChanging"));
+    try {
+      await dispatch(sendNavstate(false));
+      await dispatch(fetchNavstate("navChanging"));
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   console.log(addOrRemoveAuth);
