@@ -11,8 +11,6 @@ const MainNavigation = () => {
   const dispatch = useDispatch();
 
   const navigationRemoveHandler = () => {
-    // console.log(addOrRemoveAuth.showNavBar);
-    // dispatch(uiActions.addOrRemoveNavBar(false));
     dispatch(sendNavstate(false));
   };
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCartData } from "./store/cart-actions";
+import { fetchCartData, fetchNavstate } from "./store/cart-actions";
 import { Route, Switch } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import ManagementMainPage from "./pages/ManagementMainPage";
@@ -9,8 +9,13 @@ import Home from "./pages/Home";
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchCartData());
+  }, [dispatch, fetchCartData]);
+
+  useEffect(() => {
+    dispatch(fetchNavstate("navChanging"));
   }, [dispatch]);
 
   return (

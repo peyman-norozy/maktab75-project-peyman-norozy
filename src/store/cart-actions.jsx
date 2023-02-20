@@ -1,5 +1,6 @@
 import axios from "axios";
 import { productActions } from "./cart-slice";
+import { uiActions } from "./ui-slice";
 
 export const fetchCartData = () => {
   return async (dispatch) => {
@@ -62,7 +63,7 @@ export const sendCartData = (cart) => {
   };
 };
 
-export const fetchNavstate = () => {
+export const fetchNavstate = (reusableData) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await axios.get("http://localhost:3002/nav");
@@ -79,6 +80,9 @@ export const fetchNavstate = () => {
     try {
       const cartData = await fetchData();
       console.log(cartData);
+      if (reusableData === "navChanging") {
+        dispatch(uiActions.addOrRemoveNavBar(cartData.showNavBar));
+      }
       // dispatch(
       //   productActions.addItemToCart({
       //     items: cartData,
