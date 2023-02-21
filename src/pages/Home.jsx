@@ -35,9 +35,6 @@ const Home = () => {
       <p>soheil</p>
       <p>soheil</p>
       <p>soheil</p>
-      <p>soheil</p>
-      <p>soheil</p>
-      <p>soheil</p>
     </Fragment>
   );
 };

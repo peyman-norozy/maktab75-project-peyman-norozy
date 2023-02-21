@@ -6,7 +6,7 @@ const Layout = (props) => {
   return (
     <Fragment>
       <MainNavigation />
-      <main className="min-h-[2rem]">{props.children}</main>
+      <main className="min-h-[39rem]">{props.children}</main>
       <Footer />
     </Fragment>
   );

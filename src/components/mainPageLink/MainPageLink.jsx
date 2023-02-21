@@ -25,12 +25,12 @@ const MainPageLink = () => {
       <Link
         onClick={navigationAddHandler}
         to="/"
-        className="flex items-start gap-2 mt-2 mb-2 border-b-2 border-zinc-600"
+        className="flex items-start gap-2 mt-2 mb-2"
       >
         <i>
           <svg
-            width="16"
-            height="16"
+            width="14"
+            height="14"
             viewBox="0 0 20 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ const MainPageLink = () => {
             />
           </svg>
         </i>
-        <span>صفحه اصلی</span>
+        <span className="text-sm">صفحه اصلی</span>
       </Link>
     </Fragment>
   );

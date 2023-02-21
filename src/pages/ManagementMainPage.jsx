@@ -2,8 +2,8 @@ import MainPageLink from "../components/mainPageLink/MainPageLink";
 
 const ManagementMainPage = () => {
   return (
-    <form className="flex justify-center items-center h-[100%]">
-      <div className="bg-blue-200 p-4 flex flex-col gap-4 rounded-md">
+    <form className="flex justify-center items-center">
+      <div className="bg-blue-200 p-4 flex flex-col gap-4 rounded-md mt-10">
         <h1 className="text-[1.2rem] font-bold text-white">
           ورود به پنل مدیریت فروشگاه پیلوت
         </h1>

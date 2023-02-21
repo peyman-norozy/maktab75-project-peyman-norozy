@@ -1,11 +1,13 @@
-import { Fragment } from "react";
+import { useSelector } from "react-redux";
 import Logo from "../logo/Logo";
 
 const Footer = () => {
+  const addOrRemoveAuth = useSelector((state) => state.ui);
+
   return (
-    <Fragment>
-      <footer>
-        <div className="flex justify-between items-center px-14 bg-white ">
+    addOrRemoveAuth.showNavBar && (
+      <footer className="bg-white w-full">
+        <div className="flex justify-between items-center px-14">
           <div className="flex-1">
             <div className="mt-2">
               <Logo />
@@ -30,7 +32,7 @@ const Footer = () => {
           </p>
         </div>
       </footer>
-    </Fragment>
+    )
   );
 };
 

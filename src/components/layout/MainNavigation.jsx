@@ -5,6 +5,7 @@ import Logo from "../logo/Logo";
 import MainPageLink from "../mainPageLink/MainPageLink";
 import { sendNavstate } from "../../store/cart-actions";
 import { fetchNavstate } from "../../store/cart-actions";
+import ProductClassification from "../productClassification/ProductClassification";
 
 const MainNavigation = () => {
   const addOrRemoveAuth = useSelector((state) => state.ui);
@@ -26,7 +27,7 @@ const MainNavigation = () => {
 
   return (
     addOrRemoveAuth.showNavBar && (
-      <header className=" px-14 bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)]">
+      <header className=" px-14 bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)] w-full">
         <div className="flex justify-between items-center pt-2 pb-4 border-b-2">
           <Logo />
           <ul className="flex items-center gap-4 h-full">
@@ -89,6 +90,7 @@ const MainNavigation = () => {
             <MainPageLink />
           </li>
         </ul>
+        <ProductClassification />
       </header>
     )
   );
