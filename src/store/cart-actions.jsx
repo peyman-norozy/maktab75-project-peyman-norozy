@@ -5,7 +5,7 @@ import { uiActions } from "./ui-slice";
 export const fetchCartData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await axios.get("http://localhost:3002/products");
+      const response = await axios.get("http://localhost:3002/peyman");
 
       if (response.statusText !== "OK") {
         throw new Error("Could not fetch cart data!");
