@@ -27,11 +27,27 @@ const MainNavigation = () => {
     sendAndFetch(false);
   };
 
-  if (location.pathname === "/management") {
-    sendAndFetch(false);
-  } else if (location.pathname === "/") {
-    sendAndFetch(true);
+  switch (location.pathname) {
+    case "/management":
+      sendAndFetch(false);
+      break;
+    case "/":
+      sendAndFetch(true);
+      break;
+    case "/iphone":
+      sendAndFetch(true);
+      break;
+    case "/shiaomi":
+      sendAndFetch(true);
+      break;
+    case "/samsung":
+      sendAndFetch(true);
+      break;
+    case "/smartWatch":
+      sendAndFetch(true);
+      break;
   }
+
   return (
     addOrRemoveAuth.showNavBar && (
       <header className="fixed top-0 px-14 bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)] w-full">

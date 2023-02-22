@@ -1,8 +1,9 @@
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sendNavstate } from "../../store/cart-actions";
 import { fetchNavstate } from "./../../store/cart-actions";
+import style from "../productClassification/ProductClassification.module.css";
 
 const MainPageLink = () => {
   const dispatch = useDispatch();
@@ -22,10 +23,12 @@ const MainPageLink = () => {
 
   return (
     <Fragment>
-      <Link
-        onClick={navigationAddHandler}
+      <NavLink
+        end
         to="/"
         className="flex items-start gap-2 mt-2 mb-2"
+        activeClassName={style.bgColor}
+        onClick={navigationAddHandler}
       >
         <i>
           <svg
@@ -42,7 +45,7 @@ const MainPageLink = () => {
           </svg>
         </i>
         <span className="text-sm">صفحه اصلی</span>
-      </Link>
+      </NavLink>
     </Fragment>
   );
 };

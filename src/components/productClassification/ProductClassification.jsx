@@ -28,6 +28,7 @@ const ProductClassification = () => {
         </li>
         <li className="cursor-pointer">
           <NavLink
+            end
             to="/iphone"
             activeClassName={style.bgColor}
             onClick={navigationAddHandler}
@@ -37,6 +38,7 @@ const ProductClassification = () => {
         </li>
         <li className="cursor-pointer">
           <NavLink
+            end
             to="/shiaomi"
             activeClassName={style.bgColor}
             onClick={navigationAddHandler}
@@ -46,6 +48,7 @@ const ProductClassification = () => {
         </li>
         <li className="cursor-pointer">
           <NavLink
+            end
             to="/samsung"
             activeClassName={style.bgColor}
             onClick={navigationAddHandler}
@@ -55,6 +58,7 @@ const ProductClassification = () => {
         </li>
         <li className="cursor-pointer">
           <NavLink
+            end
             to="/smartWatch"
             activeClassName={style.bgColor}
             onClick={navigationAddHandler}
