@@ -1,3 +1,5 @@
+import * as React from "react";
+
 const WatchCart = (props) => {
   return (
     <>
@@ -6,11 +8,8 @@ const WatchCart = (props) => {
           <div className="w-full">
             <div className="flex flex-col items-center p-4">
               <div className="w-full">
-                <img
-                  src={require(`${props.data.url}`)}
-                  alt="fg"
-                  className="w-full"
-                />
+                {console.log(props.data)}
+                <img src={props.data.image} alt="fg" className="w-full" />
               </div>
               <div className="flex flex-col gap-2 justify-between text-sm w-full mt-2">
                 <h3 className="text-lg">شیر تازه</h3>
