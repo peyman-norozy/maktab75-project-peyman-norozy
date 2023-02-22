@@ -1,9 +1,7 @@
-import * as React from "react";
-
-const WatchCart = (props) => {
+const WatchAndPhoneCart = (props) => {
   return (
     <>
-      <div className="flex gap-4 p-4 bg-white">
+      <div className="flex gap-4 p-4 pb-0 bg-white">
         <div className="min-h-[100px] w-[300px] bg-[#F7F8FA]">
           <div className="w-full">
             <div className="flex flex-col items-center p-4">
@@ -31,4 +29,4 @@ const WatchCart = (props) => {
   );
 };
 
-export default WatchCart;
+export default WatchAndPhoneCart;

@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     addOrRemoveAuth.showNavBar && (
-      <footer className="bg-white w-full">
+      <footer className="bg-white w-full mt-20">
         <div className="flex justify-between items-center px-14">
           <div className="flex-1">
             <div className="mt-2">
