@@ -27,7 +27,7 @@ const MainNavigation = () => {
 
   return (
     addOrRemoveAuth.showNavBar && (
-      <header className=" px-14 bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)] w-full">
+      <header className="fixed top-0 px-14 bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)] w-full">
         <div className="flex justify-between items-center pt-2 pb-4 border-b-2">
           <Logo />
           <ul className="flex items-center gap-4 h-full">

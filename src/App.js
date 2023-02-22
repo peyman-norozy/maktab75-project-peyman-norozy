@@ -6,6 +6,7 @@ import Layout from "./components/layout/Layout";
 import ManagementMainPage from "./pages/ManagementMainPage";
 import CartMainPage from "./pages/CartMainPage";
 import Home from "./pages/Home";
+import IphonePage from "./pages/IphonePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route path="/cart">
           <CartMainPage />
+        </Route>
+        <Route path="/iphone">
+          <IphonePage />
         </Route>
       </Switch>
     </Layout>

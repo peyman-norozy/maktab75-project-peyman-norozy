@@ -11,7 +11,7 @@ import { Navigation } from "swiper";
 
 const Slider = () => {
   return (
-    <div className="flex justify-center mt-20">
+    <div className="flex justify-center pt-60">
       <div className="w-[70%] rounded-2xl overflow-hidden">
         <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
           <SwiperSlide>
