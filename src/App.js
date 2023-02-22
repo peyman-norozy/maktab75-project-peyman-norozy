@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import IphonePage from "./pages/IphonePage";
 import ShiaomiPage from "./pages/ShiaomiPage";
 import SamsungPage from "./pages/SamsungPage";
+import SmartWatch from "./pages/SmartWatch";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,9 +43,9 @@ function App() {
         <Route path="/samsung">
           <SamsungPage />
         </Route>
-        {/* <Route path="/iphone">
-          <IphonePage />
-        </Route> */}
+        <Route path="/smartWatch">
+          <SmartWatch />
+        </Route>
       </Switch>
     </Layout>
   );

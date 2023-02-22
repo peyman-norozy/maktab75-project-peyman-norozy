@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import Logo from "../logo/Logo";
 import MainPageLink from "../mainPageLink/MainPageLink";
@@ -11,9 +11,11 @@ const MainNavigation = () => {
   const addOrRemoveAuth = useSelector((state) => state.ui);
   const dispatch = useDispatch();
 
-  async function sendAndFetch() {
+  const location = useLocation();
+
+  async function sendAndFetch(status) {
     try {
-      await dispatch(sendNavstate(false));
+      await dispatch(sendNavstate(status));
       await dispatch(fetchNavstate("navChanging"));
     } catch (e) {
       console.log(e);
@@ -22,8 +24,14 @@ const MainNavigation = () => {
 
   console.log(addOrRemoveAuth);
   const navigationRemoveHandler = () => {
-    sendAndFetch();
+    sendAndFetch(false);
   };
+
+  if (location.pathname === "/management") {
+    sendAndFetch(false);
+  } else if (location.pathname === "/") {
+    sendAndFetch(true);
+  }
 
   return (
     addOrRemoveAuth.showNavBar && (

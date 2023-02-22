@@ -22,7 +22,11 @@ const ProductClassification = () => {
             سامسونگ
           </NavLink>
         </li>
-        <li className="cursor-pointer">ساعت هوشمند</li>
+        <li className="cursor-pointer">
+          <NavLink to="/smartWatch" activeClassName={style.bgColor}>
+            ساعت هوشمند
+          </NavLink>
+        </li>
       </ul>
     </>
   );
