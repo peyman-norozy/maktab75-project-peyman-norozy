@@ -8,10 +8,20 @@ const ProductClassification = () => {
           دسته بندی کالاها
         </li>
         <li className="cursor-pointer">
-          <Link to="/iphone">آیفون</Link>
+          <NavLink to="/iphone" activeClassName={style.bgColor}>
+            آیفون
+          </NavLink>
         </li>
-        <li className="cursor-pointer">شیائومی</li>
-        <li className="cursor-pointer">سامسونگ</li>
+        <li className="cursor-pointer">
+          <NavLink to="/shiaomi" activeClassName={style.bgColor}>
+            شیائومی
+          </NavLink>
+        </li>
+        <li className="cursor-pointer">
+          <NavLink to="/samsung" activeClassName={style.bgColor}>
+            سامسونگ
+          </NavLink>
+        </li>
         <li className="cursor-pointer">ساعت هوشمند</li>
       </ul>
     </>

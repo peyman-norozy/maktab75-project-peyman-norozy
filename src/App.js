@@ -7,6 +7,8 @@ import ManagementMainPage from "./pages/ManagementMainPage";
 import CartMainPage from "./pages/CartMainPage";
 import Home from "./pages/Home";
 import IphonePage from "./pages/IphonePage";
+import ShiaomiPage from "./pages/ShiaomiPage";
+import SamsungPage from "./pages/SamsungPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +36,15 @@ function App() {
         <Route path="/iphone">
           <IphonePage />
         </Route>
+        <Route path="/shiaomi">
+          <ShiaomiPage />
+        </Route>
+        <Route path="/samsung">
+          <SamsungPage />
+        </Route>
+        {/* <Route path="/iphone">
+          <IphonePage />
+        </Route> */}
       </Switch>
     </Layout>
   );
