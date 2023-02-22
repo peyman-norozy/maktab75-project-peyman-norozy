@@ -21,7 +21,7 @@ const Home = () => {
             کالاهای گروه موبایل
           </h2>
         </div>
-        <div className="grid__product bg-white pb-4">
+        <div className="grid__product bg-white gap-4 py-4 px-6">
           {data.map((item, index) => {
             if (item.name === "iphone" && phone < 4) {
               phone++;
@@ -39,7 +39,7 @@ const Home = () => {
             کالاهای گروه ساعت
           </h2>
         </div>
-        <div className="grid__product bg-white pb-4">
+        <div className="grid__product bg-white gap-4 py-4 px-6">
           {data.map((item, index) => {
             if (item.name === "smartWatch" && watch < 4) {
               watch++;

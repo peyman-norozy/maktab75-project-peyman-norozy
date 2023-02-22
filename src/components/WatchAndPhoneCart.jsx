@@ -2,10 +2,14 @@ const WatchAndPhoneCart = (props) => {
   return (
     <>
       <div
-        className={`flex gap-4 p-4 pb-0 bg-white ${props.styling.background1}`}
+        className={`flex gap-4 bg-white ${
+          props.styling ? props.styling.background1 : ""
+        }`}
       >
         <div
-          className={`min-h-[100px] w-[300px] bg-[#F7F8FA] ${props.styling.background2} ${props.styling.borderRadius}`}
+          className={`min-h-[100px] w-[300px] bg-[#F7F8FA] ${
+            props.styling ? props.styling.background2 : ""
+          } ${props.styling ? props.styling.borderRadius : ""}`}
         >
           <div className="w-full">
             <div className="flex flex-col items-center p-4">

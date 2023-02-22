@@ -32,7 +32,6 @@ const MainNavigation = () => {
   } else if (location.pathname === "/") {
     sendAndFetch(true);
   }
-
   return (
     addOrRemoveAuth.showNavBar && (
       <header className="fixed top-0 px-14 bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)] w-full">
