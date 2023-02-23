@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCartData, fetchNavstate } from "./store/cart-actions";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import ManagementMainPage from "./pages/ManagementMainPage";
 import CartMainPage from "./pages/CartMainPage";
@@ -24,29 +24,16 @@ function App() {
 
   return (
     <Layout>
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/management">
-          <ManagementMainPage />
-        </Route>
-        <Route path="/cart">
-          <CartMainPage />
-        </Route>
-        <Route path="/iphone">
-          <IphonePage />
-        </Route>
-        <Route path="/shiaomi">
-          <ShiaomiPage />
-        </Route>
-        <Route path="/samsung">
-          <SamsungPage />
-        </Route>
-        <Route path="/smartWatch">
-          <SmartWatchPage />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="management" element={<ManagementMainPage />} />
+        <Route path="cart" element={<CartMainPage />} />
+        <Route path="iphone" element={<IphonePage />} />
+        <Route path="shiaomi" element={<ShiaomiPage />} />
+        <Route path="samsung" element={<SamsungPage />} />
+        <Route path="smartWatch" element={<SmartWatchPage />} />
+      </Routes>
     </Layout>
   );
 }

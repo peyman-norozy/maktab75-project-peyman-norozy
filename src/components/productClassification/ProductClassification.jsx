@@ -28,9 +28,10 @@ const ProductClassification = () => {
         </li>
         <li className="cursor-pointer">
           <NavLink
-            end
-            to="/iphone"
-            activeClassName={style.bgColor}
+            to="iphone"
+            className={({ isActive }) =>
+              isActive ? style.activeStyle : undefined
+            }
             onClick={navigationAddHandler}
           >
             آیفون
@@ -38,9 +39,10 @@ const ProductClassification = () => {
         </li>
         <li className="cursor-pointer">
           <NavLink
-            end
-            to="/shiaomi"
-            activeClassName={style.bgColor}
+            to="shiaomi"
+            className={({ isActive }) =>
+              isActive ? style.activeStyle : undefined
+            }
             onClick={navigationAddHandler}
           >
             شیائومی
@@ -48,9 +50,10 @@ const ProductClassification = () => {
         </li>
         <li className="cursor-pointer">
           <NavLink
-            end
-            to="/samsung"
-            activeClassName={style.bgColor}
+            to="samsung"
+            className={({ isActive }) =>
+              isActive ? style.activeStyle : undefined
+            }
             onClick={navigationAddHandler}
           >
             سامسونگ
@@ -58,9 +61,10 @@ const ProductClassification = () => {
         </li>
         <li className="cursor-pointer">
           <NavLink
-            end
-            to="/smartWatch"
-            activeClassName={style.bgColor}
+            to="smartWatch"
+            className={({ isActive }) =>
+              isActive ? style.activeStyle : undefined
+            }
             onClick={navigationAddHandler}
           >
             ساعت هوشمند

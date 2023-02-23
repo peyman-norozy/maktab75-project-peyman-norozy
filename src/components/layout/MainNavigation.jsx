@@ -60,7 +60,7 @@ const MainNavigation = () => {
               className="flex items-center h-full"
             >
               <Link
-                to="/management"
+                to="management"
                 className="flex items-center gap-2 cursor-pointer bg-[#E0E7EC] py-2 px-4 rounded-md"
               >
                 <svg
@@ -80,7 +80,7 @@ const MainNavigation = () => {
             </li>
             <li className="flex items-center h-full">
               <Link
-                to="/cart"
+                to="cart"
                 className="flex items-center gap-2 cursor-pointer bg-[#3CCF4E] py-2 px-4 rounded-md"
               >
                 <svg

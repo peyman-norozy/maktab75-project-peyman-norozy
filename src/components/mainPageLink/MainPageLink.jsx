@@ -24,10 +24,15 @@ const MainPageLink = () => {
   return (
     <Fragment>
       <NavLink
-        end
         to="/"
-        className="flex items-start gap-2 mt-2 mb-2"
-        activeClassName={style.bgColor}
+        style={{
+          display: "flex",
+          alignItems: "start",
+          gap: "8px",
+          marginTop: "8px",
+          marginBottom: "8px",
+        }}
+        className={({ isActive }) => (isActive ? style.activeStyle : undefined)}
         onClick={navigationAddHandler}
       >
         <i>
