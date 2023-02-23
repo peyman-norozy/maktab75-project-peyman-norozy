@@ -1,5 +1,5 @@
 const CartMainPage = () => {
-  return <p>peyman norzy @gami</p>;
+  return <p className="pt-44">peyman norzy @gami</p>;
 };
 
 export default CartMainPage;

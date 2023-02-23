@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import WatchAndPhoneCart from "../components/WatchAndPhoneCart";
 import { customStyle } from "../components/customStyle/CustomStyle";
+import PaginatedItems from "../components/pagination/PaginatedItems";
 
 const ShiaomiPage = () => {
   const data = useSelector((state) => state.cart.items);
