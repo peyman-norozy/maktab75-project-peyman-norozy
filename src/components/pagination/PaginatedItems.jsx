@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
+import WatchAndPhoneCart from "../WatchAndPhoneCart";
+import { customStyle } from "../customStyle/CustomStyle";
 
-function PaginatedItems({ itemsPerPage }) {
-  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+function PaginatedItems(props) {
+  const { itemsPerPage, data } = props;
 
   function Items({ currentItems }) {
     return (
       <>
-        {currentItems &&
-          currentItems.map((item) => (
-            <div>
-              <h3>Item #{item}</h3>
-            </div>
-          ))}
+        <div className="pt-44 grid__product gap-4 py-4 px-6">
+          {currentItems &&
+            currentItems.map((item, index) => (
+              <WatchAndPhoneCart
+                key={index}
+                data={item}
+                styling={customStyle}
+              />
+            ))}
+        </div>
       </>
     );
   }
@@ -21,11 +27,11 @@ function PaginatedItems({ itemsPerPage }) {
 
   const endOffset = itemOffset + itemsPerPage;
   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+  const currentItems = data.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(data.length / itemsPerPage);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
+    const newOffset = (event.selected * itemsPerPage) % data.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
@@ -33,20 +39,18 @@ function PaginatedItems({ itemsPerPage }) {
   };
 
   return (
-    <>
-      <div className="mt-44">
-        <Items currentItems={currentItems} />
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={pageCount}
-          previousLabel="< previous"
-          renderOnZeroPageCount={null}
-        />
-      </div>
-    </>
+    <div>
+      <Items currentItems={currentItems} />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+      />
+    </div>
   );
 }
 export default PaginatedItems;
