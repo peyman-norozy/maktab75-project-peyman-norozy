@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sendNavstate } from "../../store/cart-actions";
 import { fetchNavstate } from "./../../store/cart-actions";

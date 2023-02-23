@@ -28,22 +28,22 @@ function App() {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/management" exact>
+        <Route path="/management">
           <ManagementMainPage />
         </Route>
-        <Route path="/cart" exact>
+        <Route path="/cart">
           <CartMainPage />
         </Route>
-        <Route path="/iphone" exact>
+        <Route path="/iphone">
           <IphonePage />
         </Route>
-        <Route path="/shiaomi" exact>
+        <Route path="/shiaomi">
           <ShiaomiPage />
         </Route>
-        <Route path="/samsung" exact>
+        <Route path="/samsung">
           <SamsungPage />
         </Route>
-        <Route path="/smartWatch" exact>
+        <Route path="/smartWatch">
           <SmartWatchPage />
         </Route>
       </Switch>

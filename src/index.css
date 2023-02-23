@@ -46,3 +46,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
+
+.important_zIndex {
+  z-index: 2 !important;
+}
