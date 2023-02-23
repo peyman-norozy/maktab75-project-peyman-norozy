@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import WatchAndPhoneCart from "../WatchAndPhoneCart";
 import { customStyle } from "../customStyle/CustomStyle";
+import style from "./PaginatedItems.module.css";
 
 function PaginatedItems(props) {
   const { itemsPerPage, data } = props;
@@ -39,18 +40,26 @@ function PaginatedItems(props) {
   };
 
   return (
-    <div>
+    <>
       <Items currentItems={currentItems} />
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
-    </div>
+      <div className="mt-10">
+        <ReactPaginate
+          containerClassName={style.container}
+          pageClassName={style["page-number"]}
+          activeLinkClassName={style.active}
+          previousClassName={style.previous}
+          nextClassName={style.next}
+          previousLinkClassName={style["next-link"]}
+          nextLinkClassName={style["next-link"]}
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handlePageClick}
+          pageCount={pageCount}
+          previousLabel="<"
+          renderOnZeroPageCount={null}
+        />
+      </div>
+    </>
   );
 }
 export default PaginatedItems;

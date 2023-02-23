@@ -2,7 +2,7 @@ const WatchAndPhoneCart = (props) => {
   return (
     <>
       <div
-        className={`flex gap-4 bg-white ${
+        className={`flex justify-center items-center gap-4 bg-white rounded-lg ${
           props.styling ? props.styling.background1 : ""
         }`}
       >

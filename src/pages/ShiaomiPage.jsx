@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-
 import PaginatedItems from "../components/pagination/PaginatedItems";
 
 const ShiaomiPage = () => {
