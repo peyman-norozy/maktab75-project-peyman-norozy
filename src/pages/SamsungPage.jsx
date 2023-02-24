@@ -4,12 +4,9 @@ import PaginatedItems from "../components/pagination/PaginatedItems";
 const SamsungPage = () => {
   const data = useSelector((state) => state.cart.items);
 
-  let newData = [];
-  for (let key of data) {
-    if (key.name === "samsung") {
-      newData.push(key);
-    }
-  }
+  const newData = data.filter((item) => item.name === "samsung");
+
+  console.log(newData);
   return <PaginatedItems itemsPerPage={4} data={newData} />;
 };
 
