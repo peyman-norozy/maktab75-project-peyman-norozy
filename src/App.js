@@ -10,6 +10,7 @@ import IphonePage from "./pages/IphonePage";
 import ShiaomiPage from "./pages/ShiaomiPage";
 import SamsungPage from "./pages/SamsungPage";
 import SmartWatchPage from "./pages/SmartWatchPage";
+import Error from "./pages/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,12 +28,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        <Route path="management" element={<ManagementMainPage />} />
-        <Route path="cart" element={<CartMainPage />} />
-        <Route path="iphone" element={<IphonePage />} />
-        <Route path="shiaomi" element={<ShiaomiPage />} />
-        <Route path="samsung" element={<SamsungPage />} />
-        <Route path="smartWatch" element={<SmartWatchPage />} />
+        <Route path="/management" element={<ManagementMainPage />} />
+        <Route path="/cart" element={<CartMainPage />} />
+        <Route path="/iphone" element={<IphonePage />} />
+        <Route path="/shiaomi" element={<ShiaomiPage />} />
+        <Route path="/samsung" element={<SamsungPage />} />
+        <Route path="/smartWatch" element={<SmartWatchPage />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </Layout>
   );
