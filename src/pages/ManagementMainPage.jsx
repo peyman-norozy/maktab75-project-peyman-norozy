@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MainPageLink from "../components/mainPageLink/MainPageLink";
 import { loginRequest } from "../store/auth-actions";
 import { useNavigate } from "react-router-dom";
@@ -7,19 +7,27 @@ import { useNavigate } from "react-router-dom";
 const ManagementMainPage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const data = useSelector((state) => state);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log(data);
 
-  console.log(password);
-  const submitHandler = async (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
+    console.log(data);
 
-    await dispatch(loginRequest({ userName, password }));
-
-    setUserName("");
-    setPassword("");
-    navigate("/panel");
+    if (data.user.error === 401) {
+      navigate("/management");
+    } else {
+      navigate("/panel");
+    }
   };
+
+  useEffect(() => {
+    dispatch(loginRequest({ userName, password }));
+  }, [dispatch, userName, password]);
 
   return (
     <form onSubmit={submitHandler} className="flex justify-center items-center">

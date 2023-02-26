@@ -24,25 +24,45 @@ export const loginRequest = (user) => {
       console.log(res.data);
       localStorage.setItem("ACCESS_TOKEYN", res.data.accessToken);
       localStorage.setItem("REFRESH_TOKEN", res.data.refreshToken);
-      dispatch(userActions.fulfilled(false));
-      // dispatch(
-      //   uiActions.showNotification({
-      //     status: "success",
-      //     title: "Success!",
-      //     message: "Sent cart data successfully!",
-      //   })
-      // );
-    } catch (e) {
-      console.log(e);
-      dispatch(userActions.error({ Loading: false, error: e.message }));
+      dispatch(userActions.error({ Loading: true, error: 0 }));
 
-      // dispatch(
-      //   uiActions.showNotification({
-      //     status: "error",
-      //     title: "Error!",
-      //     message: "Sending cart data failed!",
-      //   })
-      // );
+      dispatch(userActions.fulfilled(false));
+    } catch (e) {
+      console.log(e.response.status);
+      dispatch(userActions.error({ Loading: false, error: e.response.status }));
+    }
+  };
+};
+
+export const fetchDataPanel = () => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await axios.get("http://localhost:3002/products", {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      });
+
+      if (response.statusText !== "OK") {
+        throw new Error("Could not fetch cart data!");
+      }
+
+      const data = await response.data;
+
+      return data;
+    };
+
+    try {
+      const cartData = await fetchData();
+      console.log(cartData);
+      dispatch(
+        userActions.addItemToPanel({
+          items: cartData,
+        })
+      );
+    } catch (e) {
+      console.log(e.message);
+      dispatch(userActions.error({ Loading: false, error: e.response.status }));
     }
   };
 };

@@ -1,39 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let initialState = {
-  token: {},
-  items: [],
-  loading: false,
-  error: "",
-};
-
 const userSlice = createSlice({
   name: "users",
-  initialState,
+  initialState: { items: [], loading: false, error: 0 },
   reducers: {
     pending(state, action) {
       console.log(action);
-      initialState = { ...state, loading: action.payload };
-      console.log(initialState);
+      state = { ...state, loading: action.payload };
     },
     fulfilled(state, action) {
       console.log(action);
-      initialState = { ...state, loading: action.payload };
-      console.log(initialState);
+      state = { ...state, loading: action.payload };
     },
     error(state, action) {
       console.log(action);
-      initialState = {
-        ...state,
-        loading: action.payload.Loading,
-        error: action.payload.error,
-      };
-
-      console.log(initialState);
+      console.log(action.payload.Loading);
+      console.log(action.payload.error);
+      console.log(state.loading);
+      console.log(state.error);
+      state.error = action.payload.error;
+      state.loading = action.payload.Loading;
+      // state = {
+      //   ...state,
+      //   Loading: action.payload.Loading,
+      //   error: action.payload.error,
+      // };
     },
     addItemToPanel(state, action) {
       console.log(action.payload.items);
-      console.log(initialState);
+
       state.items.push(...action.payload.items);
     },
   },
