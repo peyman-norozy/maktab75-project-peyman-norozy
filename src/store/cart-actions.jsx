@@ -1,6 +1,7 @@
 import axios from "axios";
 import { productActions } from "./cart-slice";
 import { uiActions } from "./ui-slice";
+import { userActions } from "./user-slice";
 
 export const fetchCartData = () => {
   return async (dispatch) => {
@@ -123,6 +124,38 @@ export const sendNavstate = (mood) => {
       //     message: "Sending cart data failed!",
       //   })
       // );
+    }
+  };
+};
+
+export const fetchDataPanel = () => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await axios.get("http://localhost:3002/products", {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      });
+
+      if (response.statusText !== "OK") {
+        throw new Error("Could not fetch cart data!");
+      }
+
+      const data = await response.data;
+
+      return data;
+    };
+
+    try {
+      const cartData = await fetchData();
+      console.log(cartData);
+      dispatch(
+        userActions.addItemToPanel({
+          items: cartData,
+        })
+      );
+    } catch (error) {
+      console.log("you have a error!");
     }
   };
 };
