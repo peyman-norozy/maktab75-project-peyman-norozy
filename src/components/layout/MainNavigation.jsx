@@ -9,6 +9,7 @@ import ProductClassification from "../productClassification/ProductClassificatio
 
 const MainNavigation = () => {
   const addOrRemoveAuth = useSelector((state) => state.ui);
+
   const dispatch = useDispatch();
 
   const location = useLocation();

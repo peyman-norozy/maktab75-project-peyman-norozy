@@ -6,11 +6,13 @@ const userSlice = createSlice({
   reducers: {
     pending(state, action) {
       console.log(action);
-      state = { ...state, loading: action.payload };
+      // state = { ...state, loading: action.payload };
+      state.loading = action.payload;
     },
     fulfilled(state, action) {
       console.log(action);
-      state = { ...state, loading: action.payload };
+      // state = { ...state, loading: action.payload };
+      state.loading = action.payload;
     },
     error(state, action) {
       console.log(action);
