@@ -1,9 +1,11 @@
+import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchDataPanel } from "../store/auth-actions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
+import ManagementNavigation from "../components/layout/ManagementNavigation";
 
-const ManagementPanel = () => {
+const ManagementPanel = (props) => {
   const data = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,13 +20,15 @@ const ManagementPanel = () => {
   }
 
   return (
-    <>
-      <div>
+    <Fragment>
+      <ManagementNavigation />
+      <Outlet />
+      {/* <div>
         {data.user.items.map((item, index) => (
           <p key={index}>{item.name}</p>
         ))}
-      </div>
-    </>
+      </div> */}
+    </Fragment>
   );
 };
 

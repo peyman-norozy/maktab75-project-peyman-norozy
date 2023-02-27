@@ -12,6 +12,8 @@ import SamsungPage from "./pages/SamsungPage";
 import SmartWatchPage from "./pages/SmartWatchPage";
 import Error from "./pages/ErrorPage";
 import ManagementPanel from "./pages/ManagementPanelPage";
+import ProductManagement from "./pages/ProductManagementPage";
+import InventoryManagement from "./pages/InventoryManagementPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,8 +36,10 @@ function App() {
         <Route path="/shiaomi" element={<ShiaomiPage />} />
         <Route path="/samsung" element={<SamsungPage />} />
         <Route path="/smartWatch" element={<SmartWatchPage />} />
-        <Route path="/panel" element={<ManagementPanel />} />
-
+        <Route path="panel" element={<ManagementPanel />}>
+          <Route path="products" element={<ProductManagement />} />
+          <Route path="inventory" element={<InventoryManagement />} />
+        </Route>
         <Route path="*" element={<Error />} />
       </Routes>
     </Layout>
