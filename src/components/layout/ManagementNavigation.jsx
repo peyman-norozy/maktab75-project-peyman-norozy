@@ -6,6 +6,7 @@ const ManagementNavigation = () => {
       <nav>
         <Link to="products">کالا</Link>
         <Link to="inventory">موجودی</Link>
+        <Link to="orders">سفارش ها</Link>
       </nav>
     </>
   );

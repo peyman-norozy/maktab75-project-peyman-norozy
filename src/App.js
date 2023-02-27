@@ -14,6 +14,7 @@ import Error from "./pages/ErrorPage";
 import ManagementPanel from "./pages/ManagementPanelPage";
 import ProductManagement from "./pages/ProductManagementPage";
 import InventoryManagement from "./pages/InventoryManagementPage";
+import Orders from "./pages/OrdersPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
         <Route path="panel" element={<ManagementPanel />}>
           <Route path="products" element={<ProductManagement />} />
           <Route path="inventory" element={<InventoryManagement />} />
+          <Route path="orders" element={<Orders />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
