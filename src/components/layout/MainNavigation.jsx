@@ -8,7 +8,9 @@ import { fetchNavstate } from "../../store/cart-actions";
 import ProductClassification from "../productClassification/ProductClassification";
 
 const MainNavigation = () => {
-  const addOrRemoveAuth = useSelector((state) => state.ui);
+  const data1 = useSelector((state) => state);
+  const addOrRemoveAuth = data1.ui;
+  console.log(data1);
 
   const dispatch = useDispatch();
 
@@ -24,8 +26,8 @@ const MainNavigation = () => {
   }
 
   console.log(addOrRemoveAuth);
-  const navigationRemoveHandler = () => {
-    sendAndFetch(false);
+  const navigationRemoveHandler = async () => {
+    await sendAndFetch(false);
   };
 
   switch (location.pathname) {
