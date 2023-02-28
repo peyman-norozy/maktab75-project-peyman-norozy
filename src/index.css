@@ -50,3 +50,15 @@ body {
 .important_zIndex {
   z-index: 2 !important;
 }
+
+table,
+tr,
+th,
+td {
+  border: 2px solid #aaa;
+}
+
+td,
+th {
+  padding: 10px;
+}

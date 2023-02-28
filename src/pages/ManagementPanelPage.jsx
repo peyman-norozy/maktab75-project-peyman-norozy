@@ -21,9 +21,11 @@ const ManagementPanel = () => {
 
   return (
     <Fragment>
-      <ManagementNavigation />
+      <div className="relative">
+        <ManagementNavigation />
+        <Outlet />
+      </div>
 
-      <Outlet />
       {/* <div>
         {data.user.items.map((item, index) => (
           <p key={index}>{item.name}</p>
