@@ -31,7 +31,7 @@ const userSlice = createSlice({
     addItemToPanel(state, action) {
       console.log(action.payload.items);
 
-      state.items.push(...action.payload.items);
+      state.items = action.payload.items;
     },
   },
 });

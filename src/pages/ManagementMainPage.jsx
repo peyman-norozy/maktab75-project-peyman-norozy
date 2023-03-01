@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 import MainPageLink from "../components/mainPageLink/MainPageLink";
-import { loginRequest } from "../store/auth-actions";
 import { useNavigate } from "react-router-dom";
 
 const ManagementMainPage = () => {
@@ -9,25 +9,32 @@ const ManagementMainPage = () => {
   const [password, setPassword] = useState("");
 
   const data = useSelector((state) => state);
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log(data);
 
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(data);
-
-    if (data.user.error === 401) {
-      navigate("/management");
-    } else {
-      navigate("/panel");
-    }
+    axios
+      .post("http://localhost:3002/auth/login", {
+        username: userName,
+        password: password,
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("ACCESS_TOKEYN", res.data.accessToken);
+        localStorage.setItem("REFRESH_TOKEN", res.data.refreshToken);
+      })
+      .then(() => {
+        navigate("/panel");
+      })
+      .catch((e) => {
+        console.log(e);
+        navigate("/management");
+        setUserName("");
+        setPassword("");
+      });
   };
-
-  useEffect(() => {
-    dispatch(loginRequest({ userName, password }));
-  }, [dispatch, userName, password]);
 
   return (
     <form onSubmit={submitHandler} className="flex justify-center items-center">
@@ -61,7 +68,10 @@ const ManagementMainPage = () => {
             className="outline-none h-10 px-2 rounded-md"
           />
         </div>
-        <button className="bg-[#3ccf4e] text-white w-28 m-auto py-4 rounded-md">
+        <button
+          type="submit"
+          className="bg-[#3ccf4e] text-white w-28 m-auto py-4 rounded-md"
+        >
           ورود
         </button>
         <MainPageLink />

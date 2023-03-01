@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCartData, fetchNavstate } from "./store/cart-actions";
@@ -15,16 +16,31 @@ import ManagementPanel from "./pages/ManagementPanelPage";
 import ProductManagement from "./pages/ProductManagementPage";
 import InventoryManagement from "./pages/InventoryManagementPage";
 import Orders from "./pages/OrdersPage";
+import { productActions } from "./store/cart-slice";
+import { uiActions } from "./store/ui-slice";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCartData());
+    axios
+      .get("http://localhost:3002/products")
+      .then((res) =>
+        dispatch(
+          productActions.addItemToCart({
+            items: res.data,
+          })
+        )
+      )
+      .catch((e) => console.log(e));
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchNavstate("navChanging"));
+    axios
+      .get("http://localhost:3002/nav")
+      .then((res) => dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar)))
+      .catch((e) => console.log(e));
+    // dispatch(fetchNavstate("navChanging"));
   }, [dispatch]);
 
   return (

@@ -1,24 +1,27 @@
+import axios from "axios";
 import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { sendNavstate } from "../../store/cart-actions";
-import { fetchNavstate } from "./../../store/cart-actions";
 import style from "../productClassification/ProductClassification.module.css";
+import { uiActions } from "../../store/ui-slice";
 
 const MainPageLink = () => {
   const dispatch = useDispatch();
 
-  async function sendAndFetch() {
-    try {
-      await dispatch(sendNavstate(true));
-      await dispatch(fetchNavstate("navChanging"));
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   const navigationAddHandler = () => {
-    sendAndFetch();
+    axios
+      .post("http://localhost:3002/nav", {
+        showNavBar: true,
+      })
+      .then(() => {
+        axios
+          .get("http://localhost:3002/nav")
+          .then((res) =>
+            dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar))
+          )
+          .catch((e) => console.log(e));
+      })
+      .catch((e) => console.log(e));
   };
 
   return (

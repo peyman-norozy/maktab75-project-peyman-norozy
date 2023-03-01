@@ -1,23 +1,35 @@
 import { Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchDataPanel } from "../store/auth-actions";
 import { useNavigate, Outlet } from "react-router-dom";
 import ManagementNavigation from "../components/layout/ManagementNavigation";
+import { userActions } from "../store/user-slice";
 
 const ManagementPanel = () => {
-  const data = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchDataPanel());
+    axios
+      .get("http://localhost:3002/products", {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        dispatch(
+          userActions.addItemToPanel({
+            items: res.data,
+          })
+        );
+      })
+      .catch((e) => {
+        console.log(e);
+        navigate("/management");
+      });
   }, [dispatch]);
-
-  console.log(data);
-  if (data.user.error === 401) {
-    navigate("/management");
-  }
 
   return (
     <Fragment>

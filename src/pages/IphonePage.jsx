@@ -4,7 +4,7 @@ import PaginatedItems from "../components/pagination/PaginatedItems";
 const IphonePage = () => {
   const data = useSelector((state) => state.cart.items);
 
-  const newData = data[0].mobile.filter((item) => item.name === "iphone");
+  const newData = data.filter((item) => item.name === "iphone");
 
   return <PaginatedItems itemsPerPage={4} data={newData} />;
 };

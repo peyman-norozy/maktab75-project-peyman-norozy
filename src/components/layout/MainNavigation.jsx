@@ -1,11 +1,10 @@
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-
 import Logo from "../logo/Logo";
 import MainPageLink from "../mainPageLink/MainPageLink";
-import { sendNavstate } from "../../store/cart-actions";
-import { fetchNavstate } from "../../store/cart-actions";
 import ProductClassification from "../productClassification/ProductClassification";
+import { uiActions } from "../../store/ui-slice";
 
 const MainNavigation = () => {
   const data1 = useSelector((state) => state);
@@ -17,17 +16,24 @@ const MainNavigation = () => {
   const location = useLocation();
 
   async function sendAndFetch(status) {
-    try {
-      await dispatch(sendNavstate(status));
-      await dispatch(fetchNavstate("navChanging"));
-    } catch (e) {
-      console.log(e);
-    }
+    axios
+      .post("http://localhost:3002/nav", {
+        showNavBar: status,
+      })
+      .then(() => {
+        axios
+          .get("http://localhost:3002/nav")
+          .then((res) =>
+            dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar))
+          )
+          .catch((e) => console.log(e));
+      })
+      .catch((e) => console.log(e));
   }
 
   console.log(addOrRemoveAuth);
-  const navigationRemoveHandler = async () => {
-    await sendAndFetch(false);
+  const navigationRemoveHandler = () => {
+    sendAndFetch(false);
   };
 
   switch (location.pathname) {

@@ -11,10 +11,6 @@ const Home = () => {
   let phone = 0;
   let watch = 0;
 
-  if (data.length === 0) {
-    return;
-  }
-
   return (
     <Fragment>
       <Slider />
@@ -26,8 +22,8 @@ const Home = () => {
           </h2>
         </div>
         <div className="grid__product bg-white gap-4 py-4 px-6">
-          {data[0].mobile.map((item, index) => {
-            if (phone < 4) {
+          {data.map((item, index) => {
+            if (item.name === "iphone" && phone < 4) {
               phone++;
               return <WatchAndPhoneCart key={index} data={item} />;
             } else {
@@ -44,8 +40,8 @@ const Home = () => {
           </h2>
         </div>
         <div className="grid__product bg-white gap-4 py-4 px-6">
-          {data[0].watch.map((item, index) => {
-            if (watch < 4) {
+          {data.map((item, index) => {
+            if (item.name === "smartWatch" && watch < 4) {
               watch++;
               return <WatchAndPhoneCart key={index} data={item} />;
             } else {

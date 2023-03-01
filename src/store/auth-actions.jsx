@@ -34,6 +34,30 @@ export const loginRequest = (user) => {
   };
 };
 
+export const sendDataPanel = (formData) => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await axios.post(
+        "http://localhost:3002/products",
+        formData,
+        {
+          headers: {
+            token: localStorage.getItem("ACCESS_TOKEYN"),
+          },
+        }
+      );
+
+      if (response.statusText !== "OK") {
+        throw new Error("Sending cart data failed.");
+      }
+    };
+
+    try {
+      await sendRequest();
+    } catch (error) {}
+  };
+};
+
 export const fetchDataPanel = () => {
   return async (dispatch) => {
     const fetchData = async () => {

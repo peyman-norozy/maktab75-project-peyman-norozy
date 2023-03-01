@@ -33,7 +33,7 @@ export const fetchCartData = () => {
 export const sendCartData = (cart) => {
   return async (dispatch) => {
     const sendRequest = async () => {
-      const response = await axios.post("http://localhost:3002/navAuth", {
+      const response = await axios.post("http://localhost:3002/nav", {
         showNavBar: false,
       });
 
