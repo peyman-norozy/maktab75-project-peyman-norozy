@@ -23,7 +23,7 @@ const Home = () => {
         </div>
         <div className="grid__product bg-white gap-4 py-4 px-6">
           {data.map((item, index) => {
-            if (item.name === "iphone" && phone < 4) {
+            if (item.category === "موبایل" && phone < 4) {
               phone++;
               return <WatchAndPhoneCart key={index} data={item} />;
             } else {
@@ -41,7 +41,7 @@ const Home = () => {
         </div>
         <div className="grid__product bg-white gap-4 py-4 px-6">
           {data.map((item, index) => {
-            if (item.name === "smartWatch" && watch < 4) {
+            if (item.category === "ساعت" && watch < 4) {
               watch++;
               return <WatchAndPhoneCart key={index} data={item} />;
             } else {

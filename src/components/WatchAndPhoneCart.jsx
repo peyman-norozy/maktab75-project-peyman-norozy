@@ -14,14 +14,18 @@ const WatchAndPhoneCart = (props) => {
           <div className="w-full">
             <div className="flex flex-col items-center p-4">
               <div className="w-full">
-                <img src={props.data.image} alt="fg" className="w-full" />
+                <img
+                  src={"http://localhost:3002" + props.data.image}
+                  alt=""
+                  className="w-full"
+                />
               </div>
               <div className="flex flex-col gap-2 justify-between text-sm w-full mt-2">
-                <h3 className="text-lg">شیر تازه</h3>
+                <h3 className="text-lg">{props.data.name}</h3>
                 <div className="flex gap-6 justify-between">
                   <span>قیمت:</span>
                   <p>
-                    200,000
+                    {props.data.price}
                     <span>تومان</span>
                   </p>
                 </div>

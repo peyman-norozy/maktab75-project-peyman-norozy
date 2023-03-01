@@ -5,31 +5,28 @@ import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import ManagementNavigation from "../components/layout/ManagementNavigation";
 import { userActions } from "../store/user-slice";
+import { productActions } from "./../store/cart-slice";
 
 const ManagementPanel = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3002/products", {
-        headers: {
-          token: localStorage.getItem("ACCESS_TOKEYN"),
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        dispatch(
-          userActions.addItemToPanel({
-            items: res.data,
-          })
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-        navigate("/management");
-      });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3002/products", {
+  //       headers: {
+  //         token: localStorage.getItem("ACCESS_TOKEYN"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       dispatch(productActions.addItemToCart(res.data));
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //       navigate("/management");
+  //     });
+  // }, [dispatch]);
 
   return (
     <Fragment>
