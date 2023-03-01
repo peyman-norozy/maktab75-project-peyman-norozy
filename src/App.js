@@ -25,13 +25,10 @@ function App() {
   useEffect(() => {
     axios
       .get("http://localhost:3002/products")
-      .then((res) =>
-        dispatch(
-          productActions.addItemToCart({
-            items: res.data,
-          })
-        )
-      )
+      .then((res) => {
+        console.log(res.data);
+        dispatch(productActions.addItemToCart(res.data));
+      })
       .catch((e) => console.log(e));
   }, [dispatch]);
 

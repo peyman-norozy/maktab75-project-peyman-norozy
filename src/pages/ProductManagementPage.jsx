@@ -1,6 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { sendDataPanel } from "../store/auth-actions";
+import { useSelector, useDispatch } from "react-redux";
+import { productActions } from "./../store/cart-slice";
 
 const ProductManagement = () => {
   const [modalDisplay, setModalDisplay] = useState(false);
@@ -8,17 +9,50 @@ const ProductManagement = () => {
   const [productName, setProductName] = useState("");
   const [productClass, setProductClass] = useState("");
   const [description, setDescription] = useState("");
+
   const dispatch = useDispatch();
+  const data = useSelector((data) => data);
+  console.log(data.cart.items);
+
+  console.log(productClass);
+
+  const categoryAndSubcategory = productClass.split("/");
+  console.log(categoryAndSubcategory);
+
+  const getNewData = () => {
+    axios
+      .get("http://localhost:3002/products", {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      })
+      .then((res) => dispatch(productActions.addItemToCart(res.data)))
+      .then(() => setModalDisplay(false))
+      .catch((e) => console.log(e));
+  };
 
   const addProductHandler = (event) => {
     event.preventDefault();
 
     let formData = new FormData();
     formData.append("image", file);
-    formData.append("price", 5000);
-    formData.append("brand", "new brand");
+    formData.append("price", 0);
+    formData.append("quantity", 0);
+    formData.append("brand", categoryAndSubcategory[1]);
     formData.append("name", productName);
-    dispatch(sendDataPanel(formData));
+    formData.append("category", categoryAndSubcategory[0]);
+    formData.append("subcategory", categoryAndSubcategory[1]);
+    formData.append("description", description);
+
+    axios
+      .post("http://localhost:3002/products", formData, {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      })
+      .then(() => getNewData())
+      .catch((e) => console.log(e));
+
     console.log(formData);
   };
 
@@ -47,25 +81,27 @@ const ProductManagement = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="text-xs">
-                <td>
-                  <div className="w-20">
-                    <img src={require("./1.jpg")} alt="" />
-                  </div>
-                </td>
-                <td>Malcolm Lockyer</td>
-                <td>1961</td>
-                <td>
-                  <div className="flex flex-col gap-2">
-                    <button className="bg-green-700 text-white py-2 px-4 rounded-md">
-                      ویرایش
-                    </button>
-                    <button className="bg-red-400 text-white py-2 px-4 rounded-md">
-                      حذف
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              {data.cart.items.map((item) => (
+                <tr className="text-xs">
+                  <td>
+                    <div className="w-20">
+                      <img src={"http://localhost:3002" + item.image} alt="" />
+                    </div>
+                  </td>
+                  <td>{item.name}</td>
+                  <td>{`${item.category}/${item.subcategory}`}</td>
+                  <td>
+                    <div className="flex flex-col gap-2">
+                      <button className="bg-green-700 text-white py-2 px-4 rounded-md">
+                        ویرایش
+                      </button>
+                      <button className="bg-red-400 text-white py-2 px-4 rounded-md">
+                        حذف
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -108,12 +144,16 @@ const ProductManagement = () => {
               <select
                 id="product-class"
                 className="py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"
+                defaultValue={"select"}
                 onChange={(event) => setProductClass(event.target.value)}
               >
-                <option value="iphone">موبایل/آیفون</option>
-                <option value="samsung">موبایل/سامسونگ</option>
-                <option value="mi">موبایل/شیائومی</option>
-                <option value="smartWatch">ساعت/ساعت هوشمند</option>
+                <option value="select" disabled>
+                  انتخاب کنید...
+                </option>
+                <option value="موبایل/آیفون">موبایل/آیفون</option>
+                <option value="موبایل/سامسونگ">موبایل/سامسونگ</option>
+                <option value="موبایل/شیائومی">موبایل/شیائومی</option>
+                <option value="ساعت/ساعت هوشمند">ساعت/ساعت هوشمند</option>
               </select>
             </div>
             <div className="flex flex-col gap-1">
