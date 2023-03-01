@@ -8,10 +8,13 @@ const activeClassName =
 
 const ManagementNavigation = () => {
   return (
-    <header className="flex justify-around items-center h-20 w-full bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)]">
-      <h1 className="text-2xl">پنل مدیریت فروشگاه</h1>
+    <header className="fixed flex flex-col justify-around items-center py-4 w-full bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)]">
+      <div className="flex justify-between w-full px-[32px]">
+        <h1 className="text-2xl">پنل مدیریت فروشگاه</h1>
+        <MainPageLink />
+      </div>
 
-      <nav className="flex gap-4 items-center">
+      <nav className="flex flex-col gap-4 items-center mt-2 vm:flex-row">
         <NavLink
           to="products"
           className={({ isActive }) =>
@@ -37,7 +40,6 @@ const ManagementNavigation = () => {
           سفارش ها
         </NavLink>
       </nav>
-      <MainPageLink />
     </header>
   );
 };

@@ -57,9 +57,9 @@ const ProductManagement = () => {
   };
 
   return (
-    <div>
-      <div className="h-screen">
-        <div className="pt-10 flex justify-between items-center">
+    <div className="pt-52 pb-8 vm:pt-24">
+      <div>
+        <div className="pt-10 flex justify-between items-center px-[32px]">
           <h2 className="text-xl font-bold">مدیریت کالاها</h2>
           <button
             onClick={() => {

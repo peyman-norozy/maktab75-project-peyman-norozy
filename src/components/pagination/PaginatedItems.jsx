@@ -10,7 +10,7 @@ function PaginatedItems(props) {
   function Items({ currentItems }) {
     return (
       <>
-        <div className="pt-44 grid__product gap-4 py-4 px-6">
+        <div className="pt-44 grid__product gap-4 py-4 px-14">
           {currentItems &&
             currentItems.map((item, index) => (
               <WatchAndPhoneCart
