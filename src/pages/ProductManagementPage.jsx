@@ -30,7 +30,7 @@ const ProductManagement = () => {
   };
 
   return (
-    <div className="pt-52 pb-8 vm:pt-24">
+    <div className="pt-52 pb-8 h-full vm:pt-24">
       <div>
         <div className="pt-10 flex justify-between items-center px-[32px]">
           <h2 className="text-xl font-bold">مدیریت کالاها</h2>
@@ -84,7 +84,7 @@ const ProductManagement = () => {
         </div>
       </div>
       {data.cart.modalDisplay && (
-        <div className="bg-[#aaaaaa4d] absolute top-0 w-full h-full">
+        <div className="bg-[#aaaaaa4d] absolute top-0 bottom-0 w-full h-full">
           <AddProductForm />
         </div>
       )}

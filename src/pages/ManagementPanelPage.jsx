@@ -29,7 +29,7 @@ const ManagementPanel = () => {
 
   return (
     <Fragment>
-      <div className="relative">
+      <div>
         <ManagementNavigation />
         <Outlet />
       </div>

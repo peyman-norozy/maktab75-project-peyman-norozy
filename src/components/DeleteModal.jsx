@@ -37,6 +37,12 @@ const DeleteModal = () => {
         },
       })
       .then(() => dispatch(productActions.deleteModalDisplay(false)))
+      .then(() =>
+        navigate({
+          pathname: "/panel/products",
+          search: "",
+        })
+      )
       .then(() => getNewData())
       .catch((e) => console.log(e));
   };
