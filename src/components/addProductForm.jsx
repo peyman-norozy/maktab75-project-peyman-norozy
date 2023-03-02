@@ -27,7 +27,6 @@ const AddProductForm = () => {
       .then((res) => dispatch(productActions.addItemToCart(res.data)))
       .then(() => dispatch(productActions.modalDisplayAction(false)))
       .catch((e) => console.log(e));
-    // setModalDisplay(false)
   };
 
   const addProductHandler = (event) => {

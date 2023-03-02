@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import AddProductForm from "../components/addProductForm";
 import { productActions } from "../store/cart-slice";
@@ -7,6 +8,27 @@ const ProductManagement = () => {
   console.log(data.cart.items);
   console.log(data.cart.modalDisplay);
   const dispatch = useDispatch();
+
+  const getNewData = () => {
+    axios
+      .get("http://localhost:3002/products", {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      })
+      .then((res) => dispatch(productActions.addItemToCart(res.data)))
+      .catch((e) => console.log(e));
+  };
+
+  const deleteProductHandler = (event) => {
+    axios
+      .delete(`http://localhost:3002/products/${event.target.id}`, {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      })
+      .then(() => getNewData());
+  };
 
   return (
     <div className="pt-52 pb-8 vm:pt-24">
@@ -33,8 +55,8 @@ const ProductManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {data.cart.items.map((item) => (
-                <tr className="text-xs">
+              {data.cart.items.map((item, index) => (
+                <tr key={index} className="text-xs">
                   <td>
                     <div className="w-20">
                       <img src={"http://localhost:3002" + item.image} alt="" />
@@ -47,7 +69,11 @@ const ProductManagement = () => {
                       <button className="bg-green-700 text-white py-2 px-4 rounded-md">
                         ویرایش
                       </button>
-                      <button className="bg-red-400 text-white py-2 px-4 rounded-md">
+                      <button
+                        onClick={deleteProductHandler}
+                        id={item.id}
+                        className="bg-red-400 text-white py-2 px-4 rounded-md"
+                      >
                         حذف
                       </button>
                     </div>

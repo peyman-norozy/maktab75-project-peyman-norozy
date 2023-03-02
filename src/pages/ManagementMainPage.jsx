@@ -26,7 +26,7 @@ const ManagementMainPage = () => {
         localStorage.setItem("REFRESH_TOKEN", res.data.refreshToken);
       })
       .then(() => {
-        navigate("/panel");
+        navigate("/panel/products");
       })
       .catch((e) => {
         console.log(e);
