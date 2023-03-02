@@ -1,33 +1,32 @@
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import AddProductForm from "../components/addProductForm";
 import { productActions } from "../store/cart-slice";
+import DeleteModal from "./../components/DeleteModal";
 
 const ProductManagement = () => {
   const data = useSelector((data) => data);
   console.log(data.cart.items);
   console.log(data.cart.modalDisplay);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const getNewData = () => {
-    axios
-      .get("http://localhost:3002/products", {
-        headers: {
-          token: localStorage.getItem("ACCESS_TOKEYN"),
-        },
-      })
-      .then((res) => dispatch(productActions.addItemToCart(res.data)))
-      .catch((e) => console.log(e));
-  };
+  useEffect(() => {
+    navigate({
+      pathname: "/panel/products",
+      search: "",
+    });
+  }, [dispatch, navigate]);
 
-  const deleteProductHandler = (event) => {
-    axios
-      .delete(`http://localhost:3002/products/${event.target.id}`, {
-        headers: {
-          token: localStorage.getItem("ACCESS_TOKEYN"),
-        },
-      })
-      .then(() => getNewData());
+  const deletModalHandler = (event) => {
+    console.log(event.target.id);
+    navigate({
+      pathname: "/panel/products",
+      search: `?id=${event.target.id}`,
+    });
+    console.log(navigate);
+    dispatch(productActions.deleteModalDisplay(true));
   };
 
   return (
@@ -70,8 +69,8 @@ const ProductManagement = () => {
                         ویرایش
                       </button>
                       <button
-                        onClick={deleteProductHandler}
                         id={item.id}
+                        onClick={deletModalHandler}
                         className="bg-red-400 text-white py-2 px-4 rounded-md"
                       >
                         حذف
@@ -87,6 +86,11 @@ const ProductManagement = () => {
       {data.cart.modalDisplay && (
         <div className="bg-[#aaaaaa4d] absolute top-0 w-full h-full">
           <AddProductForm />
+        </div>
+      )}
+      {data.cart.deleteModalDisplay && (
+        <div className="bg-[#aaaaaa4d] absolute top-0 w-full h-full">
+          <DeleteModal />
         </div>
       )}
     </div>

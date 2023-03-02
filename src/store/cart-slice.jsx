@@ -5,6 +5,7 @@ const cartSlice = createSlice({
   initialState: {
     items: [],
     modalDisplay: false,
+    deleteModalDisplay: false,
   },
   reducers: {
     addItemToCart(state, action) {
@@ -14,6 +15,9 @@ const cartSlice = createSlice({
     modalDisplayAction(state, action) {
       console.log(action);
       state.modalDisplay = action.payload;
+    },
+    deleteModalDisplay(state, action) {
+      state.deleteModalDisplay = action.payload;
     },
   },
 });
