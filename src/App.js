@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCartData, fetchNavstate } from "./store/cart-actions";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import ManagementMainPage from "./pages/ManagementMainPage";
