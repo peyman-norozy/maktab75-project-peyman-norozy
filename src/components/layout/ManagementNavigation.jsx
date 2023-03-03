@@ -8,7 +8,7 @@ const activeClassName =
 
 const ManagementNavigation = () => {
   return (
-    <header className="fixed flex flex-col justify-around items-center py-4 w-full bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)]">
+    <header className="fixed flex flex-col justify-around items-center py-4 w-full bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)] important_zIndex ">
       <div className="flex justify-between w-full px-[32px]">
         <h1 className="text-2xl">پنل مدیریت فروشگاه</h1>
         <MainPageLink />
