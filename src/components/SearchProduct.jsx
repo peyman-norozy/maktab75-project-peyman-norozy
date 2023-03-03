@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { productActions } from "../store/cart-slice";
-import { useState } from "react";
 
 const SearchProduct = () => {
   const [setSearchError, newSetSearchError] = useState(false);

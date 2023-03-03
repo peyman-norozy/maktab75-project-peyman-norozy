@@ -37,6 +37,7 @@ const DeleteModal = () => {
         },
       })
       .then(() => dispatch(productActions.deleteModalDisplay(false)))
+      .then(() => dispatch(productActions.addSearchItem([])))
       .then(() =>
         navigate({
           pathname: "/panel/products",
