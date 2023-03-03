@@ -4,6 +4,7 @@ const cartSlice = createSlice({
   name: "product",
   initialState: {
     items: [],
+    searchItems: [],
     modalDisplay: false,
     deleteModalDisplay: false,
   },
@@ -19,6 +20,9 @@ const cartSlice = createSlice({
     deleteModalDisplay(state, action) {
       state.deleteModalDisplay = action.payload;
     },
+    addSearchItem(state,action){
+      state.searchItems = action.payload
+    }
   },
 });
 

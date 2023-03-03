@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import AddProductForm from "../components/addProductForm";
 import { productActions } from "../store/cart-slice";
 import DeleteModal from "./../components/DeleteModal";
+import SearchProduct from "../components/SearchProduct";
+import ProductManagementCart from "../components/ProductManagementCart";
 
 const ProductManagement = () => {
   const data = useSelector((data) => data);
@@ -19,16 +21,6 @@ const ProductManagement = () => {
     });
   }, [dispatch, navigate]);
 
-  const deletModalHandler = (event) => {
-    console.log(event.target.id);
-    navigate({
-      pathname: "/panel/products",
-      search: `?id=${event.target.id}`,
-    });
-    console.log(navigate);
-    dispatch(productActions.deleteModalDisplay(true));
-  };
-
   return (
     <div className="pt-52 pb-8 h-full vm:pt-24">
       <div>
@@ -43,6 +35,9 @@ const ProductManagement = () => {
             افزودن کالا
           </button>
         </div>
+
+        <SearchProduct />
+
         <div className="flex justify-center mt-10">
           <table>
             <thead>
@@ -54,30 +49,11 @@ const ProductManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {data.cart.items.map((item, index) => (
-                <tr key={index} className="text-xs">
-                  <td>
-                    <div className="w-20">
-                      <img src={"http://localhost:3002" + item.image} alt="" />
-                    </div>
-                  </td>
-                  <td>{item.name}</td>
-                  <td>{`${item.category}/${item.subcategory}`}</td>
-                  <td>
-                    <div className="flex flex-col gap-2">
-                      <button className="bg-green-700 text-white py-2 px-4 rounded-md">
-                        ویرایش
-                      </button>
-                      <button
-                        id={item.id}
-                        onClick={deletModalHandler}
-                        className="bg-red-400 text-white py-2 px-4 rounded-md"
-                      >
-                        حذف
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+              {(data.cart.searchItems.length === 0
+                ? data.cart.items
+                : data.cart.searchItems
+              ).map((item, index) => (
+                <ProductManagementCart key={index} item={item} />
               ))}
             </tbody>
           </table>
