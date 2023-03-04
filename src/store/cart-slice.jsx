@@ -20,9 +20,10 @@ const cartSlice = createSlice({
     deleteModalDisplay(state, action) {
       state.deleteModalDisplay = action.payload;
     },
-    addSearchItem(state,action){
-      state.searchItems = action.payload
-    }
+    addSearchItem(state, action) {
+      console.log(action);
+      state.searchItems = action.payload;
+    },
   },
 });
 

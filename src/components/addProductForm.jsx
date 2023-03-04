@@ -57,7 +57,7 @@ const AddProductForm = () => {
   return (
     <form
       onSubmit={addProductHandler}
-      className="bg-[#a37fdf] py-2 px-4 flex flex-col gap-4 text-sm rounded-md text-white m-auto w-[50%] mt-[100px]"
+      className="bg-[#a37fdf] py-2 px-4 flex flex-col gap-4 text-sm rounded-md text-white m-auto w-[50%] mt-[150px]"
     >
       <div className="flex justify-between">
         <h1 className="font-bold">افزودن/ویرایش کالا</h1>

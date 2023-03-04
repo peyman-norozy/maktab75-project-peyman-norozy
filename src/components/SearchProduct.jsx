@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { productActions } from "../store/cart-slice";
 
@@ -11,9 +11,14 @@ const SearchProduct = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    let updatedList = [...itemList];
+    dispatch(productActions.addSearchItem(updatedList));
+  }, [dispatch, itemList]);
+
   const handleInputChange = (event) => {
-    console.log(event.target.value);
     const query = event.target.value;
+    console.log(query);
     let updatedList = [...itemList];
 
     updatedList = updatedList.filter((item) => {
@@ -43,9 +48,9 @@ const SearchProduct = () => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>

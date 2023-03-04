@@ -49,10 +49,7 @@ const ProductManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {(data.cart.searchItems.length === 0
-                ? data.cart.items
-                : data.cart.searchItems
-              ).map((item, index) => (
+              {data.cart.searchItems.map((item, index) => (
                 <ProductManagementCart key={index} item={item} />
               ))}
             </tbody>
