@@ -42,39 +42,6 @@ const InventoryManagement = () => {
       newSetState(false);
       setPriceAndQuantity([]);
     });
-
-    // axios
-    //   .all(
-    //     priceAndQuantity.map((item) => {
-    //       axios.patch(
-    //         `http://localhost:3002/products/${item.id}`,
-    //         { quantity: item.quantity, price: item.price },
-    //         {
-    //           headers: {
-    //             token: localStorage.getItem("ACCESS_TOKEYN"),
-    //           },
-    //         }
-    //       );
-    //     })
-    //   )
-    //   .then(() => console.log("peyman"));
-
-    // newSetState(true);
-    // priceAndQuantity.forEach((item) => {
-    //   console.log(item);
-    //   newSetState(true);
-
-    //     .then((response) => {
-    //       console.log(response);
-    //       setPriceAndQuantity([]);
-    //       newSetState(true);
-    //     })
-    //     .catch((e) => console.log(e))
-    //     .finally(() => {
-    //       console.log("peyman");
-    //       newSetState(false);
-    //     });
-    // });
   };
 
   return (
