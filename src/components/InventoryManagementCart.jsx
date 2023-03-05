@@ -7,6 +7,7 @@ const InventoryManagementCart = ({ item, priceData, quantityData }) => {
           contentEditable="true"
           suppressContentEditableWarning={true}
           id={item.id}
+          className="text-center"
           onBlur={(e) => {
             priceData(e.target.lastChild.data, e.target.id);
 
@@ -20,6 +21,7 @@ const InventoryManagementCart = ({ item, priceData, quantityData }) => {
           contentEditable="true"
           suppressContentEditableWarning={true}
           id={item.id}
+          className="text-center"
           onBlur={(e) => {
             quantityData(e.target.lastChild.data, e.target.id);
 
