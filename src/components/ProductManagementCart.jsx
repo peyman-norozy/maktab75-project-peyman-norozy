@@ -23,7 +23,7 @@ const ProductManagementCart = ({ item }) => {
   return (
     <>
       <tr className="text-xs">
-        <td>
+        <td className="flex justify-center">
           <div className="w-20">
             <img src={"http://localhost:3002" + item.image} alt="" />
           </div>
