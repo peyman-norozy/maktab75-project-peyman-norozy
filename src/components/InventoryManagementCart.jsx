@@ -1,4 +1,4 @@
-const InventoryManagementCart = ({ item }) => {
+const InventoryManagementCart = ({ item, priceData, quantityData }) => {
   return (
     <>
       <tr className="text-xs">
@@ -8,6 +8,8 @@ const InventoryManagementCart = ({ item }) => {
           suppressContentEditableWarning={true}
           id={item.id}
           onBlur={(e) => {
+            priceData(e.target.lastChild.data, e.target.id);
+
             console.log(e.target.lastChild.data);
             console.log(e.target.id);
           }}
@@ -19,6 +21,8 @@ const InventoryManagementCart = ({ item }) => {
           suppressContentEditableWarning={true}
           id={item.id}
           onBlur={(e) => {
+            quantityData(e.target.lastChild.data, e.target.id);
+
             console.log(e.target.lastChild.data);
             console.log(e.target.id);
           }}

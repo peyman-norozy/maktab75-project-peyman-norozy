@@ -1,9 +1,81 @@
+import { useState } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import SearchProduct from "../components/SearchProduct";
 import InventoryManagementCart from "../components/InventoryManagementCart";
 
 const InventoryManagement = () => {
   const data = useSelector((data) => data);
+  const [priceAndQuantity, setPriceAndQuantity] = useState([]);
+  const [state, newSetState] = useState(false);
+
+  console.log(priceAndQuantity);
+
+  const priceDataHandler = (data, id) => {
+    setPriceAndQuantity([...priceAndQuantity, { price: data, id: id }]);
+  };
+
+  const quantityDataHandler = (data, id) => {
+    setPriceAndQuantity([...priceAndQuantity, { quantity: data, id: id }]);
+  };
+
+  const saveHandler = () => {
+    newSetState(true);
+    let promises = [];
+
+    for (let item of priceAndQuantity) {
+      promises.push(
+        axios.patch(
+          `http://localhost:3002/products/${item.id}`,
+          { quantity: item.quantity, price: item.price },
+          {
+            headers: {
+              token: localStorage.getItem("ACCESS_TOKEYN"),
+            },
+          }
+        )
+      );
+    }
+
+    Promise.all(promises).then(() => {
+      console.log("all done");
+      newSetState(false);
+      setPriceAndQuantity([]);
+    });
+
+    // axios
+    //   .all(
+    //     priceAndQuantity.map((item) => {
+    //       axios.patch(
+    //         `http://localhost:3002/products/${item.id}`,
+    //         { quantity: item.quantity, price: item.price },
+    //         {
+    //           headers: {
+    //             token: localStorage.getItem("ACCESS_TOKEYN"),
+    //           },
+    //         }
+    //       );
+    //     })
+    //   )
+    //   .then(() => console.log("peyman"));
+
+    // newSetState(true);
+    // priceAndQuantity.forEach((item) => {
+    //   console.log(item);
+    //   newSetState(true);
+
+    //     .then((response) => {
+    //       console.log(response);
+    //       setPriceAndQuantity([]);
+    //       newSetState(true);
+    //     })
+    //     .catch((e) => console.log(e))
+    //     .finally(() => {
+    //       console.log("peyman");
+    //       newSetState(false);
+    //     });
+    // });
+  };
 
   return (
     <>
@@ -11,10 +83,14 @@ const InventoryManagement = () => {
         <div>
           <div className="pt-10 flex justify-between items-center px-[32px]">
             <h2 className="text-xl font-bold">مدیریت موجودی و قیمت ها</h2>
-            <button className="bg-[#3CCF4E] text-white px-4 py-2 rounded-md hover:bg-green-400">
+            <button
+              onClick={saveHandler}
+              className="bg-[#3CCF4E] text-white px-4 py-2 rounded-md hover:bg-green-400"
+            >
               ذخیره
             </button>
           </div>
+          {state && <div>peyman</div>}
 
           <SearchProduct />
           <div className="flex justify-center mt-10">
@@ -28,7 +104,12 @@ const InventoryManagement = () => {
               </thead>
               <tbody>
                 {data.cart.searchItems.map((item, index) => (
-                  <InventoryManagementCart key={index} item={item} />
+                  <InventoryManagementCart
+                    key={index}
+                    item={item}
+                    priceData={priceDataHandler}
+                    quantityData={quantityDataHandler}
+                  />
                 ))}
               </tbody>
             </table>
