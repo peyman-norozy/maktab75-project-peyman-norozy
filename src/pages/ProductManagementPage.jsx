@@ -38,8 +38,8 @@ const ProductManagement = () => {
 
         <SearchProduct />
 
-        <div className="flex justify-center mt-10">
-          <table>
+        <div className="m-auto w-[94%] mt-10">
+          <table className="w-full">
             <thead>
               <tr className="text-xs">
                 <th>تصویر</th>
