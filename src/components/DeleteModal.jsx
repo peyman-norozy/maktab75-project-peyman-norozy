@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { productActions } from "../store/cart-slice";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { productActions } from "../store/cart-slice";
 
 const DeleteModal = () => {
   const data = useSelector((data) => data);
@@ -21,6 +21,7 @@ const DeleteModal = () => {
         },
       })
       .then((res) => dispatch(productActions.addItemToCart(res.data)))
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
   };
 
@@ -29,6 +30,8 @@ const DeleteModal = () => {
 
     const id = searchParams.get("id");
     console.log(id);
+
+    dispatch(productActions.loadingSpinnerCanger(true));
 
     axios
       .delete(`http://localhost:3002/products/${id}`, {

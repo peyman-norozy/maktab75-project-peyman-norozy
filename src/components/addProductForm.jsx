@@ -26,6 +26,7 @@ const AddProductForm = () => {
       })
       .then((res) => dispatch(productActions.addItemToCart(res.data)))
       .then(() => dispatch(productActions.modalDisplayAction(false)))
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
   };
 
@@ -42,6 +43,7 @@ const AddProductForm = () => {
     formData.append("subcategory", categoryAndSubcategory[1]);
     formData.append("description", description);
 
+    dispatch(productActions.loadingSpinnerCanger(true));
     axios
       .post("http://localhost:3002/products", formData, {
         headers: {
