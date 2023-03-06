@@ -1,14 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SearchProduct from "../components/SearchProduct";
 import InventoryManagementCart from "../components/InventoryManagementCart";
+import { productActions } from "../store/cart-slice";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 const InventoryManagement = () => {
   const data = useSelector((data) => data);
+  const dispatch = useDispatch();
   const [priceAndQuantity, setPriceAndQuantity] = useState([]);
-  const [state, newSetState] = useState(false);
 
+  console.log(data);
   console.log(priceAndQuantity);
 
   const priceDataHandler = (data, id) => {
@@ -20,7 +23,8 @@ const InventoryManagement = () => {
   };
 
   const saveHandler = () => {
-    newSetState(true);
+    dispatch(productActions.loadingSpinnerCanger(true));
+    // newSetState(true);
     let promises = [];
 
     for (let item of priceAndQuantity) {
@@ -39,7 +43,7 @@ const InventoryManagement = () => {
 
     Promise.all(promises).then(() => {
       console.log("all done");
-      newSetState(false);
+      dispatch(productActions.loadingSpinnerCanger(false));
       setPriceAndQuantity([]);
     });
   };
@@ -57,8 +61,7 @@ const InventoryManagement = () => {
               ذخیره
             </button>
           </div>
-          {state && <div>peyman</div>}
-
+          {data.cart.loading && <LoadingSpinner />}
           <SearchProduct />
           <div className="m-auto w-[94%] mt-10">
             <table className="w-full">

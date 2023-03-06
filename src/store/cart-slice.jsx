@@ -7,6 +7,7 @@ const cartSlice = createSlice({
     searchItems: [],
     modalDisplay: false,
     deleteModalDisplay: false,
+    loading: false,
   },
   reducers: {
     addItemToCart(state, action) {
@@ -23,6 +24,9 @@ const cartSlice = createSlice({
     addSearchItem(state, action) {
       console.log(action);
       state.searchItems = action.payload;
+    },
+    loadingSpinnerCanger(state, action) {
+      state.loading = action.payload;
     },
   },
 });
