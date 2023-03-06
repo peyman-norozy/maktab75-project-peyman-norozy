@@ -43,22 +43,17 @@ const MainNavigation = () => {
     case "/management":
       sendAndFetch(false);
       break;
-    case "/":
-      sendAndFetch(true);
+    case "/panel/products":
+      sendAndFetch(false);
       break;
-    case "/iphone":
-      sendAndFetch(true);
+    case "/panel/inventory":
+      sendAndFetch(false);
       break;
-    case "/shiaomi":
-      sendAndFetch(true);
-      break;
-    case "/samsung":
-      sendAndFetch(true);
-      break;
-    case "/smartWatch":
-      sendAndFetch(true);
+    case "/panel/orders":
+      sendAndFetch(false);
       break;
     default:
+      sendAndFetch(true);
   }
 
   return (
