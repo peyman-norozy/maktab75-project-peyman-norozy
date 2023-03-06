@@ -60,7 +60,7 @@ const DeleteModal = () => {
   };
 
   return (
-    <div className="bg-[#6d75a3] py-2 px-4 flex flex-col justify-center items-center gap-8 text-sm rounded-md text-white m-auto w-[50%] h-[200px] mt-[140px]">
+    <div className="bg-[#6d75a3] py-2 px-4 flex flex-col justify-center items-center gap-8 text-sm rounded-md text-white m-auto w-[50%] vm:w-[350px] h-[200px] fixed top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%]">
       <p className="text-center">آیا از حذف این محصول مطمئن هستید؟</p>
       <div className="flex justify-center gap-10">
         <button
