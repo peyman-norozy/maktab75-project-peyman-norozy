@@ -27,9 +27,9 @@ const MainNavigation = () => {
           .then((res) =>
             dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar))
           )
+          .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
           .catch((e) => console.log(e));
       })
-      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
   }
 

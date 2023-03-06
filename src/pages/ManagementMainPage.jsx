@@ -1,20 +1,23 @@
 import { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import MainPageLink from "../components/mainPageLink/MainPageLink";
 import { useNavigate } from "react-router-dom";
+import { productActions } from "./../store/cart-slice";
 
 const ManagementMainPage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const data = useSelector((state) => state);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log(data);
 
   const submitHandler = (event) => {
     event.preventDefault();
     console.log(data);
+    dispatch(productActions.loadingSpinnerCanger(true));
     axios
       .post("http://localhost:3002/auth/login", {
         username: userName,
@@ -28,6 +31,7 @@ const ManagementMainPage = () => {
       .then(() => {
         navigate("/panel/products");
       })
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => {
         console.log(e);
         navigate("/management");
