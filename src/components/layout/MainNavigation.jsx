@@ -5,6 +5,7 @@ import Logo from "../logo/Logo";
 import MainPageLink from "../mainPageLink/MainPageLink";
 import ProductClassification from "../productClassification/ProductClassification";
 import { uiActions } from "../../store/ui-slice";
+import { productActions } from "../../store/cart-slice";
 
 const MainNavigation = () => {
   const data1 = useSelector((state) => state);
@@ -15,7 +16,7 @@ const MainNavigation = () => {
 
   const location = useLocation();
 
-  async function sendAndFetch(status) {
+  function sendAndFetch(status) {
     axios
       .post("http://localhost:3002/nav", {
         showNavBar: status,
@@ -28,11 +29,13 @@ const MainNavigation = () => {
           )
           .catch((e) => console.log(e));
       })
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
   }
 
   console.log(addOrRemoveAuth);
   const navigationRemoveHandler = () => {
+    dispatch(productActions.loadingSpinnerCanger(true));
     sendAndFetch(false);
   };
 

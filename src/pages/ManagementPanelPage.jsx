@@ -9,7 +9,6 @@ import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 const ManagementPanel = () => {
   const data = useSelector((data) => data);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
