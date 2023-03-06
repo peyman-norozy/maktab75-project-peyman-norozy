@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import SearchProduct from "../components/SearchProduct";
 import InventoryManagementCart from "../components/InventoryManagementCart";
 import { productActions } from "../store/cart-slice";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 const InventoryManagement = () => {
   const data = useSelector((data) => data);
@@ -61,7 +60,6 @@ const InventoryManagement = () => {
               ذخیره
             </button>
           </div>
-          {data.cart.loading && <LoadingSpinner />}
           <SearchProduct />
           <div className="m-auto w-[94%] mt-10">
             <table className="w-full">

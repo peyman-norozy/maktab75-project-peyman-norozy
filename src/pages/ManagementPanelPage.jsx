@@ -1,12 +1,15 @@
 import { Fragment } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import ManagementNavigation from "../components/layout/ManagementNavigation";
 import { productActions } from "./../store/cart-slice";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 const ManagementPanel = () => {
+  const data = useSelector((data) => data);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,15 +33,10 @@ const ManagementPanel = () => {
   return (
     <Fragment>
       <div>
+        {data.cart.loading && <LoadingSpinner />}
         <ManagementNavigation />
         <Outlet />
       </div>
-
-      {/* <div>
-        {data.user.items.map((item, index) => (
-          <p key={index}>{item.name}</p>
-        ))}
-      </div> */}
     </Fragment>
   );
 };
