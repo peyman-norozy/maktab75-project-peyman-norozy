@@ -1,5 +1,6 @@
 .spinner {
-  position: absolute;
+  position: fixed;
+  transform: translate(-50% -50%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,6 +9,7 @@
   background-color: #aaaaaa4d;
   z-index: 10;
 }
+
 .spinner:after {
   content: " ";
   display: block;

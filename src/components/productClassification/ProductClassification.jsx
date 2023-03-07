@@ -3,11 +3,13 @@ import style from "./ProductClassification.module.css";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
+import { productActions } from "../../store/cart-slice";
 
 const ProductClassification = () => {
   const dispatch = useDispatch();
 
   const navigationAddHandler = () => {
+    dispatch(productActions.loadingSpinnerCanger(true));
     axios
       .post("http://localhost:3002/nav", {
         showNavBar: true,
@@ -20,6 +22,7 @@ const ProductClassification = () => {
           )
           .catch((e) => console.log(e));
       })
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
   };
 

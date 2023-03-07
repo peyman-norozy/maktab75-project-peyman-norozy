@@ -12,12 +12,18 @@ const ProductManagementCart = ({ item }) => {
       pathname: "/panel/products",
       search: `?id=${event.target.id}`,
     });
-    console.log(navigate);
     dispatch(productActions.deleteModalDisplay(true));
   };
 
   const editHandler = (event) => {
-    console.log(event);
+    console.log(event.target.id);
+    dispatch(productActions.modalDisplayAction(true));
+    dispatch(productActions.addFormButtonState(true));
+    navigate({
+      pathname: "/panel/products",
+      search: `?id=${event.target.id}`,
+    });
+    console.log(item);
   };
 
   return (
@@ -33,6 +39,7 @@ const ProductManagementCart = ({ item }) => {
         <td>
           <div className="flex flex-col gap-2">
             <button
+              id={item.id}
               onClick={editHandler}
               className="bg-green-700 text-white py-2 px-4 rounded-md"
             >

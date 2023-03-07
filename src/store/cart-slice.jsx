@@ -8,6 +8,7 @@ const cartSlice = createSlice({
     modalDisplay: false,
     deleteModalDisplay: false,
     loading: false,
+    buttonState:false,
   },
   reducers: {
     addItemToCart(state, action) {
@@ -28,6 +29,9 @@ const cartSlice = createSlice({
     loadingSpinnerCanger(state, action) {
       state.loading = action.payload;
     },
+    addFormButtonState(state,action){
+      state.buttonState = action.payload
+    }
   },
 });
 

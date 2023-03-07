@@ -1,18 +1,17 @@
 import { Fragment } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import ManagementNavigation from "../components/layout/ManagementNavigation";
 import { productActions } from "./../store/cart-slice";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 const ManagementPanel = () => {
-  const data = useSelector((data) => data);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(productActions.loadingSpinnerCanger(true));
     axios
       .get("http://localhost:3002/products", {
         headers: {
@@ -23,6 +22,7 @@ const ManagementPanel = () => {
         console.log(res.data);
         dispatch(productActions.addItemToCart(res.data));
       })
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => {
         console.log(e);
         navigate("/management");
@@ -32,7 +32,6 @@ const ManagementPanel = () => {
   return (
     <Fragment>
       <div>
-        {data.cart.loading && <LoadingSpinner />}
         <ManagementNavigation />
         <Outlet />
       </div>
