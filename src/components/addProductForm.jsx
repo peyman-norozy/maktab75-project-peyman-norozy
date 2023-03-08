@@ -1,15 +1,20 @@
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useCallback, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { productActions } from "./../store/cart-slice";
 
 const AddProductForm = () => {
   const [file, setFile] = useState(null);
   const [imageError, setImageError] = useState(false);
+  const [classificationError, setCalssificationError] = useState(false);
+  const [classErrorNotification, setClassErrorNotification] = useState(false);
   const [productName, setProductName] = useState("");
   const [productClass, setProductClass] = useState("");
+  const [modalImage, setModalImage] = useState(null);
   const [description, setDescription] = useState("");
+
+  const [searchParams] = useSearchParams();
 
   const dispatch = useDispatch();
 
@@ -18,8 +23,13 @@ const AddProductForm = () => {
 
   const navigate = useNavigate();
 
+  console.log(productClass);
   const categoryAndSubcategory = productClass.split("/");
   console.log(categoryAndSubcategory);
+
+  if (productClass === "") {
+    setProductClass("select");
+  }
 
   const getNewData = () => {
     axios
@@ -34,31 +44,74 @@ const AddProductForm = () => {
       .catch((e) => console.log(e));
   };
 
+  const formDataUsage = useCallback(() => {
+    let formData = new FormData();
+    formData.append("image", file);
+    formData.append("price", 0);
+    formData.append("quantity", 0);
+    formData.append("brand", categoryAndSubcategory[1]);
+    formData.append("name", productName);
+    formData.append("category", categoryAndSubcategory[0]);
+    formData.append("subcategory", categoryAndSubcategory[1]);
+    formData.append("description", description);
+    return formData;
+  }, [categoryAndSubcategory, description, file, productName]);
+
   const addProductHandler = (event) => {
     event.preventDefault();
 
-    let formData = new FormData();
+    if (!classificationError) {
+      setClassErrorNotification(true);
+      setTimeout(() => {
+        setClassErrorNotification(false);
+      }, 3000);
+      return;
+    }
+
     if (data.cart.buttonState === true) {
-      console.log("peyman");
-      console.log(formData);
-    } else {
-      formData.append("image", file);
-      formData.append("price", 0);
-      formData.append("quantity", 0);
-      formData.append("brand", categoryAndSubcategory[1]);
-      formData.append("name", productName);
-      formData.append("category", categoryAndSubcategory[0]);
-      formData.append("subcategory", categoryAndSubcategory[1]);
-      formData.append("description", description);
+      const params = searchParams.get("id");
+
+      console.log(file);
+      console.log(productName);
+      console.log(categoryAndSubcategory[1]);
+      let formData2 = new FormData();
+      formData2.append("image", file);
+      formData2.append("price", 0);
+      formData2.append("quantity", 0);
+      formData2.append("brand", categoryAndSubcategory[1]);
+      formData2.append("name", productName);
+      formData2.append("category", categoryAndSubcategory[0]);
+      formData2.append("subcategory", categoryAndSubcategory[1]);
+      formData2.append("description", description);
 
       dispatch(productActions.loadingSpinnerCanger(true));
       axios
-        .post("http://localhost:3002/products", formData, {
+        .patch(`http://localhost:3002/products/${params}`, formData2, {
           headers: {
             token: localStorage.getItem("ACCESS_TOKEYN"),
           },
         })
         .then(() => getNewData())
+        .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
+        .catch((e) => {
+          console.log(e);
+          setImageError(true);
+          setTimeout(() => {
+            setImageError(false);
+          }, 3000);
+        });
+    } else {
+      const formDataFn = formDataUsage();
+
+      dispatch(productActions.loadingSpinnerCanger(true));
+      axios
+        .post("http://localhost:3002/products", formDataFn, {
+          headers: {
+            token: localStorage.getItem("ACCESS_TOKEYN"),
+          },
+        })
+        .then(() => getNewData())
+        .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
         .catch((e) => {
           console.log(e);
           setImageError(true);
@@ -67,8 +120,35 @@ const AddProductForm = () => {
           }, 3000);
         });
 
-      console.log(formData);
+      console.log(formDataFn);
     }
+  };
+
+  useEffect(() => {
+    if (data.cart.buttonState) {
+      const params = searchParams.get("id");
+      console.log(params);
+      dispatch(productActions.loadingSpinnerCanger(true));
+
+      axios
+        .get(`http://localhost:3002/products/${params}`, {
+          headers: {
+            token: localStorage.getItem("ACCESS_TOKEYN"),
+          },
+        })
+        .then((res) => {
+          setProductName(res.data.name);
+          setDescription(res.data.description);
+          setProductClass(`${res.data.category}/${res.data.subcategory}`);
+          setModalImage(res.data.image);
+          setCalssificationError(true);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [data.cart.buttonState, searchParams, dispatch]);
+
+  const fileInputChangeHandler = (event) => {
+    setFile(event.target.files[0]);
   };
 
   return (
@@ -91,21 +171,32 @@ const AddProductForm = () => {
           <span>×</span>
         </div>
       </div>
-      <div className="flex flex-col gap-1">
-        <label htmlFor="product-img">تصویر کالا:</label>
-        <input
-          type="file"
-          id="product-img"
-          name="productImage"
-          accept="image/jpg"
-          required
-          onChange={(event) => setFile(event.target.files[0])}
-          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        />
-        {imageError && (
-          <p className="text-[rgb(255,136,0)] text-sm text-left mt-1">
-            فرمت عکس اشتباه است !!!
-          </p>
+      <div
+        className={
+          data.cart.buttonState ? "flex items-center justify-between gap-2" : ""
+        }
+      >
+        <div className="flex flex-col gap-1 flex-1">
+          <label htmlFor="product-img">تصویر کالا:</label>
+          <input
+            type="file"
+            id="product-img"
+            name="productImage"
+            accept="image/jpg"
+            required
+            onChange={fileInputChangeHandler}
+            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          />
+          {imageError && (
+            <p className="text-[rgb(255,136,0)] text-sm text-left mt-1">
+              فرمت عکس اشتباه است !!!
+            </p>
+          )}
+        </div>
+        {data.cart.buttonState && (
+          <div className="w-[60px] h-[60px]">
+            <img src={"http://localhost:3002" + modalImage} alt="" />
+          </div>
         )}
       </div>
       <div className="flex flex-col gap-1">
@@ -114,6 +205,7 @@ const AddProductForm = () => {
           type="text"
           id="product-name"
           required
+          value={productName}
           onChange={(event) => setProductName(event.target.value)}
           className="py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"
         />
@@ -124,8 +216,10 @@ const AddProductForm = () => {
           id="product-class"
           className="py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"
           defaultValue={"select"}
+          value={data.cart.buttonState ? productClass : productClass}
           onChange={(event) => {
             setProductClass(event.target.value);
+            setCalssificationError(true);
           }}
         >
           <option value="select" disabled>
@@ -136,6 +230,11 @@ const AddProductForm = () => {
           <option value="موبایل/شیائومی">موبایل/شیائومی</option>
           <option value="ساعت/ساعت هوشمند">ساعت/ساعت هوشمند</option>
         </select>
+        {classErrorNotification && (
+          <p className="text-[rgb(255,136,0)] text-sm text-left mt-1">
+            دسته بندی کالای خود را وارد کنید !!!
+          </p>
+        )}
       </div>
       <div className="flex flex-col gap-1">
         <label htmlFor="product-desc">توضیحات:</label>
@@ -145,6 +244,7 @@ const AddProductForm = () => {
           cols="20"
           rows="5"
           required
+          value={description}
           onChange={(event) => setDescription(event.target.value)}
           className="py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"
         ></textarea>
