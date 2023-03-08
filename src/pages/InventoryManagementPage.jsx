@@ -23,7 +23,7 @@ const InventoryManagement = () => {
 
   const saveHandler = () => {
     dispatch(productActions.loadingSpinnerCanger(true));
-    // newSetState(true);
+
     let promises = [];
 
     for (let item of priceAndQuantity) {
@@ -40,11 +40,23 @@ const InventoryManagement = () => {
       );
     }
 
-    Promise.all(promises).then(() => {
-      console.log("all done");
-      dispatch(productActions.loadingSpinnerCanger(false));
-      setPriceAndQuantity([]);
-    });
+    Promise.all(promises)
+      .then(() => {
+        axios
+          .get("http://localhost:3002/products", {
+            headers: {
+              token: localStorage.getItem("ACCESS_TOKEYN"),
+            },
+          })
+          .then((res) => {
+            dispatch(productActions.addItemToCart(res.data));
+          });
+      })
+      .then(() => {
+        console.log("all done");
+        dispatch(productActions.loadingSpinnerCanger(false));
+        setPriceAndQuantity([]);
+      });
   };
 
   return (
