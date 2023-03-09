@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import MainPageLink from "../components/mainPageLink/MainPageLink";
 import { useNavigate } from "react-router-dom";
 import Label from "../components/label/Label";
+import Input from "../components/input/Input";
+import Button from "../components/button/Button";
 import { productActions } from "./../store/cart-slice";
 
 const ManagementMainPage = () => {
@@ -53,13 +55,13 @@ const ManagementMainPage = () => {
             className={"text-white"}
             innerText={" نام کاربری :"}
           />
-          <input
-            type="text"
-            id="userName"
-            name="username"
+          <Input
+            type={"text"}
+            id={"userName"}
+            name={"username"}
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            className="outline-none h-10 px-2 rounded-md"
+            onChangeEvent={(e) => setUserName(e.target.value)}
+            className={"outline-none h-10 px-2 rounded-md"}
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -68,22 +70,20 @@ const ManagementMainPage = () => {
             className={"text-white"}
             innerText={"رمز عبور :"}
           />
-
-          <input
-            type="password"
-            id="password"
-            name="password"
+          <Input
+            type={"password"}
+            id={"password"}
+            name={"password"}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="outline-none h-10 px-2 rounded-md"
+            onChangeEvent={(e) => setPassword(e.target.value)}
+            className={"outline-none h-10 px-2 rounded-md"}
           />
         </div>
-        <button
-          type="submit"
-          className="bg-[#3ccf4e] text-white w-28 m-auto py-4 rounded-md"
-        >
-          ورود
-        </button>
+        <Button
+          type={"submit"}
+          className={"bg-[#3ccf4e] text-white w-28 m-auto py-4 rounded-md"}
+          innerText={"ورود"}
+        />
         <MainPageLink />
       </div>
     </form>
