@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { productActions } from "../store/cart-slice";
+import Input from "./input/Input";
 
 const SearchProduct = () => {
   const [setSearchError, newSetSearchError] = useState(false);
@@ -55,12 +56,13 @@ const SearchProduct = () => {
               />
             </svg>
           </div>
-
-          <input
-            className="h-full w-full outline-none text-sm text-gray-700 pr-2 bg-[#eee]"
-            type="search"
-            placeholder="جستوجو کنید..."
-            onChange={handleInputChange}
+          <Input
+            className={
+              "h-full w-full outline-none text-sm text-gray-700 pr-2 bg-[#eee]"
+            }
+            type={"search"}
+            placeholder={"جستوجو کنید..."}
+            onChangeEvent={handleInputChange}
           />
         </div>
       </div>
