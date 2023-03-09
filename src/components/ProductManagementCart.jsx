@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { productActions } from "../store/cart-slice";
+import Button from "./button/Button";
 
 const ProductManagementCart = ({ item }) => {
   const navigate = useNavigate();
@@ -38,20 +39,18 @@ const ProductManagementCart = ({ item }) => {
         <td>{`${item.category}/${item.subcategory}`}</td>
         <td>
           <div className="flex flex-col gap-2">
-            <button
+            <Button
               id={item.id}
-              onClick={editHandler}
-              className="bg-green-700 text-white py-2 px-4 rounded-md"
-            >
-              ویرایش
-            </button>
-            <button
+              onClickEvent={editHandler}
+              className={"bg-green-700 text-white py-2 px-4 rounded-md"}
+              innerText={"ویرایش"}
+            />
+            <Button
               id={item.id}
-              onClick={deletModalHandler}
-              className="bg-red-400 text-white py-2 px-4 rounded-md"
-            >
-              حذف
-            </button>
+              onClickEvent={deletModalHandler}
+              className={"bg-red-400 text-white py-2 px-4 rounded-md"}
+              innerText={"حذف"}
+            />
           </div>
         </td>
       </tr>
