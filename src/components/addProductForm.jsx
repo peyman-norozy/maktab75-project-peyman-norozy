@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { productActions } from "./../store/cart-slice";
+import Button from "./button/Button";
 
 const AddProductForm = () => {
   const [file, setFile] = useState(null);
@@ -251,13 +252,15 @@ const AddProductForm = () => {
       </div>
       <div className="flex justify-center items-center">
         {data.cart.buttonState ? (
-          <button className="bg-blue-500 py-2 px-4 rounded-md hover:bg-blue-600">
-            اعمال ویرایش
-          </button>
+          <Button
+            className={"bg-blue-500 py-2 px-4 rounded-md hover:bg-blue-600"}
+            innerText={"اعمال ویرایش"}
+          />
         ) : (
-          <button className="bg-blue-500 py-2 px-4 rounded-md hover:bg-blue-600">
-            ذخیره
-          </button>
+          <Button
+            className={"bg-blue-500 py-2 px-4 rounded-md hover:bg-blue-600"}
+            innerText={"ذخیره"}
+          />
         )}
       </div>
     </form>
