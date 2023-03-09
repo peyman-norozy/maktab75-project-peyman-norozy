@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { productActions } from "./../store/cart-slice";
 import Button from "./button/Button";
 import Label from "./label/Label";
+import Input from "./input/Input";
 
 const AddProductForm = () => {
   const [file, setFile] = useState(null);
@@ -180,14 +181,15 @@ const AddProductForm = () => {
       >
         <div className="flex flex-col gap-1 flex-1">
           <Label htmlFor={"product-img"} innerText={"تصویر کالا:"} />
-          <input
-            type="file"
-            id="product-img"
-            name="productImage"
-            accept="image/jpg"
-            required
-            onChange={fileInputChangeHandler}
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          <Input
+            type={"file"}
+            id={"product-img"}
+            name={"productImage"}
+            accept={"image/jpg"}
+            onChangeEvent={fileInputChangeHandler}
+            className={
+              "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            }
           />
           {imageError && (
             <p className="text-[rgb(255,136,0)] text-sm text-left mt-1">
@@ -203,13 +205,14 @@ const AddProductForm = () => {
       </div>
       <div className="flex flex-col gap-1">
         <Label htmlFor={"product-name"} innerText={"نام کالا:"} />
-        <input
-          type="text"
-          id="product-name"
-          required
+        <Input
+          type={"text"}
+          id={"product-name"}
+          name={"productImage"}
+          accept={"image/jpg"}
           value={productName}
-          onChange={(event) => setProductName(event.target.value)}
-          className="py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"
+          onChangeEvent={(event) => setProductName(event.target.value)}
+          className={"py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"}
         />
       </div>
       <div className="flex flex-col gap-1">
