@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { productActions } from "./../store/cart-slice";
 import Button from "./button/Button";
+import Label from "./label/Label";
 
 const AddProductForm = () => {
   const [file, setFile] = useState(null);
@@ -178,7 +179,7 @@ const AddProductForm = () => {
         }
       >
         <div className="flex flex-col gap-1 flex-1">
-          <label htmlFor="product-img">تصویر کالا:</label>
+          <Label htmlFor={"product-img"} innerText={"تصویر کالا:"} />
           <input
             type="file"
             id="product-img"
@@ -201,7 +202,7 @@ const AddProductForm = () => {
         )}
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="product-name">نام کالا:</label>
+        <Label htmlFor={"product-name"} innerText={"نام کالا:"} />
         <input
           type="text"
           id="product-name"
@@ -212,7 +213,7 @@ const AddProductForm = () => {
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="product-class">دسته بندی کالا:</label>
+        <Label htmlFor={"product-class"} innerText={"دسته بندی کالا:"} />
         <select
           id="product-class"
           className="py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"
@@ -238,7 +239,7 @@ const AddProductForm = () => {
         )}
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="product-desc">توضیحات:</label>
+        <Label htmlFor={"product-desc"} innerText={"توضیحات:"} />
         <textarea
           name="descriptionProduct"
           id="product-desc"
