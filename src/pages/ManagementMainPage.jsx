@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import MainPageLink from "../components/mainPageLink/MainPageLink";
 import { useNavigate } from "react-router-dom";
+import Label from "../components/label/Label";
 import { productActions } from "./../store/cart-slice";
 
 const ManagementMainPage = () => {
@@ -47,9 +48,11 @@ const ManagementMainPage = () => {
           ورود به پنل مدیریت فروشگاه پیلوت
         </h1>
         <div className="flex flex-col gap-1">
-          <label htmlFor="userName" className="text-white">
-            نام کاربری :
-          </label>
+          <Label
+            htmlFor={"userName"}
+            className={"text-white"}
+            innerText={" نام کاربری :"}
+          />
           <input
             type="text"
             id="userName"
@@ -60,9 +63,12 @@ const ManagementMainPage = () => {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label htmlFor="password" className="text-white">
-            رمز عبور :
-          </label>
+          <Label
+            htmlFor={"password"}
+            className={"text-white"}
+            innerText={"رمز عبور :"}
+          />
+
           <input
             type="password"
             id="password"

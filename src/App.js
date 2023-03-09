@@ -36,7 +36,6 @@ function App() {
       .get("http://localhost:3002/nav")
       .then((res) => dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar)))
       .catch((e) => console.log(e));
-    // dispatch(fetchNavstate("navChanging"));
   }, [dispatch]);
 
   return (
