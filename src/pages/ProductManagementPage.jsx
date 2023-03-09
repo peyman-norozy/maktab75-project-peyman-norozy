@@ -16,10 +16,17 @@ const ProductManagement = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate({
-      pathname: "/panel/products",
-      search: "",
-    });
+    if (localStorage.getItem("ACCESS_TOKEYN")) {
+      navigate({
+        pathname: "/panel/products",
+        search: "",
+      });
+    } else {
+      navigate({
+        pathname: "/management",
+        search: "",
+      });
+    }
   }, [dispatch, navigate]);
 
   return (

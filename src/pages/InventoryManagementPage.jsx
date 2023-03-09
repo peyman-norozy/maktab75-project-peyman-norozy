@@ -1,17 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchProduct from "../components/SearchProduct";
 import InventoryManagementCart from "../components/InventoryManagementCart";
 import { productActions } from "../store/cart-slice";
+import { useNavigate } from "react-router-dom";
 
 const InventoryManagement = () => {
   const data = useSelector((data) => data);
   const dispatch = useDispatch();
   const [priceAndQuantity, setPriceAndQuantity] = useState([]);
 
+  const navigate = useNavigate();
+
   console.log(data);
   console.log(priceAndQuantity);
+
+  useEffect(() => {
+    if (localStorage.getItem("ACCESS_TOKEYN")) {
+      navigate({
+        pathname: "/panel/inventory",
+        search: "",
+      });
+    } else {
+      navigate({
+        pathname: "/management",
+        search: "",
+      });
+    }
+  }, [dispatch, navigate]);
 
   const priceDataHandler = (data, id) => {
     setPriceAndQuantity([...priceAndQuantity, { price: data, id: id }]);
