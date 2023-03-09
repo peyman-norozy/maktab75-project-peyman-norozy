@@ -6,6 +6,8 @@ import MainPageLink from "../mainPageLink/MainPageLink";
 import ProductClassification from "../productClassification/ProductClassification";
 import { uiActions } from "../../store/ui-slice";
 import { productActions } from "../../store/cart-slice";
+import { BASE_URL } from "../api/axios-constance/useHttp";
+import { nav } from "../api/axios-constance/useHttp";
 
 const MainNavigation = () => {
   const data1 = useSelector((state) => state);
@@ -18,12 +20,12 @@ const MainNavigation = () => {
 
   function sendAndFetch(status) {
     axios
-      .post("http://localhost:3002/nav", {
+      .post(BASE_URL + nav, {
         showNavBar: status,
       })
       .then(() => {
         axios
-          .get("http://localhost:3002/nav")
+          .get(BASE_URL + nav)
           .then((res) =>
             dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar))
           )
