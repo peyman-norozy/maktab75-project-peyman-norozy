@@ -1,3 +1,5 @@
+import Label from "../components/label/Label";
+
 const Orders = () => {
   return (
     <>
@@ -7,7 +9,10 @@ const Orders = () => {
             <h2 className="text-xl font-bold">مدیریت سفارش ها</h2>
             <div className="flex flex-col justify-center items-start gap-8 vm:flex-row">
               <div className="flex justify-center items-center gap-1">
-                <label htmlFor="delivered">سفارش های تحویل شده</label>
+                <Label
+                  htmlFor={"delivered"}
+                  innerText={"سفارش های تحویل شده"}
+                />
                 <input
                   type="radio"
                   id="delivered"
@@ -16,7 +21,10 @@ const Orders = () => {
                 />
               </div>
               <div className="flex justify-center items-center gap-1">
-                <label htmlFor="undelivery">سفارش های در انتظار ارسال</label>
+                <Label
+                  htmlFor={"undelivery"}
+                  innerText={"سفارش های در انتظار ارسال"}
+                />
                 <input
                   type="radio"
                   id="undelivery"
@@ -27,8 +35,8 @@ const Orders = () => {
             </div>
           </div>
 
-          <div className="flex justify-center mt-10">
-            <table>
+          <div className="m-auto w-[94%] mt-10">
+            <table className="w-full">
               <thead>
                 <tr className="text-xs">
                   <th>نام کاربر</th>
@@ -42,8 +50,8 @@ const Orders = () => {
                   <td>اکبر زمانی</td>
                   <td>920,000</td>
                   <td>1399/1/5</td>
-                  <td>
-                    <button className="bg-[#00aec5] text-white py-[4px] px-[4px] rounded-[4px] hover:bg-[#00c8e2]">
+                  <td className="text-center">
+                    <button className="bg-[#009225] text-white py-[6px] px-[8px] rounded-[4px] hover:bg-[#00ff40]">
                       بررسی سفارش
                     </button>
                   </td>
