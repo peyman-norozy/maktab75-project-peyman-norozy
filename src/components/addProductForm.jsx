@@ -6,6 +6,7 @@ import { productActions } from "./../store/cart-slice";
 import Button from "./button/Button";
 import Label from "./label/Label";
 import Input from "./input/Input";
+import Select from "./select/Select";
 
 const AddProductForm = () => {
   const [file, setFile] = useState(null);
@@ -217,12 +218,12 @@ const AddProductForm = () => {
       </div>
       <div className="flex flex-col gap-1">
         <Label htmlFor={"product-class"} innerText={"دسته بندی کالا:"} />
-        <select
-          id="product-class"
-          className="py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"
+        <Select
+          id={"product-class"}
+          className={"py-2 pr-1 outline-none rounded-md bg-gray-100 text-black"}
           defaultValue={"select"}
           value={data.cart.buttonState ? productClass : productClass}
-          onChange={(event) => {
+          onChangeEvent={(event) => {
             setProductClass(event.target.value);
             setCalssificationError(true);
           }}
@@ -234,7 +235,7 @@ const AddProductForm = () => {
           <option value="موبایل/سامسونگ">موبایل/سامسونگ</option>
           <option value="موبایل/شیائومی">موبایل/شیائومی</option>
           <option value="ساعت/ساعت هوشمند">ساعت/ساعت هوشمند</option>
-        </select>
+        </Select>
         {classErrorNotification && (
           <p className="text-[rgb(255,136,0)] text-sm text-left mt-1">
             دسته بندی کالای خود را وارد کنید !!!
