@@ -5,6 +5,7 @@ import AddProductForm from "../components/addProductForm";
 import { productActions } from "../store/cart-slice";
 import DeleteModal from "./../components/DeleteModal";
 import SearchProduct from "../components/SearchProduct";
+import Button from "../components/button/Button";
 import ProductManagementCart from "../components/ProductManagementCart";
 
 const ProductManagement = () => {
@@ -26,15 +27,16 @@ const ProductManagement = () => {
       <div>
         <div className="pt-10 flex justify-between items-center px-[32px]">
           <h2 className="text-xl font-bold">مدیریت کالاها</h2>
-          <button
-            onClick={() => {
+          <Button
+            onClickEvent={() => {
               dispatch(productActions.modalDisplayAction(true));
               dispatch(productActions.addFormButtonState(false));
             }}
-            className="bg-[#3CCF4E] text-white px-4 py-2 rounded-md hover:bg-green-400"
-          >
-            افزودن کالا
-          </button>
+            className={
+              "bg-[#3CCF4E] text-white px-4 py-2 rounded-md hover:bg-green-400"
+            }
+            innerText={"افزودن کالا"}
+          />
         </div>
 
         <SearchProduct />
