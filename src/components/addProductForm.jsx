@@ -7,6 +7,9 @@ import Button from "./button/Button";
 import Label from "./label/Label";
 import Input from "./input/Input";
 import Select from "./select/Select";
+import { BASE_URL } from "./api/axios-constance/useHttp";
+import { products } from "./api/axios-constance/useHttp";
+import { HEADERS_TOKEN } from "./api/axios-constance/useHttp";
 
 const AddProductForm = () => {
   const [file, setFile] = useState(null);
@@ -37,11 +40,7 @@ const AddProductForm = () => {
 
   const getNewData = () => {
     axios
-      .get("http://localhost:3002/products", {
-        headers: {
-          token: localStorage.getItem("ACCESS_TOKEYN"),
-        },
-      })
+      .get(BASE_URL + products, HEADERS_TOKEN)
       .then((res) => dispatch(productActions.addItemToCart(res.data)))
       .then(() => dispatch(productActions.modalDisplayAction(false)))
       .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
@@ -90,11 +89,7 @@ const AddProductForm = () => {
 
       dispatch(productActions.loadingSpinnerCanger(true));
       axios
-        .patch(`http://localhost:3002/products/${params}`, formData2, {
-          headers: {
-            token: localStorage.getItem("ACCESS_TOKEYN"),
-          },
-        })
+        .patch(`${BASE_URL}${products}/${params}`, formData2, HEADERS_TOKEN)
         .then(() => getNewData())
         .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
         .catch((e) => {
@@ -109,11 +104,7 @@ const AddProductForm = () => {
 
       dispatch(productActions.loadingSpinnerCanger(true));
       axios
-        .post("http://localhost:3002/products", formDataFn, {
-          headers: {
-            token: localStorage.getItem("ACCESS_TOKEYN"),
-          },
-        })
+        .post(BASE_URL + products, formDataFn, HEADERS_TOKEN)
         .then(() => getNewData())
         .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
         .catch((e) => {
@@ -135,7 +126,7 @@ const AddProductForm = () => {
       dispatch(productActions.loadingSpinnerCanger(true));
 
       axios
-        .get(`http://localhost:3002/products/${params}`, {
+        .get(`${BASE_URL}${products}/${params}`, {
           headers: {
             token: localStorage.getItem("ACCESS_TOKEYN"),
           },
