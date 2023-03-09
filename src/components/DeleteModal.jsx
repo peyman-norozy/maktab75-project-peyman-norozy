@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { productActions } from "../store/cart-slice";
+import Button from "./button/Button";
 
 const DeleteModal = () => {
   const data = useSelector((data) => data);
@@ -63,18 +64,16 @@ const DeleteModal = () => {
     <div className="bg-[#6d75a3] py-2 px-4 flex flex-col justify-center items-center gap-8 text-sm rounded-md text-white m-auto w-[50%] vm:w-[350px] h-[200px] fixed top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%]">
       <p className="text-center">آیا از حذف این محصول مطمئن هستید؟</p>
       <div className="flex justify-center gap-10">
-        <button
-          onClick={deleteProductHandler}
-          className="bg-red-400 text-white py-2 px-4 rounded-md"
-        >
-          حذف
-        </button>
-        <button
-          onClick={dissuasionHandler}
-          className="bg-green-500 text-white py-2 px-4 rounded-md"
-        >
-          انصراف
-        </button>
+        <Button
+          onClickEvent={deleteProductHandler}
+          className={"bg-red-400 text-white py-2 px-4 rounded-md"}
+          innerText={"حذف"}
+        />
+        <Button
+          onClickEvent={dissuasionHandler}
+          className={"bg-green-500 text-white py-2 px-4 rounded-md"}
+          innerText={"انصراف"}
+        />
       </div>
     </div>
   );
