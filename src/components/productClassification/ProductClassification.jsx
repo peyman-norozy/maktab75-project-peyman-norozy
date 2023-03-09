@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import { productActions } from "../../store/cart-slice";
+import { BASE_URL } from "../api/axios-constance/useHttp";
+import { nav } from "../api/axios-constance/useHttp";
 
 const ProductClassification = () => {
   const dispatch = useDispatch();
@@ -11,12 +13,12 @@ const ProductClassification = () => {
   const navigationAddHandler = () => {
     dispatch(productActions.loadingSpinnerCanger(true));
     axios
-      .post("http://localhost:3002/nav", {
+      .post(BASE_URL + nav, {
         showNavBar: true,
       })
       .then(() => {
         axios
-          .get("http://localhost:3002/nav")
+          .get(BASE_URL + nav)
           .then((res) =>
             dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar))
           )
