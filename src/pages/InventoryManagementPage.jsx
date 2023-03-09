@@ -6,6 +6,9 @@ import InventoryManagementCart from "../components/InventoryManagementCart";
 import { productActions } from "../store/cart-slice";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/button/Button";
+import { BASE_URL } from "../components/api/axios-constance/useHttp";
+import { products } from "../components/api/axios-constance/useHttp";
+import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 
 const InventoryManagement = () => {
   const data = useSelector((data) => data);
@@ -47,28 +50,18 @@ const InventoryManagement = () => {
     for (let item of priceAndQuantity) {
       promises.push(
         axios.patch(
-          `http://localhost:3002/products/${item.id}`,
+          `${BASE_URL}${products}/${item.id}`,
           { quantity: item.quantity, price: item.price },
-          {
-            headers: {
-              token: localStorage.getItem("ACCESS_TOKEYN"),
-            },
-          }
+          HEADERS_TOKEN
         )
       );
     }
 
     Promise.all(promises)
       .then(() => {
-        axios
-          .get("http://localhost:3002/products", {
-            headers: {
-              token: localStorage.getItem("ACCESS_TOKEYN"),
-            },
-          })
-          .then((res) => {
-            dispatch(productActions.addItemToCart(res.data));
-          });
+        axios.get(BASE_URL + products, HEADERS_TOKEN).then((res) => {
+          dispatch(productActions.addItemToCart(res.data));
+        });
       })
       .then(() => {
         console.log("all done");
