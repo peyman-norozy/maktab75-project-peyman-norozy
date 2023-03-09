@@ -1,4 +1,5 @@
 import Label from "../components/label/Label";
+import Input from "../components/input/Input";
 
 const Orders = () => {
   return (
@@ -13,11 +14,11 @@ const Orders = () => {
                   htmlFor={"delivered"}
                   innerText={"سفارش های تحویل شده"}
                 />
-                <input
-                  type="radio"
-                  id="delivered"
-                  name="order"
-                  value="delivered"
+                <Input
+                  type={"radio"}
+                  id={"delivered"}
+                  name={"order"}
+                  value={"delivered"}
                 />
               </div>
               <div className="flex justify-center items-center gap-1">
@@ -25,11 +26,11 @@ const Orders = () => {
                   htmlFor={"undelivery"}
                   innerText={"سفارش های در انتظار ارسال"}
                 />
-                <input
-                  type="radio"
-                  id="undelivery"
-                  name="order"
-                  value="undelivery"
+                <Input
+                  type={"radio"}
+                  id={"undelivery"}
+                  name={"order"}
+                  value={"undelivery"}
                 />
               </div>
             </div>
