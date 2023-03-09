@@ -7,6 +7,8 @@ import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import Button from "../components/button/Button";
 import { productActions } from "./../store/cart-slice";
+import { BASE_URL } from "../components/api/axios-constance/useHttp";
+import { login } from "../components/api/axios-constance/useHttp";
 
 const ManagementMainPage = () => {
   const [userName, setUserName] = useState("");
@@ -22,7 +24,7 @@ const ManagementMainPage = () => {
     console.log(data);
     dispatch(productActions.loadingSpinnerCanger(true));
     axios
-      .post("http://localhost:3002/auth/login", {
+      .post(BASE_URL + login, {
         username: userName,
         password: password,
       })

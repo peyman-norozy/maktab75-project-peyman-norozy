@@ -17,13 +17,16 @@ import InventoryManagement from "./pages/InventoryManagementPage";
 import Orders from "./pages/OrdersPage";
 import { productActions } from "./store/cart-slice";
 import { uiActions } from "./store/ui-slice";
+import { BASE_URL } from "./components/api/axios-constance/useHttp";
+import { products } from "./components/api/axios-constance/useHttp";
+import { nav } from "./components/api/axios-constance/useHttp";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/products")
+      .get(BASE_URL + products)
       .then((res) => {
         console.log(res.data);
         dispatch(productActions.addItemToCart(res.data));
@@ -33,7 +36,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/nav")
+      .get(BASE_URL + nav)
       .then((res) => dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar)))
       .catch((e) => console.log(e));
   }, [dispatch]);
