@@ -1,5 +1,6 @@
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
+import Button from "../components/button/Button";
 
 const Orders = () => {
   return (
@@ -52,9 +53,12 @@ const Orders = () => {
                   <td>920,000</td>
                   <td>1399/1/5</td>
                   <td className="text-center">
-                    <button className="bg-[#009225] text-white py-[6px] px-[8px] rounded-[4px] hover:bg-[#00ff40]">
-                      بررسی سفارش
-                    </button>
+                    <Button
+                      className={
+                        "bg-[#009225] text-white py-[6px] px-[8px] rounded-[4px] hover:bg-[#00ff40]"
+                      }
+                      innerText={"بررسی سفارش"}
+                    />
                   </td>
                 </tr>
               </tbody>
