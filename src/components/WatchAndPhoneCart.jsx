@@ -1,3 +1,5 @@
+import Button from "./button/Button";
+
 const WatchAndPhoneCart = (props) => {
   return (
     <>
@@ -29,9 +31,12 @@ const WatchAndPhoneCart = (props) => {
                     <span>تومان</span>
                   </p>
                 </div>
-                <button className="bg-[#3CCF4E] text-white self-end px-2 py-2 rounded-sm">
-                  خرید محصول
-                </button>
+                <Button
+                  className={
+                    "bg-[#3CCF4E] text-white self-end px-2 py-2 rounded-sm"
+                  }
+                  innerText={"خرید محصول"}
+                />
               </div>
             </div>
           </div>
