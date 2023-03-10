@@ -77,19 +77,21 @@ const AddProductForm = () => {
       console.log(file);
       console.log(productName);
       console.log(categoryAndSubcategory[1]);
-      let formData2 = new FormData();
-      formData2.append("image", file);
-      formData2.append("price", 0);
-      formData2.append("quantity", 0);
-      formData2.append("brand", categoryAndSubcategory[1]);
-      formData2.append("name", productName);
-      formData2.append("category", categoryAndSubcategory[0]);
-      formData2.append("subcategory", categoryAndSubcategory[1]);
-      formData2.append("description", description);
+
+      const formDataFn = formDataUsage(
+        file,
+        0,
+        0,
+        categoryAndSubcategory[1],
+        productName,
+        categoryAndSubcategory[0],
+        categoryAndSubcategory[1],
+        description
+      );
 
       dispatch(productActions.loadingSpinnerCanger(true));
       axios
-        .patch(`${BASE_URL}${products}/${params}`, formData2, HEADERS_TOKEN)
+        .patch(`${BASE_URL}${products}/${params}`, formDataFn, HEADERS_TOKEN)
         .then(() => getNewData())
         .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
         .catch((e) => {
@@ -126,11 +128,7 @@ const AddProductForm = () => {
       dispatch(productActions.loadingSpinnerCanger(true));
 
       axios
-        .get(`${BASE_URL}${products}/${params}`, {
-          headers: {
-            token: localStorage.getItem("ACCESS_TOKEYN"),
-          },
-        })
+        .get(`${BASE_URL}${products}/${params}`, HEADERS_TOKEN)
         .then((res) => {
           setProductName(res.data.name);
           setDescription(res.data.description);
