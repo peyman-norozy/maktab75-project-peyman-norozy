@@ -1,6 +1,7 @@
-import Button from "./button/Button";
+import { Link } from "react-router-dom";
 
 const WatchAndPhoneCart = (props) => {
+  console.log(props);
   return (
     <>
       <div
@@ -31,12 +32,12 @@ const WatchAndPhoneCart = (props) => {
                     <span>تومان</span>
                   </p>
                 </div>
-                <Button
-                  className={
-                    "bg-[#3CCF4E] text-white self-end px-2 py-2 rounded-sm"
-                  }
-                  innerText={"خرید محصول"}
-                />
+                <Link
+                  to={`/singleProduct?id=${props.data.id}`}
+                  className="bg-[#3CCF4E] text-white self-end px-2 py-2 rounded-sm"
+                >
+                  خرید محصول
+                </Link>
               </div>
             </div>
           </div>
