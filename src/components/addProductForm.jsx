@@ -77,17 +77,7 @@ const AddProductForm = () => {
       console.log(file);
       console.log(productName);
       console.log(categoryAndSubcategory[1]);
-
-      const formDataFn = formDataUsage(
-        file,
-        0,
-        0,
-        categoryAndSubcategory[1],
-        productName,
-        categoryAndSubcategory[0],
-        categoryAndSubcategory[1],
-        description
-      );
+      const formDataFn = formDataUsage();
 
       dispatch(productActions.loadingSpinnerCanger(true));
       axios
