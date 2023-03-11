@@ -23,33 +23,61 @@ const SingleProductPage = () => {
   return (
     <>
       <div className="pt-48 px-14">
-        <div className="bg-white flex flex-col vm:flex-row justify-center items-center gap-4">
-          <div className="w-[240px]">
+        <div className="bg-white flex flex-col gap-8 vm:flex-row justify-center items-center vm:gap-8 py-[20px] rounded-2xl w-[90%] m-auto">
+          <div className="w-[250px] vm:w-[300px]">
             <img src={`${BASE_URL}${singleProduct.image}`} alt="" />
           </div>
-          <div>
-            <h1>{singleProduct.name}</h1>
-            <div className="flex justify-center items-center gap-2">
-              <span>{singleProduct.category}</span>
-              <span className="text-2xl font-bold">&#8592;</span>
-              <span>{singleProduct.subcategory}</span>
+          <div className="flex flex-col gap-14">
+            <div>
+              <h1 className="font-bold text-[1.4rem]">{singleProduct.name}</h1>
+              <div className="flex justify-start items-center gap-2 mt-4">
+                <span>{singleProduct.category}</span>
+                <span className="w-4">
+                  <img
+                    src="./images/icon/downward-arrow-down.png"
+                    alt=""
+                    className="rotate-90"
+                  />
+                </span>
+                <span>{singleProduct.subcategory}</span>
+              </div>
             </div>
             <div>
-              <span className="font-bold">{singleProduct.price}</span>
-              <span>تومان</span>
-            </div>
-            <div className="flex justify-center items-center gap-2">
-              <div>
-                <span>f</span>
-                <span></span>
-                <span>d</span>
+              <div className="flex gap-2 justify-start items-center mb-8">
+                <span className="font-bold text-[1.4rem]">
+                  {singleProduct.price}
+                </span>
+                <span>تومان</span>
               </div>
-              <Button
-                className={
-                  "bg-[#0b8600] text-white px-[10px] py-[10px] rounded-[5px]"
-                }
-                innerText={"افزودن به سبد خرید"}
-              />
+              <div className="flex justify-start items-center gap-4">
+                <div className="flex justify-center items-center gap-2 border-[2px] px-[4px] rounded-lg">
+                  <div className="flex flex-col border-l-2 pl-[4px]">
+                    <span className="w-[20px] inline-block cursor-pointer">
+                      <img
+                        src="./images/icon/downward-arrow-up.png"
+                        alt=""
+                        className="w-full"
+                      />
+                    </span>
+                    <span className="w-[20px] inline-block cursor-pointer">
+                      <img
+                        src="./images/icon/downward-arrow-down.png"
+                        alt=""
+                        className="w-full"
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <span>0</span>
+                  </div>
+                </div>
+                <Button
+                  className={
+                    "bg-[#0b8600] text-white px-[10px] py-[10px] rounded-[5px]"
+                  }
+                  innerText={"افزودن به سبد خرید"}
+                />
+              </div>
             </div>
           </div>
         </div>

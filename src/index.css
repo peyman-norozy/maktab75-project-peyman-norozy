@@ -10,9 +10,12 @@
 * {
   font-family: iranSans;
 }
+html {
+  height: 100vh;
+}
 
 body {
-  height: 100vh;
+  height: 100%;
 }
 
 #root {
