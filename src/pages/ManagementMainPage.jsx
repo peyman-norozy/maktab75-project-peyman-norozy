@@ -34,18 +34,7 @@ const ManagementMainPage = () => {
         localStorage.setItem("REFRESH_TOKEN", res.data.refreshToken);
       })
       .then(() => {
-        if (localStorage.getItem("ACCESS_TOKEYN")) {
-          navigate({
-            pathname: "/panel/products",
-            search: "",
-          });
-        } else {
-          navigate({
-            pathname: "/management",
-            search: "",
-          });
-        }
-        // navigate("/panel/products");
+        navigate("/panel/products");
       })
       .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => {

@@ -7,7 +7,6 @@ import ManagementNavigation from "../components/layout/ManagementNavigation";
 import { productActions } from "./../store/cart-slice";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
-import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 
 const ManagementPanel = () => {
   const dispatch = useDispatch();
@@ -16,7 +15,11 @@ const ManagementPanel = () => {
   useEffect(() => {
     dispatch(productActions.loadingSpinnerCanger(true));
     axios
-      .get(BASE_URL + products, HEADERS_TOKEN)
+      .get(BASE_URL + products, {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      })
       .then((res) => {
         console.log(res.data);
         dispatch(productActions.addItemToCart(res.data));
