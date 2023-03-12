@@ -24,9 +24,33 @@ const SingleProductPage = () => {
   }, [productId, dispatch]);
 
   console.log(singleProduct.price);
+
   const addBasketHandler = () => {
     console.log(newQuantity);
     console.log(singleProduct.price);
+
+    if (newQuantity === 0) {
+      alert("لطفا تعداد مورد نظر خود را انتخاب کنید!!!");
+      return;
+    }
+
+    const BasketGetItem = JSON.parse(localStorage.getItem("myBasket")) || [];
+    console.log(BasketGetItem);
+    const existingItem = BasketGetItem.find((item) => item.id === productId);
+    console.log(existingItem);
+
+    if (existingItem) {
+      existingItem.quantity += newQuantity;
+    } else {
+      BasketGetItem.push({
+        name: singleProduct.name,
+        price: singleProduct.price,
+        quantity: newQuantity,
+        id: productId,
+      });
+    }
+
+    localStorage.setItem("myBasket", JSON.stringify(BasketGetItem));
   };
   // const changePrice = () => {
   //   const sign = singleProduct.price && singleProduct.price.split("،").join("");
