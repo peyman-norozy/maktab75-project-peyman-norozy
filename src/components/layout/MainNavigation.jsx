@@ -21,11 +21,12 @@ const MainNavigation = () => {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(
-      uiActions.basketBalance(
-        JSON.parse(localStorage.getItem("myBasket")).length
-      )
-    );
+    localStorage.getItem("myBasket") &&
+      dispatch(
+        uiActions.basketBalance(
+          JSON.parse(localStorage.getItem("myBasket")).length
+        )
+      );
   }, [dispatch]);
 
   function sendAndFetch(status) {

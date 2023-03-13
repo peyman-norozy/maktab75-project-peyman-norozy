@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Button from "../components/button/Button";
 import { uiActions } from "../store/ui-slice";
+import { productActions } from "../store/cart-slice";
 
 const CartMainPage = () => {
   const [getMyBasket, setGetMyBasket] = useState(
@@ -22,6 +24,21 @@ const CartMainPage = () => {
   };
 
   console.log(getMyBasket);
+
+  const changePrice = () => {
+    const SingleTotalPrice = getMyBasket
+      ? getMyBasket.map(
+          (item) => +item.price.split(",").join("") * item.quantity
+        )
+      : [];
+    console.log(SingleTotalPrice);
+
+    const finallyTotalPrice = SingleTotalPrice.reduce((a, c) => a + c, 0);
+    console.log(finallyTotalPrice);
+    dispatch(productActions.newTotalPrice(finallyTotalPrice));
+  };
+  changePrice();
+
   return (
     <div className=" pb-8 h-full pt-44 vm:pt-36">
       <div className="m-auto w-[94%] mt-10">
@@ -38,7 +55,9 @@ const CartMainPage = () => {
             {getMyBasket &&
               getMyBasket.map((item, index) => (
                 <tr key={index}>
-                  <td className="text-sm">{item.name}</td>
+                  <td className="text-sm">
+                    <Link to={`/singleProduct?id=${item.id}`}>{item.name}</Link>
+                  </td>
                   <td className="text-sm text-center">{item.price}</td>
                   <td className="text-sm text-center">{item.quantity}</td>
                   <td className="text-center text-sm">
@@ -57,7 +76,9 @@ const CartMainPage = () => {
           <div className="mt-[30px] flex justify-between items-center">
             <p className="bg-[#eee] py-[20px] px-[30px] rounded-lg">
               جمع :
-              <span className="font-bold text-[1.3rem] pr-[10px]">2000</span>{" "}
+              <span className="font-bold text-[1.3rem] pr-[10px]">
+                {data.cart.totalPrice.toLocaleString()}
+              </span>
               تومان
             </p>
             <Button

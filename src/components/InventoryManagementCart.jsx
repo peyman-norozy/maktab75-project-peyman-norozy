@@ -9,9 +9,20 @@ const InventoryManagementCart = ({ item, priceData, quantityData }) => {
           id={item.id}
           className="text-center"
           onBlur={(e) => {
-            priceData(e.target.lastChild.data, e.target.id);
+            priceData(
+              Number(e.target.lastChild.data)
+                ? Number(e.target.lastChild.data).toLocaleString()
+                : Number(
+                    e.target.lastChild.data.split(",").join("")
+                  ).toLocaleString(),
+              e.target.id
+            );
 
-            console.log(e.target.lastChild.data);
+            console.log(
+              Number(
+                e.target.lastChild.data.split(",").join("")
+              ).toLocaleString()
+            );
             console.log(e.target.id);
           }}
         >
