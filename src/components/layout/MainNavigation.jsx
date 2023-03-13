@@ -71,7 +71,6 @@ const MainNavigation = () => {
     data1.ui.showNavBar && (
       <header className="fixed top-0 px-14 bg-[#FFFFFF] shadow-[0_24px_24px_-30px_rgb(197,197,197,0.685)] w-full important_zIndex ">
         <div className="flex justify-between items-center pt-2 pb-4 border-b-2">
-          import {useEffect} from 'react';
           <Logo />
           <ul className="flex items-center gap-4 h-full">
             <li

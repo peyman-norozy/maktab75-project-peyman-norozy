@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../components/button/Button";
 import { uiActions } from "../store/ui-slice";
 
@@ -7,6 +7,7 @@ const CartMainPage = () => {
   const [getMyBasket, setGetMyBasket] = useState(
     JSON.parse(localStorage.getItem("myBasket"))
   );
+  const data = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
@@ -52,6 +53,23 @@ const CartMainPage = () => {
               ))}
           </tbody>
         </table>
+        {data.ui.myBasketLength ? (
+          <div className="mt-[30px] flex justify-between items-center">
+            <p className="bg-[#eee] py-[20px] px-[30px] rounded-lg">
+              جمع :
+              <span className="font-bold text-[1.3rem] pr-[10px]">2000</span>{" "}
+              تومان
+            </p>
+            <Button
+              innerText={"نهایی کردن سبد خرید"}
+              className={
+                "text-white bg-[#009c68] hover:bg-[#00c080] text-sm py-[10px] px-[20px] rounded-lg"
+              }
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

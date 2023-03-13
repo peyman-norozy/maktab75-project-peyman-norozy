@@ -51,6 +51,7 @@ const SingleProductPage = () => {
 
     localStorage.setItem("myBasket", JSON.stringify(BasketGetItem));
     dispatch(uiActions.basketBalance(BasketGetItem.length));
+    setNewQuantity(0);
   };
   // const changePrice = () => {
   //   const sign = singleProduct.price && singleProduct.price.split("،").join("");
