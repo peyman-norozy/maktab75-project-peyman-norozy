@@ -6,6 +6,7 @@ import { productActions } from "./../store/cart-slice";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
 import Button from "./../components/button/Button";
+import { uiActions } from "../store/ui-slice";
 
 const SingleProductPage = () => {
   const [singleProduct, setSingleProduct] = useState("");
@@ -39,18 +40,17 @@ const SingleProductPage = () => {
     const existingItem = BasketGetItem.find((item) => item.id === productId);
     console.log(existingItem);
 
-    if (existingItem) {
-      existingItem.quantity += newQuantity;
-    } else {
-      BasketGetItem.push({
-        name: singleProduct.name,
-        price: singleProduct.price,
-        quantity: newQuantity,
-        id: productId,
-      });
-    }
+    existingItem
+      ? (existingItem.quantity += newQuantity)
+      : BasketGetItem.push({
+          name: singleProduct.name,
+          price: singleProduct.price,
+          quantity: newQuantity,
+          id: productId,
+        });
 
     localStorage.setItem("myBasket", JSON.stringify(BasketGetItem));
+    dispatch(uiActions.basketBalance(BasketGetItem.length));
   };
   // const changePrice = () => {
   //   const sign = singleProduct.price && singleProduct.price.split("،").join("");
@@ -124,7 +124,7 @@ const SingleProductPage = () => {
                   <Button
                     onClickEvent={addBasketHandler}
                     className={
-                      "bg-[#0b8600] text-white px-[10px] py-[10px] rounded-[5px]"
+                      "bg-[#0b8600] text-white px-[10px] py-[10px] rounded-[5px] hover:bg-[#096b00]"
                     }
                     innerText={"افزودن به سبد خرید"}
                   />

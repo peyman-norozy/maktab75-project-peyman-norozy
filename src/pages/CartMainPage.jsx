@@ -1,19 +1,23 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Button from "../components/button/Button";
+import { uiActions } from "../store/ui-slice";
 
 const CartMainPage = () => {
   const [getMyBasket, setGetMyBasket] = useState(
     JSON.parse(localStorage.getItem("myBasket"))
   );
 
-  // getMyBasket.filter(item);
+  const dispatch = useDispatch();
 
   const deleteHandler = (event) => {
     let filteredData = getMyBasket.filter(
       (item) => item.id !== event.target.id
     );
     localStorage.setItem("myBasket", JSON.stringify(filteredData));
-    setGetMyBasket(JSON.parse(localStorage.getItem("myBasket")));
+    const getItem = JSON.parse(localStorage.getItem("myBasket"));
+    setGetMyBasket(getItem);
+    dispatch(uiActions.basketBalance(getItem.length));
   };
 
   console.log(getMyBasket);
@@ -31,8 +35,8 @@ const CartMainPage = () => {
           </thead>
           <tbody>
             {getMyBasket &&
-              getMyBasket.map((item) => (
-                <tr>
+              getMyBasket.map((item, index) => (
+                <tr key={index}>
                   <td className="text-sm">{item.name}</td>
                   <td className="text-sm text-center">{item.price}</td>
                   <td className="text-sm text-center">{item.quantity}</td>
