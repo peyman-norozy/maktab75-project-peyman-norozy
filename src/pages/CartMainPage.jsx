@@ -76,7 +76,7 @@ const CartMainPage = () => {
           <div className="mt-[30px] flex justify-between items-center">
             <p className="bg-[#eee] py-[20px] px-[30px] rounded-lg">
               جمع :
-              <span className="font-bold text-[1.3rem] pr-[10px]">
+              <span className="font-bold text-[1.3rem] pr-[10px] pl-[5px]">
                 {data.cart.totalPrice.toLocaleString()}
               </span>
               تومان
