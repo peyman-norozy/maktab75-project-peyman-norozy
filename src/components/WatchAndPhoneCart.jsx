@@ -23,8 +23,8 @@ const WatchAndPhoneCart = (props) => {
                   className="w-full"
                 />
               </div>
-              <div className="flex flex-col gap-2 justify-between text-sm w-full mt-2">
-                <h3 className="text-lg">{props.data.name}</h3>
+              <div className="flex flex-col gap-4 justify-between text-sm w-full mt-4">
+                <h3 className="text-[1rem] font-bold">{props.data.name}</h3>
                 <div className="flex gap-6 justify-between">
                   <span>قیمت:</span>
                   <p>

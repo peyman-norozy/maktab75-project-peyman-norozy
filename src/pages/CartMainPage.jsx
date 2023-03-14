@@ -81,12 +81,12 @@ const CartMainPage = () => {
               </span>
               تومان
             </p>
-            <Button
-              innerText={"نهایی کردن سبد خرید"}
-              className={
-                "text-white bg-[#009c68] hover:bg-[#00c080] text-sm py-[10px] px-[20px] rounded-lg"
-              }
-            />
+            <Link
+              to={"/finallyBasket"}
+              className="text-white bg-[#009c68] hover:bg-[#00c080] text-sm py-[10px] px-[20px] rounded-lg"
+            >
+              نهایی کردن سبد خرید
+            </Link>
           </div>
         ) : (
           ""

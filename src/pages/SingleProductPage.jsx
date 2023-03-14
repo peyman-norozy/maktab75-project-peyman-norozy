@@ -10,7 +10,6 @@ import { uiActions } from "../store/ui-slice";
 
 const SingleProductPage = () => {
   const [singleProduct, setSingleProduct] = useState("");
-  // const [priceChanger, setPriceChanger] = useState(0);
   const [newQuantity, setNewQuantity] = useState(0);
   const [searchParams] = useSearchParams();
   const productId = searchParams.get("id");
@@ -53,11 +52,7 @@ const SingleProductPage = () => {
     dispatch(uiActions.basketBalance(BasketGetItem.length));
     setNewQuantity(0);
   };
-  // const changePrice = () => {
-  //   const sign = singleProduct.price && singleProduct.price.split("،").join("");
-  //   console.log(sign);
-  // };
-  // changePrice();
+
   return (
     <>
       <div className="pt-48 px-14">
