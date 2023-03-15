@@ -64,6 +64,9 @@ const MainNavigation = () => {
     case "/panel/orders":
       sendAndFetch(false);
       break;
+    case "/payment":
+      sendAndFetch(false);
+      break;
     default:
       sendAndFetch(true);
   }

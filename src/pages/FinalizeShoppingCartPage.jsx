@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import Button from "../components/button/Button";
+import pd from "persian-date";
 
 const FinalizeShoppingCart = () => {
   const [date, setDate] = useState("");
@@ -48,10 +49,12 @@ const FinalizeShoppingCart = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const validDate = new RegExp(
       "^(\\d{4})/(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])$"
     );
     const validPhone = new RegExp("^(\\+98|0)?9\\d{9}$");
+
     !validDate.test(date)
       ? setErrorOfDate("تاریخ با فرمت نادرست وارد شده است !!!")
       : setErrorOfDate("");
@@ -63,16 +66,27 @@ const FinalizeShoppingCart = () => {
       : setErrorOfPhoneNumber("");
 
     if (validPhone.test(phone) && validDate.test(date)) {
+      const IsDate = date.split("/");
+      const persianDate = new pd([+IsDate[0], +IsDate[1], +IsDate[2]], "fa");
+      console.log(persianDate);
+      // const dateOfDeliveryGoods = new Date(
+      //   persianDate.valueOf()
+      // ).toLocaleDateString("fa-IR");
+
       localStorage.setItem(
         "IndividualProfile",
         JSON.stringify({
           name: name,
           lastName: lastName,
           address: address,
-          date: date,
+          date: persianDate.valueOf(),
           phone: phone,
         })
       );
+      navigate({
+        pathname: "/payment",
+        search: "",
+      });
     }
   };
 

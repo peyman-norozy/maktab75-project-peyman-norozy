@@ -16,6 +16,7 @@ import ProductManagement from "./pages/ProductManagementPage";
 import InventoryManagement from "./pages/InventoryManagementPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import FinalizeShoppingCart from "./pages/FinalizeShoppingCartPage";
+import InternetPayment from "./pages/InternetPaymentPage";
 import Orders from "./pages/OrdersPage";
 import { productActions } from "./store/cart-slice";
 import { uiActions } from "./store/ui-slice";
@@ -55,6 +56,7 @@ function App() {
         <Route path="/smartWatch" element={<SmartWatchPage />} />
         <Route path="/singleProduct" element={<SingleProductPage />} />
         <Route path="/finallyBasket" element={<FinalizeShoppingCart />} />
+        <Route path="/payment" element={<InternetPayment />} />
         <Route path="panel" element={<ManagementPanel />}>
           <Route path="products" element={<ProductManagement />} />
           <Route path="inventory" element={<InventoryManagement />} />
