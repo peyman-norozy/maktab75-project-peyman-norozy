@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import Button from "../components/button/Button";
@@ -6,14 +8,42 @@ import Button from "../components/button/Button";
 const FinalizeShoppingCart = () => {
   const [date, setDate] = useState("");
   const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
   const [errorOfDate, setErrorOfDate] = useState("");
   const [errorOfPhoneNumber, setErrorOfPhoneNumber] = useState("");
+  const data = useSelector((state) => state);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data.ui.myBasketLength) {
+      navigate({
+        pathname: "/finallyBasket",
+        search: "",
+      });
+    } else {
+      navigate({
+        pathname: "/",
+        search: "",
+      });
+    }
+  }, [data.ui.myBasketLength, navigate]);
 
   const handleDateChange = (event) => {
     setDate(event.target.value);
   };
   const handlePhoneChange = (event) => {
     setPhone(event.target.value);
+  };
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
+  };
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -22,16 +52,27 @@ const FinalizeShoppingCart = () => {
       "^(\\d{4})/(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])$"
     );
     const validPhone = new RegExp("^(\\+98|0)?9\\d{9}$");
-    if (!validDate.test(date)) {
-      setErrorOfDate("تاریخ با فرمت نادرست وارد شده است !!!");
-    } else {
-      setErrorOfDate("");
-    }
-    if (!validPhone.test(phone)) {
-      setErrorOfPhoneNumber("لطفا شماره تلفن خود را به طور صحیح وارد کنید !!!");
-      console.log("peyman");
-    } else {
-      setErrorOfPhoneNumber("");
+    !validDate.test(date)
+      ? setErrorOfDate("تاریخ با فرمت نادرست وارد شده است !!!")
+      : setErrorOfDate("");
+
+    !validPhone.test(phone)
+      ? setErrorOfPhoneNumber(
+          "لطفا شماره تلفن خود را به طور صحیح وارد کنید !!!"
+        )
+      : setErrorOfPhoneNumber("");
+
+    if (validPhone.test(phone) && validDate.test(date)) {
+      localStorage.setItem(
+        "IndividualProfile",
+        JSON.stringify({
+          name: name,
+          lastName: lastName,
+          address: address,
+          date: date,
+          phone: phone,
+        })
+      );
     }
   };
 
@@ -41,7 +82,7 @@ const FinalizeShoppingCart = () => {
         onSubmit={handleSubmit}
         className="flex flex-col justify-center items-center gap-6 w-[70%] m-auto"
       >
-        <div className="flex gap-4 w-full">
+        <div className="flex flex-col gap-4 w-full hm:flex-row">
           <div className="flex flex-col flex-1">
             <Label
               innerText={"نام :"}
@@ -51,6 +92,7 @@ const FinalizeShoppingCart = () => {
             <Input
               type={"text"}
               id={"name"}
+              onChangeEvent={handleNameChange}
               className="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
@@ -63,11 +105,12 @@ const FinalizeShoppingCart = () => {
             <Input
               type={"text"}
               id={"lastName"}
+              onChangeEvent={handleLastNameChange}
               className="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
         </div>
-        <div className="flex gap-4 w-full">
+        <div className="flex flex-col gap-4 w-full hm:flex-row">
           <div className="flex flex-col flex-1">
             <Label
               innerText={"تاریخ تحویل :"}
@@ -118,6 +161,8 @@ const FinalizeShoppingCart = () => {
               id="address"
               cols="30"
               rows="5"
+              required
+              onChangeEvent={handleAddressChange}
               className="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
           </div>
