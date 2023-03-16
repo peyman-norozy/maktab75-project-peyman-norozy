@@ -1,30 +1,18 @@
-import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import Button from "../components/button/Button";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { orders } from "../components/api/axios-constance/useHttp";
+import { uiActions } from "../store/ui-slice";
+import { productActions } from "../store/cart-slice";
 
 const InternetPayment = () => {
   const data = useSelector((state) => state);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (data.ui.myBasketLength) {
-      navigate({
-        pathname: "/payment",
-        search: "",
-      });
-    } else {
-      navigate({
-        pathname: "/",
-        search: "",
-      });
-    }
-  }, [data.ui.myBasketLength, navigate]);
+  const dispatch = useDispatch();
 
   const inputHandler = (event) => {
     if (event.target.value.length > event.target.maxLength) {
@@ -35,6 +23,8 @@ const InternetPayment = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    dispatch(productActions.loadingSpinnerCanger(true));
+
     const getMyBasket = JSON.parse(localStorage.getItem("myBasket"));
     const getIndividual = JSON.parse(localStorage.getItem("IndividualProfile"));
     const dataMerging = {
@@ -48,7 +38,25 @@ const InternetPayment = () => {
       delivered: "false",
     };
     console.log(dataMerging);
-    axios.post(BASE_URL + orders, dataMerging).then(() => {});
+    axios
+      .post(BASE_URL + orders, dataMerging)
+      .then(() => {
+        localStorage.removeItem("myBasket");
+        localStorage.removeItem("IndividualProfile");
+        dispatch(uiActions.basketBalance(0));
+        navigate({
+          pathname: "/paymentSuccessfully",
+          search: "",
+        });
+      })
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
+      .catch((e) => {
+        console.log(e);
+        navigate({
+          pathname: "/paymentFailure",
+          search: "",
+        });
+      });
   };
 
   return (

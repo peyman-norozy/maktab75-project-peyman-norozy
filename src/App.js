@@ -18,6 +18,8 @@ import SingleProductPage from "./pages/SingleProductPage";
 import FinalizeShoppingCart from "./pages/FinalizeShoppingCartPage";
 import InternetPayment from "./pages/InternetPaymentPage";
 import Orders from "./pages/OrdersPage";
+import SuccessfulPayment from "./pages/successfulPaymentPage";
+import PaymentFailure from "./pages/paymentFailurePage";
 import { productActions } from "./store/cart-slice";
 import { uiActions } from "./store/ui-slice";
 import { BASE_URL } from "./components/api/axios-constance/useHttp";
@@ -57,6 +59,8 @@ function App() {
         <Route path="/singleProduct" element={<SingleProductPage />} />
         <Route path="/finallyBasket" element={<FinalizeShoppingCart />} />
         <Route path="/payment" element={<InternetPayment />} />
+        <Route path="/paymentSuccessfully" element={<SuccessfulPayment />} />
+        <Route path="/paymentFailure" element={<PaymentFailure />} />
         <Route path="panel" element={<ManagementPanel />}>
           <Route path="products" element={<ProductManagement />} />
           <Route path="inventory" element={<InventoryManagement />} />
