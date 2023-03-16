@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
@@ -10,7 +10,6 @@ import { uiActions } from "../store/ui-slice";
 import { productActions } from "../store/cart-slice";
 
 const InternetPayment = () => {
-  const data = useSelector((state) => state);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,6 +26,7 @@ const InternetPayment = () => {
 
     const getMyBasket = JSON.parse(localStorage.getItem("myBasket"));
     const getIndividual = JSON.parse(localStorage.getItem("IndividualProfile"));
+    const getTotalPrice = localStorage.getItem("totalPrice");
     const dataMerging = {
       username: getIndividual.name,
       lastname: getIndividual.lastName,
@@ -34,7 +34,7 @@ const InternetPayment = () => {
       phone: getIndividual.phone,
       expectAt: getIndividual.date,
       products: getMyBasket,
-      prices: data.cart.totalPrice,
+      prices: +getTotalPrice,
       delivered: "false",
     };
     console.log(dataMerging);
@@ -43,6 +43,7 @@ const InternetPayment = () => {
       .then(() => {
         localStorage.removeItem("myBasket");
         localStorage.removeItem("IndividualProfile");
+        localStorage.removeItem("totalPrice");
         dispatch(uiActions.basketBalance(0));
         navigate({
           pathname: "/paymentSuccessfully",

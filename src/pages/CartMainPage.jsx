@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../components/button/Button";
 import { uiActions } from "../store/ui-slice";
-import { productActions } from "../store/cart-slice";
 
 const CartMainPage = () => {
   const [getMyBasket, setGetMyBasket] = useState(
@@ -35,7 +34,7 @@ const CartMainPage = () => {
 
     const finallyTotalPrice = SingleTotalPrice.reduce((a, c) => a + c, 0);
     console.log(finallyTotalPrice);
-    dispatch(productActions.newTotalPrice(finallyTotalPrice));
+    localStorage.setItem("totalPrice", finallyTotalPrice);
   };
   changePrice();
 
@@ -77,7 +76,7 @@ const CartMainPage = () => {
             <p className="bg-[#eee] py-[20px] px-[30px] rounded-lg">
               جمع :
               <span className="font-bold text-[1.3rem] pr-[10px] pl-[5px]">
-                {data.cart.totalPrice.toLocaleString()}
+                {(+localStorage.getItem("totalPrice")).toLocaleString()}
               </span>
               تومان
             </p>

@@ -1,7 +1,21 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
+import OrdersCart from "../components/OrdersCart";
+import { BASE_URL } from "../components/api/axios-constance/useHttp";
+import { orders } from "../components/api/axios-constance/useHttp";
+import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 
 const Orders = () => {
+  const [ordersData, setOrdersData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(BASE_URL + orders, HEADERS_TOKEN)
+      .then((res) => setOrdersData(res.data));
+  }, []);
+
   return (
     <>
       <div className="pt-52 pb-8 h-full vm:pt-24">
@@ -46,7 +60,11 @@ const Orders = () => {
                   <th></th>
                 </tr>
               </thead>
-              <tbody className="text-[.8rem]"></tbody>
+              <tbody className="text-[.8rem]">
+                {ordersData.map((item) => (
+                  <OrdersCart key={item.id} data={item} />
+                ))}
+              </tbody>
             </table>
           </div>
         </div>

@@ -69,9 +69,6 @@ const FinalizeShoppingCart = () => {
       const IsDate = date.split("/");
       const persianDate = new pd([+IsDate[0], +IsDate[1], +IsDate[2]], "fa");
       console.log(persianDate);
-      // const dateOfDeliveryGoods = new Date(
-      //   persianDate.valueOf()
-      // ).toLocaleDateString("fa-IR");
 
       localStorage.setItem(
         "IndividualProfile",

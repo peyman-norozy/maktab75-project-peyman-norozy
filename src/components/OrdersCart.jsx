@@ -1,12 +1,16 @@
 import Button from "./button/Button";
 
-const OrdersCart = () => {
+const OrdersCart = ({ data }) => {
+  console.log(data);
+
+  const registrationTime = new Date(data.createdAt).toLocaleDateString("fa-IR");
+
   return (
     <>
       <tr>
-        <td className="text-center">اکبر زمانی</td>
-        <td className="text-center">920,000</td>
-        <td className="text-center">1399/1/5</td>
+        <td className="text-center">{`${data.username} ${data.lastname}`}</td>
+        <td className="text-center">{data.prices.toLocaleString()}</td>
+        <td className="text-center">{registrationTime}</td>
         <td className="text-center">
           <Button
             className={
