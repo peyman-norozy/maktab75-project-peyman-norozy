@@ -60,47 +60,146 @@ const InternetPayment = () => {
   };
 
   return (
-    <div className="h-screen flex justify-center items-center bg-[#ddd]">
-      <form onSubmit={submitHandler} className="bg-white px-5">
-        <h1>اطلاعات کارت</h1>
-        <div>
-          <Label innerText={"شماره کارت:"} htmlFor={"cart-number"} />
+    <div className="min-h-[39rem] flex justify-center items-center bg-[#ddd]">
+      <form
+        onSubmit={submitHandler}
+        className="bg-white px-8 pb-8 flex flex-col gap-8 rounded-[15px]"
+      >
+        <div className="flex justify-start ">
+          <h1 className="bg-[#ffeef3] text-[#E6457B] border-b-orange-700 border-b-2 font-bold py-[12px] px-[8px]">
+            اطلاعات کارت
+          </h1>
+        </div>
+        <div className="flex justify-between">
+          <div className="flex flex-col flex-1">
+            <Label
+              innerText={"شماره کارت:"}
+              htmlFor={"cart-number"}
+              className={"font-bold"}
+            />
+            <span className="text-[10px]">
+              شماره 16 رقمی درج شده بر روی کارت
+            </span>
+          </div>
           <Input
             type={"number"}
             id={"cart-number"}
             maxlength={"16"}
+            className={"outline-none border-2 flex-1 rounded-[10px] pr-[6px]"}
             onInputEvent={inputHandler}
           />
         </div>
-        <div>
-          <Label innerText={"شماره شناسایی دوم (CVV2):"} htmlFor={"cvv2"} />
+        <div className="flex justify-between">
+          <div className="flex flex-col flex-1">
+            <Label
+              innerText={"شماره شناسایی دوم (CVV2):"}
+              htmlFor={"cvv2"}
+              className={"font-bold"}
+            />
+            <span className="text-[10px]">
+              شماره 3 یا 4 رقمی درج شده بر روی کارت
+            </span>
+          </div>
           <Input
             type={"number"}
             id={"cvv2"}
             maxlength={"4"}
             onInputEvent={inputHandler}
+            className={"outline-none border-2 flex-1 rounded-[10px] pr-[6px]"}
           />
         </div>
-        <div>
-          <Label innerText={"تاریخ انقضای کارت:"} />
-          <Input type={"number"} maxlength={"2"} onInputEvent={inputHandler} />
-          <Input type={"number"} maxlength={"2"} onInputEvent={inputHandler} />
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col flex-1">
+            <Label innerText={"تاریخ انقضای کارت:"} className={"font-bold"} />
+            <span className="text-[10px]">
+              دو رقم ماه / دو رقم آخر سال را وارد کنید
+            </span>
+          </div>
+          <div className="flex items-center flex-1 h-full">
+            <Input
+              type={"number"}
+              maxlength={"2"}
+              onInputEvent={inputHandler}
+              className={
+                "outline-none border-2 w-[20%] rounded-[10px] pr-[6px] h-full"
+              }
+            />
+            <span className="text-[34px] text-[#eee] mx-4">/</span>
+            <Input
+              type={"number"}
+              maxlength={"2"}
+              onInputEvent={inputHandler}
+              className={
+                "outline-none border-2 w-[20%] rounded-[10px] pr-[6px] h-full"
+              }
+            />
+          </div>
         </div>
-        <div>
-          <Label innerText={"رمز دوم (اینترنتی):"} htmlFor={"secondPassword"} />
-          <Input type={"password"} id={"secondPassword"} />
+        <div className="flex justify-between">
+          <div className="flex flex-col flex-1">
+            <Label
+              innerText={"کد امنیتی"}
+              htmlFor={"security"}
+              className={"font-bold"}
+            />
+            <span className="text-[10px]">
+              کد آورده شده در کادر روبرو را وارد کنید
+            </span>
+          </div>
+          <Input
+            type={"number"}
+            id={"security"}
+            className={"outline-none border-2 flex-1 rounded-[10px] pr-[6px]"}
+          />
         </div>
-        <div>
-          <Label
+        <div className="flex justify-between">
+          <div className="flex flex-col flex-1">
+            <Label
+              innerText={"رمز دوم (اینترنتی):"}
+              htmlFor={"secondPassword"}
+              className={"font-bold"}
+            />
+            <span className="text-[10px]">
+              رمز دوم ارسالی به گوشی خود را در اینجا وارد کنید
+            </span>
+          </div>
+          <Input
+            type={"password"}
+            id={"secondPassword"}
+            className={"outline-none border-2 flex-1 rounded-[10px] pr-[6px]"}
+          />
+        </div>
+        <div className="flex justify-between">
+          <div className="flex flex-col flex-1">
+            <Label
+              innerText={"ایمیل (اختیاری):"}
+              htmlFor={"email"}
+              className={"font-bold"}
+            />
+            <span className="text-[10px]">
+              رسید پرداخت به این آدرس ایمیل خواهد شد
+            </span>
+          </div>
+          <Input
             type={"email"}
-            innerText={"ایمیل (اختیاری):"}
-            htmlFor={"email"}
+            id={"email"}
+            className={"outline-none border-2 flex-1 rounded-[10px] pr-[6px]"}
           />
-          <Input id={"email"} />
         </div>
-        <div>
-          <Link to={"/finallyBasket"}>انصراف</Link>
-          <Button type={"submit"} innerText={"پرداخت"} />
+        <div className="flex gap-[4rem]">
+          <Button
+            type={"submit"}
+            innerText={"پرداخت"}
+            className={
+              "bg-[#0EC592] flex-1 text-center text-white py-[.5rem] rounded-xl"
+            }
+          />
+          <Link
+            to={"/finallyBasket"}
+            className="bg-[#FCBE56] flex-1 text-center text-white py-[.5rem] rounded-xl"
+          >
+            انصراف
+          </Link>
         </div>
       </form>
     </div>
