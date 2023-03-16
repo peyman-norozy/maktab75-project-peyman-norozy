@@ -91,10 +91,10 @@ const FinalizeShoppingCart = () => {
   };
 
   return (
-    <div className="h-screen pt-52 vm:pt-44">
+    <div className="h-full pt-52 vm:pt-44">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center items-center gap-6 w-[70%] m-auto"
+        className="flex flex-col justify-center items-center gap-6 w-[70%] m-auto "
       >
         <div className="flex flex-col gap-4 w-full hm:flex-row">
           <div className="flex flex-col flex-1">
@@ -176,7 +176,7 @@ const FinalizeShoppingCart = () => {
               cols="30"
               rows="5"
               required
-              onChangeEvent={handleAddressChange}
+              onChange={handleAddressChange}
               className="form-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
           </div>

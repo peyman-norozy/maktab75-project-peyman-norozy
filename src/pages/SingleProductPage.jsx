@@ -45,6 +45,7 @@ const SingleProductPage = () => {
           name: singleProduct.name,
           price: singleProduct.price,
           quantity: newQuantity,
+          image: singleProduct.image,
           id: productId,
         });
 
