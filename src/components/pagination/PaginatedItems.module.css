@@ -1,0 +1,52 @@
+.container {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  gap: 10px;
+  height: 40px;
+  width: 50%;
+  position: relative;
+}
+
+.page-number {
+  color: #aaa;
+}
+
+.active {
+  background-color: rgb(84, 101, 255);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+.previous {
+  font-size: 1.4rem;
+  position: absolute;
+  right: 10px;
+  background-color: #eee;
+  color: #aaa;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.next {
+  font-size: 1.4rem;
+  position: absolute;
+  left: 10px;
+  background-color: #eee;
+  color: #aaa;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.next-link {
+  padding-top: 3px;
+}

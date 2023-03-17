@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
 import Logo from "../logo/Logo";
+import Button from "../button/Button";
 
 const Footer = () => {
   const addOrRemoveAuth = useSelector((state) => state.ui);
 
   return (
     addOrRemoveAuth.showNavBar && (
-      <footer className="bg-white w-full mt-20">
+      <footer className="bg-white w-full mt-10">
         <div className="flex justify-between items-center px-14">
           <div className="flex-1">
             <div className="mt-2">
@@ -21,9 +22,10 @@ const Footer = () => {
             </p>
           </div>
           <div className="flex-1 text-left self-start">
-            <button className="bg-[#003865] text-white px-4 py-2 rounded-md mt-2">
-              تماس با ما
-            </button>
+            <Button
+              className="bg-[#003865] text-white px-4 py-2 rounded-md mt-2"
+              innerText={"تماس با ما"}
+            />
           </div>
         </div>
         <div>

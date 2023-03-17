@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
 @font-face {
   font-family: iranSans;
   src: url(./assets/font/IRANSANSWEB.TTF);
@@ -10,9 +18,12 @@
 * {
   font-family: iranSans;
 }
+html {
+  height: 100vh;
+}
 
 body {
-  height: 100vh;
+  height: 100%;
 }
 
 #root {
@@ -45,4 +56,33 @@ body {
 .grid__product {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.important_zIndex {
+  z-index: 2 !important;
+}
+
+th {
+  background-color: #4ecdc4;
+}
+
+td {
+  border-left: 1px solid #aaa;
+}
+
+td:first-child {
+  border-right: 1px solid #aaa;
+}
+
+tr {
+  border-bottom: 1px solid #aaa;
+}
+
+th {
+  border: 1px solid #4ecdc4;
+}
+
+td,
+th {
+  padding: 10px;
 }

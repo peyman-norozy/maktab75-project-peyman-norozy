@@ -13,41 +13,43 @@ const Home = () => {
 
   return (
     <Fragment>
-      <Slider />
-      {/* mobile group product in main page */}
-      <div className="mt-20">
-        <div className="flex justify-start">
-          <h2 className="border-b-4 border-[#EF5B0C] rounded-sm pb-2">
-            کالاهای گروه موبایل
-          </h2>
+      <div className="px-14">
+        <Slider />
+        {/* mobile group product in main page */}
+        <div className="mt-20">
+          <div className="flex justify-start">
+            <h2 className="border-b-4 border-[#EF5B0C] rounded-sm pb-2">
+              کالاهای گروه موبایل
+            </h2>
+          </div>
+          <div className="grid__product bg-white gap-4 py-4 px-6">
+            {data.map((item, index) => {
+              if (item.category === "موبایل" && phone < 4) {
+                phone++;
+                return <WatchAndPhoneCart key={index} data={item} />;
+              } else {
+                return "";
+              }
+            })}
+          </div>
         </div>
-        <div className="grid__product bg-white pb-4">
-          {data.map((item, index) => {
-            if (item.name === "iphone" && phone < 4) {
-              phone++;
-              return <WatchAndPhoneCart key={index} data={item} />;
-            } else {
-              return "";
-            }
-          })}
-        </div>
-      </div>
-      {/* watch group product in main page */}
-      <div className="mt-20">
-        <div className="flex justify-start">
-          <h2 className="border-b-4 border-[#EF5B0C] rounded-sm pb-2">
-            کالاهای گروه ساعت
-          </h2>
-        </div>
-        <div className="grid__product bg-white pb-4">
-          {data.map((item, index) => {
-            if (item.name === "smartWatch" && watch < 4) {
-              watch++;
-              return <WatchAndPhoneCart key={index} data={item} />;
-            } else {
-              return "";
-            }
-          })}
+        {/* watch group product in main page */}
+        <div className="mt-20">
+          <div className="flex justify-start">
+            <h2 className="border-b-4 border-[#EF5B0C] rounded-sm pb-2">
+              کالاهای گروه ساعت
+            </h2>
+          </div>
+          <div className="grid__product bg-white gap-4 py-4 px-6">
+            {data.map((item, index) => {
+              if (item.category === "ساعت" && watch < 4) {
+                watch++;
+                return <WatchAndPhoneCart key={index} data={item} />;
+              } else {
+                return "";
+              }
+            })}
+          </div>
         </div>
       </div>
     </Fragment>
