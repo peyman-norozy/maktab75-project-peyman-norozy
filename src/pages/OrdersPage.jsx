@@ -11,6 +11,7 @@ import { productActions } from "../store/cart-slice";
 
 const Orders = () => {
   const [ordersData, setOrdersData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
   const [newChecked, setnewChecked] = useState(false);
 
   const dispatch = useDispatch();
@@ -28,8 +29,18 @@ const Orders = () => {
     console.log(event.target.id);
     if (event.target.id === "delivered") {
       setnewChecked(true);
+      let deliveryProduct = ordersData.filter(
+        (item) => item.delivered === "true"
+      );
+      console.log(deliveryProduct);
+      setFilterData(deliveryProduct);
     } else {
       setnewChecked(false);
+      let undeliveryProduct = ordersData.filter(
+        (item) => item.delivered === "false"
+      );
+      setFilterData(undeliveryProduct);
+      console.log(undeliveryProduct);
     }
   };
 
@@ -82,7 +93,10 @@ const Orders = () => {
                 </tr>
               </thead>
               <tbody className="text-[.8rem]">
-                {ordersData.map((item) => (
+                {/* {
+                  !newChecked &&
+                } */}
+                {filterData.map((item) => (
                   <OrdersCart key={item.id} data={item} />
                 ))}
               </tbody>
