@@ -10,6 +10,7 @@ const Input = (props) => {
     placeholder,
     accept,
     maxlength,
+    checked,
   } = props;
 
   return (
@@ -19,6 +20,7 @@ const Input = (props) => {
         id={id}
         name={name}
         value={value}
+        checked={checked}
         maxLength={maxlength}
         placeholder={placeholder}
         onChange={onChangeEvent}

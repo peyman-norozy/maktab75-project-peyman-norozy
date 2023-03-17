@@ -1,20 +1,37 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import OrdersCart from "../components/OrdersCart";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { orders } from "../components/api/axios-constance/useHttp";
 import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
+import { productActions } from "../store/cart-slice";
 
 const Orders = () => {
   const [ordersData, setOrdersData] = useState([]);
+  const [newChecked, setnewChecked] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(productActions.loadingSpinnerCanger(true));
     axios
       .get(BASE_URL + orders, HEADERS_TOKEN)
-      .then((res) => setOrdersData(res.data));
-  }, []);
+      .then((res) => setOrdersData(res.data))
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
+      .catch((e) => console.log(e));
+  }, [dispatch]);
+
+  const radioChangeHandler = (event) => {
+    console.log(event.target.id);
+    if (event.target.id === "delivered") {
+      setnewChecked(true);
+    } else {
+      setnewChecked(false);
+    }
+  };
 
   return (
     <>
@@ -32,7 +49,9 @@ const Orders = () => {
                   type={"radio"}
                   id={"delivered"}
                   name={"order"}
+                  checked={newChecked}
                   value={"delivered"}
+                  onChangeEvent={radioChangeHandler}
                 />
               </div>
               <div className="flex justify-center items-center gap-1">
@@ -44,7 +63,9 @@ const Orders = () => {
                   type={"radio"}
                   id={"undelivery"}
                   name={"order"}
+                  checked={!newChecked}
                   value={"undelivery"}
+                  onChangeEvent={radioChangeHandler}
                 />
               </div>
             </div>
