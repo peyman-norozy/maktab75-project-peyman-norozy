@@ -10,6 +10,9 @@ const cartSlice = createSlice({
     loading: false,
     buttonState: false,
     totalPrice: 0,
+    checked: false,
+    viewOrderModalDisplay: false,
+    deliveredButton: false,
   },
   reducers: {
     addItemToCart(state, action) {
@@ -35,6 +38,15 @@ const cartSlice = createSlice({
     },
     newTotalPrice(state, action) {
       state.totalPrice = action.payload;
+    },
+    newCheckedOrders(state, action) {
+      state.checked = action.payload;
+    },
+    newViewOrderDisplay(state, action) {
+      state.viewOrderModalDisplay = action.payload;
+    },
+    deliveredButtonHandle(state, action) {
+      state.deliveredButton = action.payload;
     },
   },
 });

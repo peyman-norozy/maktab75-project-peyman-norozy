@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import OrdersCart from "../components/OrdersCart";
@@ -8,11 +8,11 @@ import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { orders } from "../components/api/axios-constance/useHttp";
 import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 import { productActions } from "../store/cart-slice";
+import ViewOrderModal from "../components/ViewOrderModal";
 
 const Orders = () => {
+  const checkedData = useSelector((state) => state);
   const [ordersData, setOrdersData] = useState([]);
-  const [filterData, setFilterData] = useState([]);
-  const [newChecked, setnewChecked] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -28,20 +28,21 @@ const Orders = () => {
   const radioChangeHandler = (event) => {
     console.log(event.target.id);
     if (event.target.id === "delivered") {
-      setnewChecked(true);
-      let deliveryProduct = ordersData.filter(
-        (item) => item.delivered === "true"
-      );
-      console.log(deliveryProduct);
-      setFilterData(deliveryProduct);
+      dispatch(productActions.newCheckedOrders(true));
+      dispatch(productActions.deliveredButtonHandle(true));
     } else {
-      setnewChecked(false);
-      let undeliveryProduct = ordersData.filter(
-        (item) => item.delivered === "false"
-      );
-      setFilterData(undeliveryProduct);
-      console.log(undeliveryProduct);
+      dispatch(productActions.newCheckedOrders(false));
+      dispatch(productActions.deliveredButtonHandle(false));
     }
+  };
+
+  const handelDelivery = () => {
+    dispatch(productActions.loadingSpinnerCanger(true));
+    axios
+      .get(BASE_URL + orders, HEADERS_TOKEN)
+      .then((res) => setOrdersData(res.data))
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -60,7 +61,7 @@ const Orders = () => {
                   type={"radio"}
                   id={"delivered"}
                   name={"order"}
-                  checked={newChecked}
+                  checked={checkedData.cart.checked}
                   value={"delivered"}
                   onChangeEvent={radioChangeHandler}
                 />
@@ -74,7 +75,7 @@ const Orders = () => {
                   type={"radio"}
                   id={"undelivery"}
                   name={"order"}
-                  checked={!newChecked}
+                  checked={!checkedData.cart.checked}
                   value={"undelivery"}
                   onChangeEvent={radioChangeHandler}
                 />
@@ -93,17 +94,32 @@ const Orders = () => {
                 </tr>
               </thead>
               <tbody className="text-[.8rem]">
-                {/* {
-                  !newChecked &&
-                } */}
-                {filterData.map((item) => (
-                  <OrdersCart key={item.id} data={item} />
-                ))}
+                {!checkedData.cart.checked
+                  ? ordersData.map((item) =>
+                      item.delivered === "false" ? (
+                        <OrdersCart key={item.id} data={item} />
+                      ) : (
+                        ""
+                      )
+                    )
+                  : ordersData.map((item) =>
+                      item.delivered === "true" ? (
+                        <OrdersCart key={item.id} data={item} />
+                      ) : (
+                        ""
+                      )
+                    )}
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      {checkedData.cart.viewOrderModalDisplay && (
+        <ViewOrderModal
+          modalData={ordersData}
+          addUndelivryToDelivery={handelDelivery}
+        />
+      )}
     </>
   );
 };

@@ -67,7 +67,7 @@ const ProductManagement = () => {
         </div>
       </div>
       {data.cart.modalDisplay && (
-        <div className="bg-[#aaaaaa4d] absolute top-0 bottom-0 w-full h-full">
+        <div className="bg-[#aaaaaa4d] absolute top-0 bottom-0 w-full h-full important_zIndex">
           <AddProductForm />
         </div>
       )}
