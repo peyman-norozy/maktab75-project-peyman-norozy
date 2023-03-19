@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Label from "../components/label/Label";
@@ -16,7 +16,7 @@ const Orders = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getDataFromServer = useCallback(() => {
     dispatch(productActions.loadingSpinnerCanger(true));
     axios
       .get(BASE_URL + orders, HEADERS_TOKEN)
@@ -24,6 +24,10 @@ const Orders = () => {
       .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
   }, [dispatch]);
+
+  useEffect(() => {
+    getDataFromServer();
+  }, [getDataFromServer]);
 
   const radioChangeHandler = (event) => {
     console.log(event.target.id);
@@ -37,12 +41,7 @@ const Orders = () => {
   };
 
   const handelDelivery = () => {
-    dispatch(productActions.loadingSpinnerCanger(true));
-    axios
-      .get(BASE_URL + orders, HEADERS_TOKEN)
-      .then((res) => setOrdersData(res.data))
-      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
-      .catch((e) => console.log(e));
+    getDataFromServer();
   };
 
   return (
