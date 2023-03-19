@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/DataBase/server/node_modules
+src/DataBase/server/node_modules
 /.pnp
 .pnp.js
 
