@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import "../index.css";
 // import required modules
 import { Navigation } from "swiper";
+import LazyLoad from "react-lazy-load";
 
 const Slider = () => {
   return (
@@ -12,10 +13,14 @@ const Slider = () => {
       <div className="w-[100%] h-[30rem] rounded-2xl overflow-hidden">
         <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
           <SwiperSlide>
-            <img src="./images/slider/bannerApple.png" alt="" />
+            <LazyLoad>
+              <img src="./images/slider/bannerApple.png" alt="" />
+            </LazyLoad>
           </SwiperSlide>
           <SwiperSlide>
-            <img src="./images/slider/bannerWatch.png" alt="" />
+            <LazyLoad>
+              <img src="./images/slider/bannerWatch.png" alt="" />
+            </LazyLoad>
           </SwiperSlide>
         </Swiper>
       </div>

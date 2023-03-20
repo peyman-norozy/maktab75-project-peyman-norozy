@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import LazyLoad from "react-lazy-load";
 import { productActions } from "../store/cart-slice";
 import Button from "./button/Button";
 
@@ -32,7 +33,9 @@ const ProductManagementCart = ({ item }) => {
       <tr className="text-xs">
         <td className="flex justify-center">
           <div className="w-20">
-            <img src={"http://localhost:3002" + item.image} alt="" />
+            <LazyLoad>
+              <img src={"http://localhost:3002" + item.image} alt="" />
+            </LazyLoad>
           </div>
         </td>
         <td>{item.name}</td>

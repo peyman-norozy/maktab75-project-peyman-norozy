@@ -2,6 +2,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
 import { productActions } from "./../store/cart-slice";
 import Button from "./button/Button";
 import Label from "./label/Label";
@@ -179,7 +180,9 @@ const AddProductForm = () => {
         </div>
         {data.cart.buttonState && (
           <div className="w-[60px] h-[60px]">
-            <img src={"http://localhost:3002" + modalImage} alt="" />
+            <LazyLoad>
+              <img src={"http://localhost:3002" + modalImage} alt="" />
+            </LazyLoad>
           </div>
         )}
       </div>

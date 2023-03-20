@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
 
 const WatchAndPhoneCart = (props) => {
   console.log(props);
@@ -17,11 +18,13 @@ const WatchAndPhoneCart = (props) => {
           <div className="w-full">
             <div className="flex flex-col items-center p-4">
               <div className="w-full">
-                <img
-                  src={"http://localhost:3002" + props.data.image}
-                  alt=""
-                  className="w-full"
-                />
+                <LazyLoad>
+                  <img
+                    src={"http://localhost:3002" + props.data.image}
+                    alt=""
+                    className="w-full"
+                  />
+                </LazyLoad>
               </div>
               <div className="flex flex-col gap-4 justify-between text-sm w-full mt-4">
                 <h3 className="text-[1rem] font-bold">{props.data.name}</h3>

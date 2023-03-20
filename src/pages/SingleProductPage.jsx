@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import LazyLoad from "react-lazy-load";
 import { productActions } from "./../store/cart-slice";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
@@ -60,7 +61,9 @@ const SingleProductPage = () => {
         <div className="bg-white rounded-2xl">
           <div className="flex flex-col gap-8 vm:flex-row justify-center items-center vm:gap-8 py-[20px] px-[20px] w-[90%] m-auto">
             <div className="w-[250px] vm:w-[300px]">
-              <img src={`${BASE_URL}${singleProduct.image}`} alt="" />
+              <LazyLoad>
+                <img src={`${BASE_URL}${singleProduct.image}`} alt="" />
+              </LazyLoad>
             </div>
             <div className="flex flex-col gap-14">
               <div>
@@ -70,11 +73,13 @@ const SingleProductPage = () => {
                 <div className="flex justify-start items-center gap-2 mt-4">
                   <span>{singleProduct.category}</span>
                   <span className="w-4">
-                    <img
-                      src="./images/icon/downward-arrow-down.png"
-                      alt=""
-                      className="rotate-90"
-                    />
+                    <LazyLoad>
+                      <img
+                        src="./images/icon/downward-arrow-down.png"
+                        alt=""
+                        className="rotate-90"
+                      />
+                    </LazyLoad>
                   </span>
                   <span>{singleProduct.subcategory}</span>
                 </div>
@@ -93,11 +98,13 @@ const SingleProductPage = () => {
                         onClick={() => setNewQuantity(newQuantity + 1)}
                         className="w-[20px] inline-block cursor-pointer"
                       >
-                        <img
-                          src="./images/icon/downward-arrow-up.png"
-                          alt=""
-                          className="w-full"
-                        />
+                        <LazyLoad>
+                          <img
+                            src="./images/icon/downward-arrow-up.png"
+                            alt=""
+                            className="w-full"
+                          />
+                        </LazyLoad>
                       </span>
                       <span
                         onClick={() =>
