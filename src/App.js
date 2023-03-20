@@ -9,6 +9,7 @@ import { uiActions } from "./store/ui-slice";
 import { BASE_URL } from "./components/api/axios-constance/useHttp";
 import { products } from "./components/api/axios-constance/useHttp";
 import { nav } from "./components/api/axios-constance/useHttp";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
 const ManagementMainPage = React.lazy(() =>
   import("./pages/ManagementMainPage")
 );
@@ -59,7 +60,13 @@ function App() {
 
   return (
     <Layout>
-      <Suspense>
+      <Suspense
+        fallback={
+          <div className="centered">
+            <LoadingSpinner />
+          </div>
+        }
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/management" element={<ManagementMainPage />} />

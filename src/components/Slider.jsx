@@ -13,12 +13,12 @@ const Slider = () => {
       <div className="w-[100%] h-[30rem] rounded-2xl overflow-hidden">
         <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
           <SwiperSlide>
-            <LazyLoad>
+            <LazyLoad className="h-full">
               <img src="./images/slider/bannerApple.png" alt="" />
             </LazyLoad>
           </SwiperSlide>
           <SwiperSlide>
-            <LazyLoad>
+            <LazyLoad className="h-full">
               <img src="./images/slider/bannerWatch.png" alt="" />
             </LazyLoad>
           </SwiperSlide>
