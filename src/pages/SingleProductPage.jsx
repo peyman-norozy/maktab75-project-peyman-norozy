@@ -6,6 +6,7 @@ import LazyLoad from "react-lazy-load";
 import { productActions } from "./../store/cart-slice";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
+import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 import Button from "./../components/button/Button";
 import { uiActions } from "../store/ui-slice";
 
@@ -26,15 +27,7 @@ const SingleProductPage = () => {
 
   console.log(singleProduct.price);
 
-  const addBasketHandler = () => {
-    console.log(newQuantity);
-    console.log(singleProduct.price);
-
-    if (newQuantity === 0) {
-      alert("لطفا تعداد مورد نظر خود را انتخاب کنید!!!");
-      return;
-    }
-
+  const addProductToBasket = () => {
     const BasketGetItem = JSON.parse(localStorage.getItem("myBasket")) || [];
     console.log(BasketGetItem);
     const existingItem = BasketGetItem.find((item) => item.id === productId);
@@ -53,6 +46,39 @@ const SingleProductPage = () => {
     localStorage.setItem("myBasket", JSON.stringify(BasketGetItem));
     dispatch(uiActions.basketBalance(BasketGetItem.length));
     setNewQuantity(0);
+  };
+
+  const addBasketHandler = () => {
+    console.log(newQuantity);
+    console.log(singleProduct.price);
+
+    if (newQuantity === 0) {
+      alert("لطفا تعداد مورد نظر خود را انتخاب کنید!!!");
+      return;
+    }
+
+    console.log(productId);
+    axios
+      .get(BASE_URL + products + `/${productId}`)
+      .then((res) => {
+        console.log(res.data.quantity);
+        console.log(newQuantity);
+        if (res.data.quantity >= newQuantity) {
+          axios
+            .patch(
+              BASE_URL + products + `/${productId}`,
+              {
+                quantity: String(res.data.quantity - String(newQuantity)),
+              },
+              HEADERS_TOKEN
+            )
+            .then(() => addProductToBasket())
+            .catch((e) => console.log(e));
+        } else {
+          alert("موجودی انبار کافی نمیباشد");
+        }
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
