@@ -1,8 +1,12 @@
 import { useState } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../components/button/Button";
 import { uiActions } from "../store/ui-slice";
+import { BASE_URL } from "../components/api/axios-constance/useHttp";
+import { products } from "../components/api/axios-constance/useHttp";
+import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 
 const CartMainPage = () => {
   const [getMyBasket, setGetMyBasket] = useState(
@@ -12,14 +16,39 @@ const CartMainPage = () => {
 
   const dispatch = useDispatch();
 
-  const deleteHandler = (event) => {
-    let filteredData = getMyBasket.filter(
+  const deleteProductFromBasket = (event) => {
+    let deleteFilteredData = getMyBasket.filter(
       (item) => item.id !== event.target.id
     );
-    localStorage.setItem("myBasket", JSON.stringify(filteredData));
+    console.log(deleteFilteredData);
+    localStorage.setItem("myBasket", JSON.stringify(deleteFilteredData));
     const getItem = JSON.parse(localStorage.getItem("myBasket"));
     setGetMyBasket(getItem);
     dispatch(uiActions.basketBalance(getItem.length));
+  };
+
+  const deleteHandler = (event) => {
+    let filteredData = getMyBasket.filter((item) => item.id == event.target.id);
+
+    axios
+      .get(BASE_URL + products + `/${event.target.id}`)
+      .then((res) => {
+        axios
+          .patch(
+            BASE_URL + products + `/${event.target.id}`,
+            {
+              quantity: String(
+                Number(res.data.quantity) + filteredData[0].quantity
+              ),
+            },
+            HEADERS_TOKEN
+          )
+          .then(() => {
+            deleteProductFromBasket(event);
+          })
+          .catch((e) => console.log(e));
+      })
+      .catch((e) => console.log(e));
   };
 
   console.log(getMyBasket);
