@@ -21,7 +21,7 @@ const SingleProductPage = () => {
     axios
       .get(`${BASE_URL}${products}/${productId}`)
       .then((res) => setSingleProduct(res.data))
-      .then(() => dispatch(productActions.loadingSpinnerCanger(true)))
+      .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
   }, [productId, dispatch]);
 
@@ -58,6 +58,7 @@ const SingleProductPage = () => {
     }
 
     console.log(productId);
+    dispatch(productActions.loadingSpinnerCanger(true));
     axios
       .get(BASE_URL + products + `/${productId}`)
       .then((res) => {
@@ -73,6 +74,7 @@ const SingleProductPage = () => {
               HEADERS_TOKEN
             )
             .then(() => addProductToBasket())
+            .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
             .catch((e) => console.log(e));
         } else {
           alert("موجودی انبار کافی نمیباشد");

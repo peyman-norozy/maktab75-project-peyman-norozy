@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../components/button/Button";
 import { uiActions } from "../store/ui-slice";
+import { productActions } from "../store/cart-slice";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
 import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
@@ -28,7 +29,11 @@ const CartMainPage = () => {
   };
 
   const deleteHandler = (event) => {
-    let filteredData = getMyBasket.filter((item) => item.id == event.target.id);
+    dispatch(productActions.loadingSpinnerCanger(true));
+
+    let filteredData = getMyBasket.filter(
+      (item) => item.id === event.target.id
+    );
 
     axios
       .get(BASE_URL + products + `/${event.target.id}`)
@@ -43,9 +48,8 @@ const CartMainPage = () => {
             },
             HEADERS_TOKEN
           )
-          .then(() => {
-            deleteProductFromBasket(event);
-          })
+          .then(() => deleteProductFromBasket(event))
+          .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
           .catch((e) => console.log(e));
       })
       .catch((e) => console.log(e));
