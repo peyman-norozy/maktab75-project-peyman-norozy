@@ -1,11 +1,10 @@
 import { Fragment } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import ManagementNavigation from "../components/layout/ManagementNavigation";
 import { productActions } from "./../store/cart-slice";
-import { BASE_URL } from "../components/api/axios-constance/useHttp";
+import { ADMIN_API } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
 
 const ManagementPanel = () => {
@@ -14,12 +13,7 @@ const ManagementPanel = () => {
 
   useEffect(() => {
     dispatch(productActions.loadingSpinnerCanger(true));
-    axios
-      .get(BASE_URL + products, {
-        headers: {
-          token: localStorage.getItem("ACCESS_TOKEYN"),
-        },
-      })
+    ADMIN_API.get(products)
       .then((res) => {
         console.log(res.data);
         dispatch(productActions.addItemToCart(res.data));
