@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import ManagementNavigation from "../components/layout/ManagementNavigation";
 import { productActions } from "./../store/cart-slice";
-import { ADMIN_API } from "../components/api/axios-constance/useHttp";
+import { USER_API } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
 
 const ManagementPanel = () => {
@@ -13,7 +13,9 @@ const ManagementPanel = () => {
 
   useEffect(() => {
     dispatch(productActions.loadingSpinnerCanger(true));
-    ADMIN_API.get(products)
+    USER_API.get(products, {
+      headers: { token: localStorage.getItem("ACCESS_TOKEYN") },
+    })
       .then((res) => {
         console.log(res.data);
         dispatch(productActions.addItemToCart(res.data));

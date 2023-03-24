@@ -568,7 +568,7 @@
     "protection": "admin"
   },
   "nav": {
-    "showNavBar": true,
-    "createdAt": 1679611113099
+    "showNavBar": false,
+    "createdAt": 1679652850255
   }
 }
