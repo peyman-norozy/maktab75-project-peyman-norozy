@@ -1,12 +1,11 @@
 import React, { Suspense } from "react";
-import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import { productActions } from "./store/cart-slice";
 import { uiActions } from "./store/ui-slice";
-import { BASE_URL } from "./components/api/axios-constance/useHttp";
+import { USER_API } from "./components/api/axios-constance/useHttp";
 import { products } from "./components/api/axios-constance/useHttp";
 import { nav } from "./components/api/axios-constance/useHttp";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
@@ -42,8 +41,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get(BASE_URL + products)
+    USER_API.get(products)
       .then((res) => {
         console.log(res.data);
         dispatch(productActions.addItemToCart(res.data));
@@ -52,8 +50,7 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    axios
-      .get(BASE_URL + nav)
+    USER_API.get(nav)
       .then((res) => dispatch(uiActions.addOrRemoveNavBar(res.data.showNavBar)))
       .catch((e) => console.log(e));
   }, [dispatch]);
