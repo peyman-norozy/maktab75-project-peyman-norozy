@@ -10,7 +10,7 @@ import Input from "./input/Input";
 import Select from "./select/Select";
 import { BASE_URL } from "./api/axios-constance/useHttp";
 import { products } from "./api/axios-constance/useHttp";
-import { HEADERS_TOKEN } from "./api/axios-constance/useHttp";
+// import { HEADERS_TOKEN } from "./api/axios-constance/useHttp";
 
 const AddProductForm = () => {
   const [file, setFile] = useState(null);
@@ -41,7 +41,11 @@ const AddProductForm = () => {
 
   const getNewData = () => {
     axios
-      .get(BASE_URL + products, HEADERS_TOKEN)
+      .get(BASE_URL + products, {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      })
       .then((res) => dispatch(productActions.addItemToCart(res.data)))
       .then(() => dispatch(productActions.modalDisplayAction(false)))
       .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
@@ -82,7 +86,11 @@ const AddProductForm = () => {
 
       dispatch(productActions.loadingSpinnerCanger(true));
       axios
-        .patch(`${BASE_URL}${products}/${params}`, formDataFn, HEADERS_TOKEN)
+        .patch(`${BASE_URL}${products}/${params}`, formDataFn, {
+          headers: {
+            token: localStorage.getItem("ACCESS_TOKEYN"),
+          },
+        })
         .then(() => getNewData())
         .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
         .catch((e) => {
@@ -97,7 +105,11 @@ const AddProductForm = () => {
 
       dispatch(productActions.loadingSpinnerCanger(true));
       axios
-        .post(BASE_URL + products, formDataFn, HEADERS_TOKEN)
+        .post(BASE_URL + products, formDataFn, {
+          headers: {
+            token: localStorage.getItem("ACCESS_TOKEYN"),
+          },
+        })
         .then(() => getNewData())
         .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
         .catch((e) => {
@@ -119,7 +131,11 @@ const AddProductForm = () => {
       dispatch(productActions.loadingSpinnerCanger(true));
 
       axios
-        .get(`${BASE_URL}${products}/${params}`, HEADERS_TOKEN)
+        .get(`${BASE_URL}${products}/${params}`, {
+          headers: {
+            token: localStorage.getItem("ACCESS_TOKEYN"),
+          },
+        })
         .then((res) => {
           setProductName(res.data.name);
           setDescription(res.data.description);

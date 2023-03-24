@@ -34,7 +34,11 @@ const DeleteModal = () => {
     dispatch(productActions.loadingSpinnerCanger(true));
 
     axios
-      .delete(`${BASE_URL}${products}/${id}`, HEADERS_TOKEN)
+      .delete(`${BASE_URL}${products}/${id}`, {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      })
       .then(() => dispatch(productActions.deleteModalDisplay(false)))
       .then(() => dispatch(productActions.addSearchItem([])))
       .then(() =>

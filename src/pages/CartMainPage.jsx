@@ -7,7 +7,6 @@ import { uiActions } from "../store/ui-slice";
 import { productActions } from "../store/cart-slice";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
-import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 
 const CartMainPage = () => {
   const [getMyBasket, setGetMyBasket] = useState(
@@ -46,7 +45,11 @@ const CartMainPage = () => {
                 Number(res.data.quantity) + filteredData[0].quantity
               ),
             },
-            HEADERS_TOKEN
+            {
+              headers: {
+                token: localStorage.getItem("ACCESS_TOKEYN"),
+              },
+            }
           )
           .then(() => deleteProductFromBasket(event))
           .then(() => dispatch(productActions.loadingSpinnerCanger(false)))

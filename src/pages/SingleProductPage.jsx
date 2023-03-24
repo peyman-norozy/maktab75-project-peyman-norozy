@@ -5,7 +5,6 @@ import LazyLoad from "react-lazy-load";
 import { productActions } from "./../store/cart-slice";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
-import { ADMIN_API } from "../components/api/axios-constance/useHttp";
 import { USER_API } from "../components/api/axios-constance/useHttp";
 import Button from "./../components/button/Button";
 import { uiActions } from "../store/ui-slice";
@@ -63,9 +62,17 @@ const SingleProductPage = () => {
         console.log(res.data.quantity);
         console.log(newQuantity);
         if (res.data.quantity >= newQuantity) {
-          ADMIN_API.patch(products + `/${productId}`, {
-            quantity: String(res.data.quantity - String(newQuantity)),
-          })
+          USER_API.patch(
+            products + `/${productId}`,
+            {
+              quantity: String(res.data.quantity - String(newQuantity)),
+            },
+            {
+              headers: {
+                token: localStorage.getItem("ACCESS_TOKEYN"),
+              },
+            }
+          )
             .then(() => addProductToBasket())
             .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
             .catch((e) => console.log(e));
