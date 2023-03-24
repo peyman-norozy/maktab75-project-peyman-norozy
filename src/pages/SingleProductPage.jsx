@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -6,7 +5,8 @@ import LazyLoad from "react-lazy-load";
 import { productActions } from "./../store/cart-slice";
 import { BASE_URL } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
-import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
+import { ADMIN_API } from "../components/api/axios-constance/useHttp";
+import { USER_API } from "../components/api/axios-constance/useHttp";
 import Button from "./../components/button/Button";
 import { uiActions } from "../store/ui-slice";
 
@@ -18,8 +18,7 @@ const SingleProductPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(productActions.loadingSpinnerCanger(true));
-    axios
-      .get(`${BASE_URL}${products}/${productId}`)
+    USER_API.get(`${products}/${productId}`)
       .then((res) => setSingleProduct(res.data))
       .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
@@ -59,20 +58,14 @@ const SingleProductPage = () => {
 
     console.log(productId);
     dispatch(productActions.loadingSpinnerCanger(true));
-    axios
-      .get(BASE_URL + products + `/${productId}`)
+    USER_API.get(products + `/${productId}`)
       .then((res) => {
         console.log(res.data.quantity);
         console.log(newQuantity);
         if (res.data.quantity >= newQuantity) {
-          axios
-            .patch(
-              BASE_URL + products + `/${productId}`,
-              {
-                quantity: String(res.data.quantity - String(newQuantity)),
-              },
-              HEADERS_TOKEN
-            )
+          ADMIN_API.patch(products + `/${productId}`, {
+            quantity: String(res.data.quantity - String(newQuantity)),
+          })
             .then(() => addProductToBasket())
             .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
             .catch((e) => console.log(e));

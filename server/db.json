@@ -2,7 +2,7 @@
   "products": [
     {
       "price": "3,300,000",
-      "quantity": "12",
+      "quantity": "10",
       "brand": "ساعت هوشمند",
       "name": "ساعت هوشمند شیائومی Mibro Lite",
       "category": "ساعت",
@@ -569,6 +569,6 @@
   },
   "nav": {
     "showNavBar": true,
-    "createdAt": 1679475003170
+    "createdAt": 1679611113099
   }
 }
