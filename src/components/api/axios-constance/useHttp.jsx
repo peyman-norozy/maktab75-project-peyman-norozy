@@ -22,3 +22,5 @@ export const ADMIN_API = axios.create({
 export const USER_API = axios.create({
   baseURL: BASE_URL,
 });
+
+// axios.defaults.headers.common["token"] = localStorage.getItem("ACCESS_TOKEYN");

@@ -1,12 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Label from "../components/label/Label";
 import Input from "../components/input/Input";
 import OrdersCart from "../components/OrdersCart";
-import { BASE_URL } from "../components/api/axios-constance/useHttp";
+import { USER_API } from "../components/api/axios-constance/useHttp";
 import { orders } from "../components/api/axios-constance/useHttp";
-import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 import { productActions } from "../store/cart-slice";
 import ViewOrderModal from "../components/ViewOrderModal";
 
@@ -18,8 +16,11 @@ const Orders = () => {
 
   const getDataFromServer = useCallback(() => {
     dispatch(productActions.loadingSpinnerCanger(true));
-    axios
-      .get(BASE_URL + orders, HEADERS_TOKEN)
+    USER_API.get(orders, {
+      headers: {
+        token: localStorage.getItem("ACCESS_TOKEYN"),
+      },
+    })
       .then((res) => setOrdersData(res.data))
       .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));

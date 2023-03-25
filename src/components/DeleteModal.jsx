@@ -1,12 +1,10 @@
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { productActions } from "../store/cart-slice";
 import Button from "./button/Button";
-import { BASE_URL } from "./api/axios-constance/useHttp";
+import { USER_API } from "./api/axios-constance/useHttp";
 import { products } from "./api/axios-constance/useHttp";
-import { HEADERS_TOKEN } from "./api/axios-constance/useHttp";
 
 const DeleteModal = () => {
   const data = useSelector((data) => data);
@@ -18,8 +16,11 @@ const DeleteModal = () => {
   console.log(location);
 
   const getNewData = () => {
-    axios
-      .get(BASE_URL + products, HEADERS_TOKEN)
+    USER_API.get(products, {
+      headers: {
+        token: localStorage.getItem("ACCESS_TOKEYN"),
+      },
+    })
       .then((res) => dispatch(productActions.addItemToCart(res.data)))
       .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
       .catch((e) => console.log(e));
@@ -33,12 +34,11 @@ const DeleteModal = () => {
 
     dispatch(productActions.loadingSpinnerCanger(true));
 
-    axios
-      .delete(`${BASE_URL}${products}/${id}`, {
-        headers: {
-          token: localStorage.getItem("ACCESS_TOKEYN"),
-        },
-      })
+    USER_API.delete(`${products}/${id}`, {
+      headers: {
+        token: localStorage.getItem("ACCESS_TOKEYN"),
+      },
+    })
       .then(() => dispatch(productActions.deleteModalDisplay(false)))
       .then(() => dispatch(productActions.addSearchItem([])))
       .then(() =>

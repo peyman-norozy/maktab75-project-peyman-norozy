@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CustomerOrderSCart from "./CustomerOrdersCart";
 import { productActions } from "../store/cart-slice";
 import Button from "./button/Button";
-import { BASE_URL } from "./api/axios-constance/useHttp";
+import { USER_API } from "./api/axios-constance/useHttp";
 import { orders } from "./api/axios-constance/useHttp";
-import { HEADERS_TOKEN } from "./api/axios-constance/useHttp";
 
 const ViewOrderModal = (props) => {
   const { modalData, addUndelivryToDelivery } = props;
@@ -46,12 +44,15 @@ const ViewOrderModal = (props) => {
     console.log(event.target.id);
     dispatch(productActions.loadingSpinnerCanger(true));
 
-    axios
-      .patch(
-        BASE_URL + orders + `/${event.target.id}`,
-        { delivered: "true" },
-        HEADERS_TOKEN
-      )
+    USER_API.patch(
+      orders + `/${event.target.id}`,
+      { delivered: "true" },
+      {
+        headers: {
+          token: localStorage.getItem("ACCESS_TOKEYN"),
+        },
+      }
+    )
       .then(() => dispatch(productActions.newViewOrderDisplay(false)))
       .then(() => addUndelivryToDelivery())
       .then(() => dispatch(productActions.loadingSpinnerCanger(false)))
