@@ -98,7 +98,7 @@
     },
     {
       "price": "6,540,000",
-      "quantity": "9",
+      "quantity": "12",
       "brand": "آیفون",
       "name": "گوشی موبایل اپل آیفون 13 پرو مکس ",
       "category": "موبایل",
@@ -655,7 +655,7 @@
     "protection": "admin"
   },
   "nav": {
-    "showNavBar": false,
-    "createdAt": 1679741282222
+    "showNavBar": true,
+    "createdAt": 1679822787014
   }
 }

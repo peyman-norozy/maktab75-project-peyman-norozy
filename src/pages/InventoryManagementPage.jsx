@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import SearchProduct from "../components/SearchProduct";
 import InventoryManagementCart from "../components/InventoryManagementCart";
 import { productActions } from "../store/cart-slice";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/button/Button";
-import { BASE_URL } from "../components/api/axios-constance/useHttp";
+import { USER_API } from "../components/api/axios-constance/useHttp";
 import { products } from "../components/api/axios-constance/useHttp";
-import { HEADERS_TOKEN } from "../components/api/axios-constance/useHttp";
 
 const InventoryManagement = () => {
   const data = useSelector((data) => data);
@@ -49,17 +47,25 @@ const InventoryManagement = () => {
 
     for (let item of priceAndQuantity) {
       promises.push(
-        axios.patch(
-          `${BASE_URL}${products}/${item.id}`,
+        USER_API.patch(
+          `${products}/${item.id}`,
           { quantity: item.quantity, price: item.price },
-          HEADERS_TOKEN
+          {
+            headers: {
+              token: localStorage.getItem("ACCESS_TOKEYN"),
+            },
+          }
         )
       );
     }
 
     Promise.all(promises)
       .then(() => {
-        axios.get(BASE_URL + products, HEADERS_TOKEN).then((res) => {
+        USER_API.get(products, {
+          headers: {
+            token: localStorage.getItem("ACCESS_TOKEYN"),
+          },
+        }).then((res) => {
           dispatch(productActions.addItemToCart(res.data));
         });
       })
